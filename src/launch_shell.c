@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Tue May 24 11:47:49 2016 CUENAT
+** Last update Tue May 24 15:30:27 2016 CUENAT
 */
 
 #include "shell.h"
@@ -21,10 +21,10 @@ char	*ft_fill_path_for_execve(char *dest, char **path)
       if ((tmp = malloc(sizeof(char) *
 			(strlen(dest) + strlen(path[i]) + 2))) == NULL)
 	exit(EXIT_FAILURE);
-      strcpy(tmp, dest);
+      strcpy(tmp, path[i]);
       tmp[strlen(tmp) + 1] = '\0';
       tmp[strlen(tmp)] = '/';
-      strcat(tmp, path[i]);
+      strcat(tmp, dest);
       if (access(tmp, X_OK) == 0)
 	{
 	  free(dest);
@@ -47,7 +47,7 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   while (cmd[*i] && cmd[*i][0] != '|' && cmd[*i][0] != '<'
 	 && cmd[*i][0] != '>')
     {
-      if ((res = realloc(res, sizeof(char *) *( j + 2))) == NULL)
+      if ((res = realloc(res, sizeof(char *) * (j + 2))) == NULL)
 	exit(EXIT_FAILURE);
       res[j] = strdup(cmd[*i]);
       j += 1;
@@ -59,14 +59,25 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
 {
   int	i;
-  char	**f_exec;
+  char	*tkn;
 
   i = 0;
-
+  shell->fd_in = 0;
+  tkn = "\0";
   while (tmp->exec_cmd[i])
     {
-      f_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
-      f_exec[0] = ft_fill_path_for_execve(f_exec[0], shell->path);
+      shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
+      shell->cur_exec[0] =
+	ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
+      ft_execute_instr(shell, tkn);
+      if (tmp->exec_cmd[i] != NULL)
+	{
+	  for (int j = 0; shell->cur_exec[j]; j++)
+	    puts(shell->cur_exec[j]);
+	  tkn = strdup(tmp->exec_cmd[i]);
+	  puts(tkn);
+	}
+      ft_free_tab(shell->cur_exec);
       (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
     }
   return (0);

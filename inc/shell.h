@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 24 10:02:54 2016 CUENAT
+** Last update Tue May 24 15:25:06 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -15,7 +15,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pwd.h>
+#include <fcntl.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
@@ -54,8 +56,11 @@ typedef struct		s_shell
   char			**env;
   char			**path;
   t_list		*exec_list;
+  int			fd_in;
+  char			**cur_exec;
   int			res_exec;
 }			t_shell;
+
 
 /*
 ** START ----- FILL STRUCT ----- START
@@ -137,11 +142,20 @@ int	my_strlen(char *str);
 int	ft_launch_shell(t_shell *shell);
 int	ft_start_exec(t_shell *shell);
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp);
-char	**ft_fill_tab_for_exec(char **f_exec,
-			       char **exec_cmd,
-			       int *i,
-			       char **path);
+char	**ft_fill_tab_for_execve(char **cmd, int *i);
+char	*ft_fill_path_for_execve(char *dest, char **path);
 
+/*
+** execute_instruction.c
+*/
+int	ft_execute_instr(t_shell *shell, char *tkn);
+int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
+
+/*
+** redirection.c
+*/
+void	ft_write_at_end(char *file, int fd_in);
+void	ft_rewrite(char *file, int fd_in);
 /*
 ** check_input.c
 */
