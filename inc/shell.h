@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 24 16:33:27 2016 CUENAT
+** Last update Tue May 24 17:00:38 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <limits.h>
+#include <errno.h>
 #include "get_next_line.h"
 
 #ifndef AND
