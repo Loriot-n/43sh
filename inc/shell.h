@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Mon May 23 18:39:24 2016 CUENAT
+** Last update Tue May 24 10:02:54 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -137,7 +137,10 @@ int	my_strlen(char *str);
 int	ft_launch_shell(t_shell *shell);
 int	ft_start_exec(t_shell *shell);
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp);
-char	**ft_fill_tab_for_exec(char **f_exec, char **exec_cmd, int *i);
+char	**ft_fill_tab_for_exec(char **f_exec,
+			       char **exec_cmd,
+			       int *i,
+			       char **path);
 
 /*
 ** check_input.c

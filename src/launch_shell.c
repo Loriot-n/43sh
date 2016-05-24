@@ -5,42 +5,68 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 23 18:38:16 2016 CUENAT
+** Last update Tue May 24 11:47:49 2016 CUENAT
 */
 
 #include "shell.h"
 
-char	**ft_fill_tab_for_exec(char **f_exec, char **exec_cmd, int *i)
+char	*ft_fill_path_for_execve(char *dest, char **path)
 {
+  char	*tmp;
+  int	i;
+
+  i = 0;
+  while (path[i])
+    {
+      if ((tmp = malloc(sizeof(char) *
+			(strlen(dest) + strlen(path[i]) + 2))) == NULL)
+	exit(EXIT_FAILURE);
+      strcpy(tmp, dest);
+      tmp[strlen(tmp) + 1] = '\0';
+      tmp[strlen(tmp)] = '/';
+      strcat(tmp, path[i]);
+      if (access(tmp, X_OK) == 0)
+	{
+	  free(dest);
+	  return (tmp);
+	}
+      free(tmp);
+      i += 1;
+    }
+  return (dest);
+}
+
+char	**ft_fill_tab_for_execve(char **cmd, int *i)
+{
+  char	**res;
   int	j;
 
   j = 0;
-  while (exec_cmd[*i] && exec_cmd[*i][0] != '|' && exec_cmd[*i][0] != '<'
-	 &&  exec_cmd[*i][0] != '>')
+  if ((res = malloc(sizeof(char *) * 2)) == NULL)
+    exit(EXIT_FAILURE);
+  while (cmd[*i] && cmd[*i][0] != '|' && cmd[*i][0] != '<'
+	 && cmd[*i][0] != '>')
     {
-      if ((f_exec = realloc(f_exec, sizeof(char *) * (j + 2))) == NULL)
+      if ((res = realloc(res, sizeof(char *) *( j + 2))) == NULL)
 	exit(EXIT_FAILURE);
-      f_exec[j] = strdup(exec_cmd[*i]);
-      *i += 1;
+      res[j] = strdup(cmd[*i]);
       j += 1;
+      *i +=1;
     }
-  f_exec[j] = NULL;
-  return (f_exec);
+  res[j] = NULL;
+  return (res);
 }
-
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
 {
   int	i;
   char	**f_exec;
 
   i = 0;
-  while (tmp->exec_cmd[i] != NULL)
-    {
-      if ((f_exec = malloc(sizeof(char *) * 1)) == NULL)
-	exit(EXIT_FAILURE);
-      f_exec = ft_fill_tab_for_exec(f_exec, tmp->exec_cmd, &i);
 
-      ft_free_tab(f_exec);
+  while (tmp->exec_cmd[i])
+    {
+      f_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
+      f_exec[0] = ft_fill_path_for_execve(f_exec[0], shell->path);
       (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
     }
   return (0);
