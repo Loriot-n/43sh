@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 24 16:52:31 2016 CUENAT
+** Last update Tue May 24 16:56:33 2016 CUENAT
 */
 
 #include "shell.h"
@@ -50,7 +50,7 @@ int		ft_execute_instr(t_shell *shell, char *tkn, int end)
       if (end == 0)
 	dup2(tube[1], 1);
       close(tube[0]);
-      ft_redirect_or_pipe(shell, tkn);
+      shell->res_exec = ft_redirect_or_pipe(shell, tkn);
       exit(EXIT_FAILURE);
     }
   else
