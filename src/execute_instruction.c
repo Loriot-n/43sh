@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 24 15:47:59 2016 CUENAT
+** Last update Tue May 24 16:52:31 2016 CUENAT
 */
 
 #include "shell.h"
@@ -26,7 +26,8 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	    {}
 	  else
 	    {
-	      printf("%s : No such file or directory\n", shell->cur_exec[0]);
+	      dprintf(2,"%s : No such file or directory\n",
+		      shell->cur_exec[0]);
 	      return (-1);
 	    }
 	}
