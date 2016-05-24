@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 24 15:25:06 2016 CUENAT
+** Last update Tue May 24 16:05:36 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -148,7 +148,7 @@ char	*ft_fill_path_for_execve(char *dest, char **path);
 /*
 ** execute_instruction.c
 */
-int	ft_execute_instr(t_shell *shell, char *tkn);
+int	ft_execute_instr(t_shell *shell, char *tkn, int end);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
 
 /*

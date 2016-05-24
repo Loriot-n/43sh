@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Tue May 24 15:30:27 2016 CUENAT
+** Last update Tue May 24 16:08:46 2016 CUENAT
 */
 
 #include "shell.h"
@@ -60,23 +60,21 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
 {
   int	i;
   char	*tkn;
+  int	end;
 
   i = 0;
   shell->fd_in = 0;
-  tkn = "\0";
+  tkn = strdup("\0");
   while (tmp->exec_cmd[i])
     {
       shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
       shell->cur_exec[0] =
 	ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
-      ft_execute_instr(shell, tkn);
+      (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
+      ft_execute_instr(shell, tkn, end);
+      free(tkn);
       if (tmp->exec_cmd[i] != NULL)
-	{
-	  for (int j = 0; shell->cur_exec[j]; j++)
-	    puts(shell->cur_exec[j]);
-	  tkn = strdup(tmp->exec_cmd[i]);
-	  puts(tkn);
-	}
+	tkn = strdup(tmp->exec_cmd[i]);
       ft_free_tab(shell->cur_exec);
       (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
     }
@@ -106,7 +104,6 @@ int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
 
-  (void)(shell);
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);
@@ -121,6 +118,7 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
+      write(1, "$> ", 2);
     }
   return (0);
 }

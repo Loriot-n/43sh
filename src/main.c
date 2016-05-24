@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:48:14 2016 CUENAT
-** Last update Mon May 23 15:16:55 2016 CUENAT
+** Last update Tue May 24 16:08:43 2016 CUENAT
 */
 
 #include "shell.h"
@@ -18,6 +18,7 @@ int		main(int ac, char **av, char **environ)
   (void)(av);
   shell = ft_init_struct();
   ft_fill_env(environ, shell);
+  write(1, "$> ", 2);
   ft_launch_shell(shell);
   ft_free_tab(shell->env);
   return (0);
