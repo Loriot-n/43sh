@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ## 
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Thu May 19 16:38:13 2016 CUENAT
+## Last update Tue May 24 15:33:52 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -22,7 +22,9 @@ SRCS	=	src/main.c \
 		src/string_utils.c \
 		src/check_input.c \
 		src/fill_list.c \
-		src/free_struct.c
+		src/free_struct.c \
+		src/execute_instruction.c \
+		src/redirection.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
