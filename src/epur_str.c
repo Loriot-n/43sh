@@ -61,7 +61,7 @@ char	*epur(char *str)
   char	*answer;
 
   if (!str || !str[0])
-    return (NULL);
+    return (strdup("\0"));
   if ((answer = malloc(sizeof(char) * (ft_strlen(str)) + 2)) == NULL)
     exit(EXIT_FAILURE);
   i = 0;
