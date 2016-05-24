@@ -26,7 +26,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	    {}
 	  else
 	    {
-	      printf("%s : No such file or directory\n", tkn);
+	      printf("%s : No such file or directory\n", shell->cur_exec[0]);
 	      return (-1);
 	    }
 	}
