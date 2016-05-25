@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 24 17:00:38 2016 CUENAT
+** Last update Wed May 25 12:07:06 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -156,6 +156,12 @@ int	ft_start_exec(t_shell *shell);
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp);
 char	**ft_fill_tab_for_execve(char **cmd, int *i);
 char	*ft_fill_path_for_execve(char *dest, char **path);
+
+/*
+** signal.c
+*/
+void	segfault(int sig);
+void	ctrl(int sig);
 
 /*
 ** execute_instruction.c

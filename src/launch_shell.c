@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Tue May 24 16:41:47 2016 CUENAT
+** Last update Wed May 25 12:05:36 2016 CUENAT
 */
 
 #include "shell.h"
@@ -65,6 +65,7 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
   i = 0;
   shell->fd_in = 0;
   tkn = strdup("\0");
+  signal(SIGSEGV, segfault);
   while (tmp->exec_cmd[i])
     {
       shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
@@ -104,6 +105,7 @@ int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
 
+  signal(SIGINT, ctrl);
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);

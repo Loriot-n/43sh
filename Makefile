@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Tue May 24 15:33:52 2016 CUENAT
+## Last update Wed May 25 12:06:00 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -26,6 +26,7 @@ SRCS	=	src/main.c \
 		src/execute_instruction.c \
 		src/redirection.c \
 		src/alias.c \
+		src/signal.c
 
 OBJS	=	$(SRCS:.c=.o)
 
