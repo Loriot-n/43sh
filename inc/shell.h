@@ -239,6 +239,10 @@ void	ft_unsetenv(t_shell *shell, char *tkn, int end);
 */
 void	ft_cd(t_shell *shell, char *tkn, int end);
 
+/*
+** env_values.c
+*/
+char	*replace_env(t_shell *shell, char *line);
 
 void	ft_env(t_shell *shell, char *tkn, int end);
 /*

@@ -37,6 +37,7 @@ SRCS	=	src/main.c \
 		src/build_unsetenv.c \
 		src/build_cd.c \
 		src/build_env.c \
+		src/env_values.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

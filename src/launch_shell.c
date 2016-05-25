@@ -115,6 +115,7 @@ int	ft_launch_shell(t_shell *shell)
     {
       shell->path = ft_fill_bin_path(shell->env);
       shell->res_exec = 0;
+      line = replace_env(shell, line);
       line = epur(line);
       line = replace_alias(shell->alias, line);
       if (ft_check_input(line) == 0)

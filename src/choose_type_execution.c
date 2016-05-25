@@ -12,12 +12,10 @@
 
 int	ft_is_a_build_in(char *cmd)
 {
-  char	**check;
+  char	*check[7];
   int	i;
 
   i = 0;
-  if ((check = malloc(sizeof(char * ) * 7)) == NULL)
-    exit(EXIT_FAILURE);
   check[0] = "exit";
   check[1] = "echo";
   check[2] = "unsetenv";
