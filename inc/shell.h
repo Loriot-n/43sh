@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 15:44:39 2016 CUENAT
+** Last update Wed May 25 16:14:16 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -217,6 +217,26 @@ void	parse_options(t_shell *shell, char *file);
 ** build_exit.c
 */
 void	ft_exit(t_shell *shell, char *tkn, int end);
+
+/*
+** build_exit.c
+*/
+void	ft_echo(t_shell *shell, char *tkn, int end);
+
+/*
+** build_setenv.c
+*/
+void	ft_setenv(t_shell *shell, char *tkn, int end);
+
+/*
+** build_unsetenv.c
+*/
+void	ft_unsetenv(t_shell *shell, char *tkn, int end);
+
+/*
+** build_cd.c
+*/
+void	ft_cd(t_shell *shell, char *tkn, int end);
 
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
