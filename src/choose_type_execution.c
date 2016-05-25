@@ -16,14 +16,15 @@ int	ft_is_a_build_in(char *cmd)
   int	i;
 
   i = 0;
-  if ((check = malloc(sizeof(char * ) * 6)) == NULL)
+  if ((check = malloc(sizeof(char * ) * 7)) == NULL)
     exit(EXIT_FAILURE);
-  check[0] = "cd";
+  check[0] = "exit";
   check[1] = "echo";
-  check[2] = "exit";
+  check[2] = "unsetenv";
   check[3] = "setenv";
-  check[4] = "unsetenv";
-  check[5] = NULL;
+  check[4] = "cd";
+  check[5] = "env";
+  check[6] = NULL;
   while (check[i])
     {
       if (strcmp(check[i], cmd) == 0)
