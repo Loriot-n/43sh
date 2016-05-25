@@ -53,11 +53,19 @@ typedef struct		s_list
   struct s_list		*next;
 }			t_list;
 
+typedef struct 		s_alias
+{
+  char			*cmd;
+  char			*alias;
+  struct s_alias	*next;
+}			t_alias;
+
 typedef struct		s_shell
 {
   char			**env;
   char			**path;
   t_list		*exec_list;
+  t_alias		*alias;
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
@@ -77,8 +85,8 @@ char	**ft_fill_bin_path(char **env);
 /*
 ** fill_list.c
 */
-t_sub_list	*ft_add_sub_list_at_end(t_sub_list *exec_list,
-					char *val,
+t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
+					char *tmp_c,
 					int *sep);
 int	ft_create_list(t_shell *shell, char *line);
 t_list	*ft_add_at_end(t_list *exec_list, char *val);
@@ -186,6 +194,21 @@ int	ft_look_or(char **tab, int i);
 int	ft_look_bad_tkn(char *word, char *tkn);
 
 /*
+** END ----- PARSE / UTILS STRING ----- END
+*/
+
+/*
+** START ----- ALIAS ----- START
+*/
+/*
+** alias_list.c
+*/
+t_alias		*get_aliases(int fd);
+t_alias		*insert_alias(char **cmd, char *alias, t_alias **head);
+char		*replace_alias(t_alias *alias_list, char *cmd);
+
+/*
+**42shconfig.c
 ** build_exit.c
 */
 void	ft_exit(t_shell *shell, char *tkn, int end);

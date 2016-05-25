@@ -12,15 +12,14 @@
 
 t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
 					char *tmp_c,
-					int *sep,
-					t_shell *shell)
+					int *sep)
 {
   t_sub_list	*tmp;
   t_sub_list	*new;
 
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
-  new->cmd = replace_alias(shell->alias, strdup(epur(tmp_c)));
+  new->cmd = strdup(epur(tmp_c));
   new->exec_cmd = split(new->cmd, " |");
   new->separator = *sep;
   new->next = NULL;
@@ -59,8 +58,7 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
 	      exit(EXIT_FAILURE);
 	  strncpy(tmp_c, &tmp->cmd[j], (i - j));
 	  tmp_c[i - j] = '\0';
-	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep,
-						 shell);
+	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep);
 	  *sep = NO;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '&') ? (*sep = AND) : 0;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '|') ? (*sep = OR) : 0;
@@ -124,7 +122,7 @@ int	ft_create_list(t_shell *shell, char *line)
       tmp[i - j] = '\0';
       if (tmp != NULL || tmp[0] != '\0')
 	shell->exec_list = ft_add_at_end(shell->exec_list, tmp);
-      i += 1;
+      i = (line[i]) ? i + 1 : i;
       free(tmp);
     }
   return (0);

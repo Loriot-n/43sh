@@ -18,7 +18,7 @@ void	parse_options(t_shell *shell, char *path)
     return ;
   if ((fd = open(path, O_RDONLY)) < 0)
     {
-      printf("Error while opening %s: %s\n", path, strerror(errno));
+      dprintf(2, "Error while opening %s: %s\n", path, strerror(errno));
       return ;
     }
   shell->alias = get_aliases(fd);
