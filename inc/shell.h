@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 16:14:16 2016 CUENAT
+** Last update Wed May 25 17:34:37 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -157,7 +157,7 @@ int	my_getnbr(char *str);
 */
 int	ft_launch_shell(t_shell *shell);
 int	ft_start_exec(t_shell *shell);
-int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp);
+int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char  *tkn);
 char	**ft_fill_tab_for_execve(char **cmd, int *i);
 char	*ft_fill_path_for_execve(char *dest, char **path);
 

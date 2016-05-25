@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Wed May 25 17:08:52 2016 CUENAT
+** Last update Wed May 25 17:23:57 2016 CUENAT
 */
 
 #include "shell.h"
@@ -49,12 +49,16 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
       if (end == 0)
 	dup2(tube[1], 1);
       close(tube[0]);
-      shell->res_exec = ft_redirect_or_pipe(shell, tkn);
+      ft_redirect_or_pipe(shell, tkn);
       exit(EXIT_FAILURE);
     }
   else
     {
       waitpid(pid, &status, WUNTRACED);
+      if(WIFEXITED(status))
+	shell->res_exec = 0;
+      else
+	shell->res_exec = -1;
       close(tube[1]);
       shell->fd_in = tube[0];
     }

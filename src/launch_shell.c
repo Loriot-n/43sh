@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 17:04:59 2016 CUENAT
+** Last update Wed May 25 17:34:57 2016 CUENAT
 */
 
 #include "shell.h"
@@ -56,29 +56,30 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   res[j] = NULL;
   return (res);
 }
-int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
+int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
-  char	*tkn;
   int	end;
 
   i = 0;
-  shell->fd_in = 0;
-  tkn = strdup("\0");
   signal(SIGSEGV, segfault);
-  while (tmp->exec_cmd[i])
+  if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
+      || (tmp->separator == OR && shell->res_exec == -1))
     {
-      shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
-      if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
-	shell->cur_exec[0] =
-	  ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
-      (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
-      ft_choose_type_execution(shell, tkn, end);
-      free(tkn);
-      if (tmp->exec_cmd[i] != NULL)
-	tkn = strdup(tmp->exec_cmd[i]);
-      ft_free_tab(shell->cur_exec);
-      (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
+      while (tmp->exec_cmd[i])
+	{
+	  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
+	  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
+	    shell->cur_exec[0] =
+	      ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
+	  (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
+	  ft_choose_type_execution(shell, tkn, end);
+	  free(tkn);
+	  if (tmp->exec_cmd[i] != NULL)
+	    tkn = strdup(tmp->exec_cmd[i]);
+	  ft_free_tab(shell->cur_exec);
+	  (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
+	}
     }
   return (0);
 }
@@ -87,6 +88,7 @@ int		ft_start_exec(t_shell *shell)
 {
   t_list	*tmp_list;
   t_sub_list	*tmp_sub;
+  char		*tkn;
 
   tmp_list = shell->exec_list;
   while (tmp_list != NULL)
@@ -94,7 +96,9 @@ int		ft_start_exec(t_shell *shell)
       tmp_sub = tmp_list->sub_list;
       while (tmp_sub != NULL)
 	{
-	  ft_create_exec_function(shell, tmp_sub);
+	  tkn = strdup("\0");
+	  shell->fd_in = 0;
+	  ft_create_exec_function(shell, tmp_sub, tkn);
 	  tmp_sub = tmp_sub->next;
 	}
       tmp_list = tmp_list->next;
