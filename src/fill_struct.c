@@ -60,6 +60,6 @@ t_shell		*ft_init_struct()
   tmp->env = NULL;
   tmp->path = NULL;
   tmp->exec_list = NULL;
-  tmp->alias = get_aliases(".42shrc");
+  tmp->alias = NULL;
   return (tmp);
 }

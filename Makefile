@@ -26,7 +26,8 @@ SRCS	=	src/main.c \
 		src/execute_instruction.c \
 		src/redirection.c \
 		src/alias.c \
-		src/signal.c
+		src/signal.c \
+		src/42shconfig.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

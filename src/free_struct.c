@@ -55,6 +55,4 @@ void	ft_free_struct(t_shell *shell)
       shell->exec_list = shell->exec_list->next;
       free(tmp);
     }
-  free_alias(shell->alias);
-  free(shell);
 }

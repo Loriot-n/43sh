@@ -54,35 +54,28 @@ void	empty(char *tmp, char *one, char **lexed)
 
 int	check_alias(char **lexed)
 {
-  int	right;
-
-  right = -1;
-  if (!lexed[1])
-    {
-      printf("Bad assignment\n");
-      return (-1);
-    }
-  if (tab_len(lexed) != 6 && !(right += 1))
+  if (tab_len(lexed) < 6)
     {
       printf("%s=: bad assignment\n", lexed[1]);
+      return (-1);
+    }
+  if (!lexed[1] || strcmp(lexed[2], "=") != 0 ||
+      ((*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
+       (*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
+    {
+      printf("Bad assignment\n");
       return (-1);
     }
   return (1);
 }
 
-t_alias		*get_aliases(char *path)
+t_alias		*get_aliases(int fd)
 {
   char		*one;
-  int		fd;
   char		**lexed;
   char		*tmp;
   t_alias	*list_alias;
 
-  if (access(path, F_OK | R_OK) != 0 || (fd = open(path, O_RDONLY)) < 0)
-    {
-      printf("Error while opening %s: %s\n", path, strerror(errno));
-      return (NULL);
-    }
   list_alias = NULL;
   while ((one = get_next_line(fd)))
     {

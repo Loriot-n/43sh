@@ -193,10 +193,15 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 /*
 ** alias_list.c
 */
-t_alias		*get_aliases(char *path);
+t_alias		*get_aliases(int fd);
 t_alias		*new_alias(char *cmd, char *alias);
 t_alias		*insert_alias(char *cmd, char *alias, t_alias **head);
 char		*replace_alias(t_alias *alias_list, char *cmd);
+
+/*
+**42shconfig.c
+*/
+void	parse_options(t_shell *shell, char *path);
 
 /*
 ** END ----- ALIAS ----- END
