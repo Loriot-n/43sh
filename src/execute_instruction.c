@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Wed May 25 16:47:58 2016 CUENAT
+** Last update Wed May 25 17:08:52 2016 CUENAT
 */
 
 #include "shell.h"
@@ -67,11 +67,11 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
   int  	i;
   int  	tube[2];
 
-  ptr[0] = &ft_exit;
+  ptr[0] = &ft_cd;
   ptr[1] = &ft_echo;
-  ptr[2] = &ft_setenv;
-  ptr[3] = &ft_unsetenv;
-  ptr[4] = &ft_cd;
+  ptr[2] = &ft_exit;
+  ptr[3] = &ft_setenv;
+  ptr[4] = &ft_unsetenv;
   ptr[5] = NULL;
   pipe(tube);
   dup2(shell->fd_in, 0);

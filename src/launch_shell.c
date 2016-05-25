@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 16:42:19 2016 CUENAT
+** Last update Wed May 25 17:04:59 2016 CUENAT
 */
 
 #include "shell.h"
@@ -122,7 +122,7 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      // write(1, "$> ", 2);
+      write(1, "$> ", 3);
     }
   return (0);
 }
