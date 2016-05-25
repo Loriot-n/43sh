@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 24 16:56:33 2016 CUENAT
+** Last update Wed May 25 15:19:06 2016 CUENAT
 */
 
 #include "shell.h"
@@ -26,8 +26,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	    {}
 	  else
 	    {
-	      dprintf(2,"%s : No such file or directory\n",
-		      shell->cur_exec[0]);
+	      dprintf(2, "%s: Command not found.", shell->cur_exec[0]);
 	      return (-1);
 	    }
 	}
@@ -35,7 +34,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
   return (0);
 }
 
-int		ft_execute_instr(t_shell *shell, char *tkn, int end)
+int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 {
   int		tube[2];
   pid_t		pid;
@@ -59,5 +58,28 @@ int		ft_execute_instr(t_shell *shell, char *tkn, int end)
       close(tube[1]);
       shell->fd_in = tube[0];
     }
+  return (0);
+}
+
+int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
+{
+  void	(*ptr[6])(shell, tkn, end);
+  int  	i;
+  int  	tube[2];
+
+  ptr[0] = &ft_exit;
+  ptr[1] = &ft_exit;
+  ptr[2] = &ft_exit;
+  ptr[3] = &ft_exit;
+  ptr[4] = &ft_exit;
+  ptr[5] = NULL;
+  dup2(shell->fd_in, 0);
+  if (end == 0)
+    dup2(tube[1], 1);
+  close(tube[0]);
+  if ((i = ft_is_a_build_int(shell->cur_exec[0])) != -1)
+    (ptr[i])(shell, tkn, end);
+  close(tube[1]);
+  shell->fd_in = tube[0];
   return (0);
 }

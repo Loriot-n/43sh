@@ -12,8 +12,7 @@
 
 t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
 					char *tmp_c,
-					int *sep,
-					t_shell *shell)
+					int *sep)
 {
   t_sub_list	*tmp;
   t_sub_list	*new;
@@ -59,8 +58,7 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
 	      exit(EXIT_FAILURE);
 	  strncpy(tmp_c, &tmp->cmd[j], (i - j));
 	  tmp_c[i - j] = '\0';
-	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep,
-						 shell);
+	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep);
 	  *sep = NO;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '&') ? (*sep = AND) : 0;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '|') ? (*sep = OR) : 0;
