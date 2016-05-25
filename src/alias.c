@@ -58,6 +58,8 @@ char	*replace_alias(t_alias *alias_list, char *cmd)
   char	**tmp;
   char	*one;
 
+  if (!cmd || !cmd[0])
+    return (cmd);
   tmp = split(cmd, " ;&|><");
   while (alias_list)
     {

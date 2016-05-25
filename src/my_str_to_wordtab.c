@@ -1,11 +1,11 @@
 /*
-** my_str_to_wordtab.c for str to word tab in /home/loriot_n/rendu/Piscine_C_J08/ex_04
+** my_str_to_wordtab.c for 42sh in /home/qwebify/rendu/PSU/PSU_2015_42sh/src/
 **
-** Made by nicolas loriot
-** Login   <loriot_n@epitech.net>
+** Made by maire_q
+** Login   <maire_q@epitech.eu>
 **
-** Started on  Fri Oct  9 11:43:20 2015 nicolas loriot
-** Last update Wed May 18 17:48:14 2016 CUENAT
+** Started on  %cdate maire_q
+** Last update %udate maire_q
 */
 
 #include "shell.h"
