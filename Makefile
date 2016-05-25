@@ -1,9 +1,9 @@
 ##
 ## Makefile for  in /home/stanislas/PSU_2015_minishell2
-## 
+##
 ## Made by CUENAT
 ## Login   <stanislas@epitech.net>
-## 
+##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
 ## Last update Tue May 24 15:33:52 2016 CUENAT
 ##
@@ -25,6 +25,7 @@ SRCS	=	src/main.c \
 		src/free_struct.c \
 		src/execute_instruction.c \
 		src/redirection.c \
+		src/alias.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -39,20 +39,15 @@ char	**autocomplete(char *begin, char *path, int check)
   return (answer);
 }
 
-char	**get_aliases(char *path)
+int		main(int ac, char **av)
 {
-  return (NULL);
-}
+  t_alias	*alias = get_aliases(".42shrc");
 
-int	main(int ac, char **av)
-{
-  char	**alias = get_aliases("42shrc");
-
-  for (int i = 0; alias[i]; i++)
+  for (; alias; alias = alias->next)
     {
-      printf("%s\n", alias[i]);
-      free(alias[i]);
+      printf("cmd:%s, alias:%s\n", alias->cmd, alias->alias);
     }
+  free(alias);
 }
 
 

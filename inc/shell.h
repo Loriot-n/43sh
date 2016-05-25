@@ -53,14 +53,22 @@ typedef struct		s_list
   struct s_list		*next;
 }			t_list;
 
+typedef struct 		s_alias
+{
+  char			*cmd;
+  char			*alias;
+  struct s_alias	*next;
+}			t_alias;
+
 typedef struct		s_shell
 {
   char			**env;
   char			**path;
-  t_list		*exec_list;
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
+  t_alias		*alias;
+  t_list		*exec_list;
 }			t_shell;
 
 
@@ -77,9 +85,10 @@ char	**ft_fill_bin_path(char **env);
 /*
 ** fill_list.c
 */
-t_sub_list	*ft_add_sub_list_at_end(t_sub_list *exec_list,
-					char *val,
-					int *sep);
+t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
+					char *tmp_c,
+					int *sep,
+					t_shell *shell);
 int	ft_create_list(t_shell *shell, char *line);
 t_list	*ft_add_at_end(t_list *exec_list, char *val);
 int	ft_create_sub_list(t_shell *shell);
@@ -123,6 +132,7 @@ int	next_char(char *str, int i);
 */
 char   	*my_strncpy(char *src, int n);
 char	**split(char *str, char *tokens);
+size_t	tab_len(char **tab);
 
 /*
 ** get_next_line.c
@@ -166,8 +176,24 @@ int	ft_look_dot(char **tab, int i);
 int	ft_look_and(char **tab, int i);
 int	ft_look_or(char **tab, int i);
 int	ft_look_bad_tkn(char *word, char *tkn);
+
 /*
 ** END ----- PARSE / UTILS STRING ----- END
+*/
+
+/*
+** START ----- ALIAS ----- START
+*/
+/*
+** alias_list.c
+*/
+t_alias		*get_aliases(char *path);
+t_alias		*new_alias(char *cmd, char *alias);
+t_alias		*insert_alias(char *cmd, char *alias, t_alias **head);
+char		*replace_alias(t_alias *alias_list, char *cmd);
+
+/*
+** END ----- ALIAS ----- END
 */
 
 #endif /*!SHELL_H_*/
