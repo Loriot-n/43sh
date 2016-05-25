@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Wed May 25 16:13:12 2016 CUENAT
+** Last update Wed May 25 16:47:58 2016 CUENAT
 */
 
 #include "shell.h"
@@ -73,6 +73,7 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
   ptr[3] = &ft_unsetenv;
   ptr[4] = &ft_cd;
   ptr[5] = NULL;
+  pipe(tube);
   dup2(shell->fd_in, 0);
   if (end == 0)
     dup2(tube[1], 1);
@@ -80,6 +81,6 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell, tkn, end);
   close(tube[1]);
-  shell->fd_in = tube[0];
+    shell->fd_in = tube[0];
   return (0);
 }
