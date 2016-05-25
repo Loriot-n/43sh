@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 14:33:13 2016 CUENAT
+** Last update Wed May 25 16:24:42 2016 CUENAT
 */
 
 #include "shell.h"
@@ -69,8 +69,9 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
   while (tmp->exec_cmd[i])
     {
       shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
-      shell->cur_exec[0] =
-	ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
+      if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
+	shell->cur_exec[0] =
+	  ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
       (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
       ft_choose_type_execution(shell, tkn, end);
       free(tkn);
