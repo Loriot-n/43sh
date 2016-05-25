@@ -34,6 +34,7 @@ void	ft_free_tab(char **tab)
       free(tab[i]);
       i += 1;
     }
+  free(tab);
 }
 
 void	ft_free_struct(t_shell *shell)

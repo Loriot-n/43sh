@@ -10,44 +10,9 @@
 
 #include "shell.h"
 
-t_alias			*new_alias(char *cmd, char *alias)
-{
-  t_alias		*elem;
-
-  if (!(elem = malloc(sizeof(t_alias))))
-    exit(EXIT_FAILURE);
-  elem->cmd = cmd;
-  elem->alias = alias;
-  elem->next = NULL;
-  return (elem);
-}
-
-t_alias			*insert_alias(char *cmd, char *alias, t_alias **head)
-{
-  t_alias		*newnode;
-  t_alias		*tmp;
-
-  tmp = *head;
-  newnode = new_alias(cmd, alias);
-  if (!(*head))
-    {
-      *head = newnode;
-      return (*head);
-    }
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  tmp->next = newnode;
-  return (newnode);
-}
-
 void	empty(char *tmp, char *one, char **lexed)
 {
-  int	i;
-
-  i = 0;
-  while (lexed[i])
-    free(lexed[i++]);
-  free(lexed);
+  ft_free_tab(lexed);
   free(tmp);
   free(one);
 }
@@ -82,7 +47,7 @@ t_alias		*get_aliases(int fd)
       tmp = epur(one);
       lexed = split(tmp, " =\"'");
       if (strcmp(lexed[0], "alias") == 0 && check_alias(lexed) == 1)
-	insert_alias(strdup(lexed[1]), strdup(lexed[4]), &list_alias);
+	insert_alias(&lexed[4], lexed[1], &list_alias);
       empty(tmp, one, lexed);
     }
   return (list_alias);
@@ -90,11 +55,24 @@ t_alias		*get_aliases(int fd)
 
 char	*replace_alias(t_alias *alias_list, char *cmd)
 {
+  char	**tmp;
+  char	*one;
+
+  tmp = split(cmd, " ;&|><");
   while (alias_list)
     {
-      if (strcmp(alias_list->cmd, cmd) == 0)
-	return (strdup(alias_list->alias));
+      if (strcmp(alias_list->alias, tmp[0]) == 0)
+	{
+	  one = strdup(alias_list->cmd);
+	  if (!(one = realloc(one, strlen(cmd) + strlen(alias_list->cmd) + 2)))
+	    exit(EXIT_FAILURE);
+	  cmd = strcat(one, &cmd[strlen(alias_list->alias)]);
+	  cmd = epur(cmd);
+	  ft_free_tab(tmp);
+	  return (strdup(cmd));
+	}
       alias_list = alias_list->next;
     }
+  ft_free_tab(tmp);
   return (cmd);
 }

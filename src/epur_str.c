@@ -79,5 +79,5 @@ char	*epur(char *str)
       if (str[i])
 	i++;
     }
-  return (add_char(answer, '\0'));
+  return (answer);
 }
