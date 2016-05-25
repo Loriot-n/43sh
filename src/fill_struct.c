@@ -24,8 +24,8 @@ char	**ft_create_env()
   tmp[0] = ft_strcat("NAME=", info->pw_name);
   tmp[1] = ft_strcat("HOME=", info->pw_dir);
   tmp[2] = ft_strcat("OLDPWD=", getcwd(pwd, PATH_MAX));
-  tmp[3] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
-  tmp[4] = strdup("PATH=/bin:/usr/bin");
+  tmp[3] = strdup("PATH=/bin:/usr/bin");
+  tmp[4] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
   tmp[5] = NULL;
   free(pwd);
   return (tmp);

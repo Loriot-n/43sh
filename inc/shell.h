@@ -239,6 +239,8 @@ void	ft_unsetenv(t_shell *shell, char *tkn, int end);
 */
 void	ft_cd(t_shell *shell, char *tkn, int end);
 
+
+void	ft_env(t_shell *shell, char *tkn, int end);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */

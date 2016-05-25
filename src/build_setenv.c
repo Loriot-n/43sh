@@ -1,17 +1,108 @@
 /*
-** build_setenv.c for  in /home/stanislas/clone/PSU_2015_42sh
+** build_setenv.c for 42sh in /home/qwebify/rendu/PSU/PSU_2015_42sh/src/
 **
-** Made by CUENAT
-** Login   <stanislas@epitech.net>
+** Made by maire_q
+** Login   <maire_q@epitech.eu>
 **
-** Started on  Wed May 25 16:08:49 2016 CUENAT
-** Last update Wed May 25 16:11:30 2016 CUENAT
+** Started on  %cdate maire_q
+** Last update %udate maire_q
 */
 
 #include "shell.h"
 
+void	modify_env(t_shell *shell, char **cmd, int pos)
+{
+  char	*new;
+
+  new = strdup(cmd[1]);
+  new = add_char(new, '=');
+  if (cmd[2])
+    {
+      if (!(new = realloc(new, strlen(new) + strlen(cmd[2]) + 1)))
+	exit(EXIT_FAILURE);
+      new = strcat(new, cmd[2]);
+    }
+  free(shell->env[pos]);
+  shell->env[pos] = new;
+}
+
+void	add_env(t_shell *shell, char **cmd)
+{
+  char	*new;
+  int	len;
+
+  len = tab_len(shell->env);
+  if (!(shell->env = realloc(shell->env, sizeof(char *) * (len + 2))))
+    exit(EXIT_FAILURE);
+  new = strdup(cmd[1]);
+  new = add_char(new, '=');
+  if (cmd[2])
+    {
+      if (!(new = realloc(new, sizeof(char) * strlen(new) +
+			  strlen(cmd[2]) + 2)))
+	exit(EXIT_FAILURE);
+      new = strcat(new, cmd[2]);
+    }
+  shell->env[len] = new;
+  shell->env[len + 1] = NULL;
+}
+
+int	is_alphanum(char *str)
+{
+  int	i;
+
+  i = 0;
+  if ((str[0] < 'a' || str[0] > 'z') && (str[0] < 'A' || str[0] > 'Z'))
+    {
+      dprintf(2, "setenv: Variable name must begin with a letter.\n");
+      return (-1);
+    }
+  while (str[i])
+    {
+      if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') &&
+	  (str[i] < '0' || str[i] > '9') && str[i] != '_')
+	{
+	  dprintf(2, "setenv: Variable name must contain");
+	  dprintf(2, "alphanumeric characters.\n");
+	  return (-1);
+	}
+      i++;
+    }
+  return (1);
+}
+
+static int	check(t_shell *shell)
+{
+  if (tab_len(shell->cur_exec) > 3)
+    {
+      dprintf(2, "setenv: Too many arguments.\n");
+      return (-1);
+    }
+  if (!shell->cur_exec[1])
+    {
+      ft_env(shell, 0, 0);
+      return (-1);
+    }
+  if (is_alphanum(shell->cur_exec[1]) == -1)
+    return (-1);
+  return (1);
+}
+
 void	ft_setenv(t_shell *shell, char *tkn, int end)
 {
+  int	i;
+
+  if (check(shell) == -1)
+    return ;
+  i = 0;
+  while (shell->env[i] && (strncmp(shell->env[i], shell->cur_exec[1],
+				  strlen(shell->cur_exec[1])) != 0 ||
+	 shell->env[i][strlen(shell->cur_exec[1])] != '='))
+    i++;
+  if (!shell->env[i])
+    add_env(shell, shell->cur_exec);
+  else
+    modify_env(shell, shell->cur_exec, i);
   (void)(shell);
   (void)(tkn);
   (void)(end);

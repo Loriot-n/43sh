@@ -63,16 +63,17 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
 {
-  void	(*ptr[6])(t_shell *shell, char *tkn, int end);
+  void	(*ptr[7])(t_shell *shell, char *tkn, int end);
   int  	i;
   int  	tube[2];
 
   ptr[0] = &ft_exit;
   ptr[1] = &ft_echo;
-  ptr[2] = &ft_setenv;
-  ptr[3] = &ft_unsetenv;
+  ptr[2] = &ft_unsetenv;
+  ptr[3] = &ft_setenv;
   ptr[4] = &ft_cd;
-  ptr[5] = NULL;
+  ptr[5] = &ft_env;
+  ptr[6] = NULL;
   pipe(tube);
   dup2(shell->fd_in, 0);
   if (end == 0)
