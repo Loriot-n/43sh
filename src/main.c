@@ -20,6 +20,7 @@ int		main(int ac, char **av, char **environ)
   ft_fill_env(environ, shell);
   write(1, "$> ", 2);
   ft_launch_shell(shell);
-  ft_free_tab(shell->env);
+  ft_free_struct(shell);
+  putchar(10);
   return (0);
 }

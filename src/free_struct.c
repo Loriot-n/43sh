@@ -10,6 +10,20 @@
 
 #include "shell.h"
 
+void		free_alias(t_alias *alias)
+{
+  t_alias	*tmp;
+
+  while (alias)
+    {
+      tmp = alias;
+      free(alias->cmd);
+      free(alias->alias);
+      alias = alias->next;
+      free(tmp);
+    }
+}
+
 void	ft_free_tab(char **tab)
 {
   int	i;
@@ -41,4 +55,6 @@ void	ft_free_struct(t_shell *shell)
       shell->exec_list = shell->exec_list->next;
       free(tmp);
     }
+  free_alias(shell->alias);
+  free(shell);
 }
