@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 12:07:06 2016 CUENAT
+** Last update Wed May 25 15:27:18 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -53,22 +53,14 @@ typedef struct		s_list
   struct s_list		*next;
 }			t_list;
 
-typedef struct 		s_alias
-{
-  char			*cmd;
-  char			*alias;
-  struct s_alias	*next;
-}			t_alias;
-
 typedef struct		s_shell
 {
   char			**env;
   char			**path;
+  t_list		*exec_list;
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
-  t_alias		*alias;
-  t_list		*exec_list;
 }			t_shell;
 
 
@@ -85,10 +77,9 @@ char	**ft_fill_bin_path(char **env);
 /*
 ** fill_list.c
 */
-t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
-					char *tmp_c,
-					int *sep,
-					t_shell *shell);
+t_sub_list	*ft_add_sub_list_at_end(t_sub_list *exec_list,
+					char *val,
+					int *sep);
 int	ft_create_list(t_shell *shell, char *line);
 t_list	*ft_add_at_end(t_list *exec_list, char *val);
 int	ft_create_sub_list(t_shell *shell);
@@ -132,7 +123,6 @@ int	next_char(char *str, int i);
 */
 char   	*my_strncpy(char *src, int n);
 char	**split(char *str, char *tokens);
-size_t	tab_len(char **tab);
 
 /*
 ** get_next_line.c
@@ -141,6 +131,11 @@ char	*get_next_line(int fd);
 char	*go_to_next(char *line, int *i, int *len);
 char	*my_realloc(char *buf, int ctr);
 int	my_strlen(char *str);
+
+/*
+** my_getnbr.c
+*/
+int	my_getnbr(char *str);
 /*
 ** END ----- PARSE / UTILS STRING ----- END
 */
@@ -166,8 +161,15 @@ void	ctrl(int sig);
 /*
 ** execute_instruction.c
 */
-int	ft_execute_instr(t_shell *shell, char *tkn, int end);
+int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
+int	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
+
+/*
+** choose_type_execution.c
+*/
+int	ft_choose_type_execution(t_shell *shell, char *tkn, int end);
+int	ft_is_a_build_int(char *cmd);
 
 /*
 ** redirection.c
@@ -184,27 +186,12 @@ int	ft_look_or(char **tab, int i);
 int	ft_look_bad_tkn(char *word, char *tkn);
 
 /*
-** END ----- PARSE / UTILS STRING ----- END
+** build_exit.c
 */
+void	ft_exit(t_shell *shell, char *tkn, int end);
 
 /*
-** START ----- ALIAS ----- START
-*/
-/*
-** alias_list.c
-*/
-t_alias		*get_aliases(int fd);
-t_alias		*new_alias(char *cmd, char *alias);
-t_alias		*insert_alias(char *cmd, char *alias, t_alias **head);
-char		*replace_alias(t_alias *alias_list, char *cmd);
-
-/*
-**42shconfig.c
-*/
-void	parse_options(t_shell *shell, char *path);
-
-/*
-** END ----- ALIAS ----- END
+** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
 
 #endif /*!SHELL_H_*/

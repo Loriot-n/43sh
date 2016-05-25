@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Wed May 25 12:06:00 2016 CUENAT
+## Last update Wed May 25 15:26:50 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -28,6 +28,9 @@ SRCS	=	src/main.c \
 		src/alias.c \
 		src/signal.c \
 		src/42shconfig.c \
+		src/choose_type_execution.c \
+		src/my_getnbr.c \
+		src/build_exit.c
 
 OBJS	=	$(SRCS:.c=.o)
 
