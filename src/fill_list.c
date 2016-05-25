@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 11:25:16 2016 CUENAT
-** Last update Tue May 24 16:47:08 2016 CUENAT
+** Last update Wed May 25 15:41:41 2016 CUENAT
 */
 
 #include "shell.h"
@@ -35,7 +35,7 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   return (list);
 }
 
-void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
+void	ft_parse_string_sub_list(t_list *tmp, int *sep)
 {
   int  	i;
   int  	j;
@@ -76,7 +76,7 @@ int		ft_create_sub_list(t_shell *shell)
   while (tmp != NULL)
     {
       separator = NO;
-      ft_parse_string_sub_list(tmp, &separator, shell);
+      ft_parse_string_sub_list(tmp, &separator);
       tmp = tmp->next;
     }
   return (0);

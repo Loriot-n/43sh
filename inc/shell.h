@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 15:27:18 2016 CUENAT
+** Last update Wed May 25 15:44:39 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -131,6 +131,7 @@ int	next_char(char *str, int i);
 */
 char   	*my_strncpy(char *src, int n);
 char	**split(char *str, char *tokens);
+size_t	tab_len(char **str);
 
 /*
 ** get_next_line.c
@@ -177,7 +178,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
 ** choose_type_execution.c
 */
 int	ft_choose_type_execution(t_shell *shell, char *tkn, int end);
-int	ft_is_a_build_int(char *cmd);
+int	ft_is_a_build_in(char *cmd);
 
 /*
 ** redirection.c
@@ -209,6 +210,10 @@ char		*replace_alias(t_alias *alias_list, char *cmd);
 
 /*
 **42shconfig.c
+*/
+void	parse_options(t_shell *shell, char *file);
+
+/*
 ** build_exit.c
 */
 void	ft_exit(t_shell *shell, char *tkn, int end);
