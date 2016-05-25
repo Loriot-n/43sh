@@ -207,6 +207,7 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 t_alias		*get_aliases(int fd);
 t_alias		*insert_alias(char **cmd, char *alias, t_alias **head);
 char		*replace_alias(t_alias *alias_list, char *cmd);
+void		free_alias(t_alias *alias);
 
 /*
 **42shconfig.c

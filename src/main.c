@@ -22,6 +22,8 @@ int		main(int ac, char **av, char **environ)
   //write(1, "$> ", 2);
   ft_launch_shell(shell);
   ft_free_tab(shell->env);
+  free_alias(shell->alias);
+  ft_free_struct(shell);
   putchar(10);
   return (0);
 }

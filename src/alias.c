@@ -66,10 +66,11 @@ char	*replace_alias(t_alias *alias_list, char *cmd)
 	  one = strdup(alias_list->cmd);
 	  if (!(one = realloc(one, strlen(cmd) + strlen(alias_list->cmd) + 2)))
 	    exit(EXIT_FAILURE);
-	  cmd = strcat(one, &cmd[strlen(alias_list->alias)]);
-	  cmd = epur(cmd);
+	  one = strcat(one, &cmd[strlen(alias_list->alias)]);
+	  one = epur(one);
+	  free(cmd);
 	  ft_free_tab(tmp);
-	  return (strdup(cmd));
+	  return (one);
 	}
       alias_list = alias_list->next;
     }
