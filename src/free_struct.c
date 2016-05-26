@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 16:30:52 2016 CUENAT
-** Last update Thu May 19 16:43:33 2016 CUENAT
+** Last update Thu May 26 14:06:15 2016 CUENAT
 */
 
 #include "shell.h"
@@ -29,7 +29,7 @@ void	ft_free_tab(char **tab)
   int	i;
 
   i = 0;
-  while (tab[i])
+  while (tab != NULL && tab[i])
     {
       free(tab[i]);
       i += 1;

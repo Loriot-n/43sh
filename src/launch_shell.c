@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 17:34:57 2016 CUENAT
+** Last update Thu May 26 14:05:43 2016 CUENAT
 */
 
 #include "shell.h"
@@ -16,7 +16,7 @@ char	*ft_fill_path_for_execve(char *dest, char **path)
   int	i;
 
   i = 0;
-  while (path[i])
+  while (path != NULL && path[i])
     {
       if ((tmp = malloc(sizeof(char) *
 			(strlen(dest) + strlen(path[i]) + 2))) == NULL)

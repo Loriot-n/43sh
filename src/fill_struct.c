@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Wed May 25 14:09:40 2016 CUENAT
+** Last update Thu May 26 14:04:49 2016 CUENAT
 */
 
 #include "shell.h"
@@ -36,7 +36,7 @@ char	**ft_fill_bin_path(char **env)
   int	i;
 
   i = 0;
-  while (ft_find_line_env(env[i], "PATH=") == -1)
+  while (env[i] && ft_find_line_env(env[i], "PATH=") == -1)
     i += 1;
   if (env[i] != NULL)
     return (split(&env[i][5], ":"));
