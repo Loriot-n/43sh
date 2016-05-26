@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 12:05:36 2016 CUENAT
+** Last update Thu May 26 17:01:54 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -108,6 +108,7 @@ int	ft_launch_shell(t_shell *shell)
   signal(SIGINT, ctrl);
   while ((line = get_next_line(0)) != NULL)
     {
+      append_history(line);
       shell->path = ft_fill_bin_path(shell->env);
       shell->res_exec = 0;
       line = epur(line);

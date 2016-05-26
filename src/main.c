@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:48:14 2016 CUENAT
-** Last update Tue May 24 16:08:43 2016 CUENAT
+** Last update Thu May 26 17:02:41 2016 Nicolas Loriot
 */
 
 #include "shell.h"

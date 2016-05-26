@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 12:07:06 2016 CUENAT
+** Last update Wed May 25 14:27:16 2016 Nicolas Loriot
 */
 
 #ifndef SHELL_H_
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
@@ -202,4 +203,13 @@ char		*replace_alias(t_alias *alias_list, char *cmd);
 ** END ----- ALIAS ----- END
 */
 
+/*
+** START ------ HISTORY -------- END
+*/
+
+void		append_history(char *value);
+
+/*
+** END ------- HISTORY --------- END
+*/
 #endif /*!SHELL_H_*/
