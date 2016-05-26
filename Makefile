@@ -15,7 +15,7 @@ CC	=	gcc
 SRCS	=	src/main.c \
 		src/fill_struct.c \
 		src/parse_string.c \
-		src/my_str_to_wordtab.c \
+		src/split.c \
 		src/get_next_line.c \
 		src/launch_shell.c \
 		src/epur_str.c \
@@ -38,6 +38,7 @@ SRCS	=	src/main.c \
 		src/build_cd.c \
 		src/build_env.c \
 		src/env_values.c \
+		src/join.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
