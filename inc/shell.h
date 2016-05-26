@@ -24,6 +24,7 @@
 #include <signal.h>
 #include <limits.h>
 #include <errno.h>
+#include <stdarg.h>
 #include "get_next_line.h"
 
 #ifndef AND
@@ -249,5 +250,11 @@ void	ft_env(t_shell *shell, char *tkn, int end);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
+
+/*
+** join.c
+*/
+char		*join(int nb, char sep, ...);
+char	*tab_join(char sep, char **tab);
 
 #endif /*!SHELL_H_*/
