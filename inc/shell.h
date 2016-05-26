@@ -83,6 +83,8 @@ t_shell	*ft_init_struct();
 int	ft_fill_env(char **env, t_shell *shell);
 char	**ft_create_env();
 char	**ft_fill_bin_path(char **env);
+char	*get_home(struct passwd *info);
+
 /*
 ** fill_list.c
 */
@@ -128,7 +130,7 @@ void	*raoul(char *oldptr, int size);
 int	next_char(char *str, int i);
 
 /*
-** my_str_to_word_tab.c
+** split.c
 */
 char   	*my_strncpy(char *src, int n);
 char	**split(char *str, char *tokens);
@@ -244,6 +246,7 @@ void	ft_cd(t_shell *shell, char *tkn, int end);
 ** env_values.c
 */
 char	*replace_env(t_shell *shell, char *line);
+char	*get_env(char **env, char *var);
 
 void	ft_env(t_shell *shell, char *tkn, int end);
 /*
@@ -253,7 +256,7 @@ void	ft_env(t_shell *shell, char *tkn, int end);
 /*
 ** join.c
 */
-char		*join(int nb, char sep, ...);
+char	*join(int nb, char sep, ...);
 char	*tab_join(char sep, char **tab);
 
 #endif /*!SHELL_H_*/

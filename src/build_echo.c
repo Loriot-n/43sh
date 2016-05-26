@@ -12,8 +12,10 @@
 
 void	ft_echo(t_shell *shell, char *tkn, int end)
 {
+  dprintf(2, "caca\n");
 
   (void)(tkn);
   (void)(end);
   (void)(shell);
+  return ;
 }

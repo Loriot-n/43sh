@@ -24,10 +24,26 @@ char	**init_history(void)
 
 void		ft_cd(t_shell *shell, char *tkn, int end)
 {
+  char		*path;
+  struct passwd	*info;
   static char	**history = NULL;
+  char		tmp[PATH_MAX];
 
   if (!(history))
     history = init_history();
+  if (!(path = shell->cur_exec[1]) && !(path = get_env(shell->env, "$HOME")))
+    {
+      info = getpwuid(geteuid());
+      path = get_home(info);
+      path = &path[5];
+    }
+  if (path[0] == '.')
+    path = join(2, '\0', getcwd(tmp, PATH_MAX), &path[1]);
+  if (chdir(path) == -1)
+    {
+      dprintf(2, "%s: Aucun fichier ou dossier de ce type.\n", path);
+      return ;
+    }
   (void)(shell);
   (void)(tkn);
   (void)(end);

@@ -10,6 +10,11 @@
 
 #include "shell.h"
 
+char	*get_home(struct passwd *info)
+{
+ return (ft_strcat("HOME=", info->pw_dir));
+}
+
 char	**ft_create_env()
 {
   char	**tmp;
@@ -22,7 +27,7 @@ char	**ft_create_env()
   if ((pwd = malloc(sizeof(char) * PATH_MAX)) == NULL)
     exit(EXIT_FAILURE);
   tmp[0] = ft_strcat("NAME=", info->pw_name);
-  tmp[1] = ft_strcat("HOME=", info->pw_dir);
+  tmp[1] = get_home(info);
   tmp[2] = ft_strcat("OLDPWD=", getcwd(pwd, PATH_MAX));
   tmp[3] = strdup("PATH=/bin:/usr/bin");
   tmp[4] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
@@ -51,6 +56,7 @@ int	ft_fill_env(char **env, t_shell *shell)
     shell->env = ft_strdup_tab(env);
   return (0);
 }
+
 t_shell		*ft_init_struct()
 {
   t_shell	*tmp;
