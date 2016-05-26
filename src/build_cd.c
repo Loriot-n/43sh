@@ -22,22 +22,31 @@ char	**init_history(void)
   return (history);
 }
 
-void		ft_cd(t_shell *shell, char *tkn, int end)
+static char	*get_home(t_shell *shell)
 {
   char		*path;
   struct passwd	*info;
+
+  if (!(path = get_env(shell->env, "$HOME")))
+    {
+      info = getpwuid(geteuid());
+      path = ft_strcat("HOME=", info->pw_dir);
+      path = &path[5];
+    }
+  return (path);
+}
+
+void		ft_cd(t_shell *shell, char *tkn, int end)
+{
+  char		*path;
   static char	**history = NULL;
   char		tmp[PATH_MAX];
 
   if (!(history))
     history = init_history();
-  if (!(path = shell->cur_exec[1]) && !(path = get_env(shell->env, "$HOME")))
-    {
-      info = getpwuid(geteuid());
-      path = get_home(info);
-      path = &path[5];
-    }
-  if (path[0] == '.')
+  if (!(path = shell->cur_exec[1]) || strcmp(shell->cur_exec[1], "~") == 0)
+    path = get_home(shell);
+  if (path[0] == '.' && strlen(path) > 2)
     path = join(2, '\0', getcwd(tmp, PATH_MAX), &path[1]);
   if (chdir(path) == -1)
     {

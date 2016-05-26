@@ -84,7 +84,6 @@ t_shell	*ft_init_struct();
 int	ft_fill_env(char **env, t_shell *shell);
 char	**ft_create_env();
 char	**ft_fill_bin_path(char **env);
-char	*get_home(struct passwd *info);
 
 /*
 ** fill_list.c
