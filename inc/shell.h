@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 17:34:37 2016 CUENAT
+** Last update Thu May 26 15:19:57 2016 Sanchez Loris
 */
 
 #ifndef SHELL_H_
@@ -248,5 +248,11 @@ void	ft_env(t_shell *shell, char *tkn, int end);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
+
+/*
+** check_options.c
+*/
+void	check_options(int ac, char **av, t_shell *shell);
+void	exec_simple_cmd(char *line, t_shell *shell);
 
 #endif /*!SHELL_H_*/

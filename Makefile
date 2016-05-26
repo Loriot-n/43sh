@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Wed May 25 16:14:34 2016 CUENAT
+## Last update Thu May 26 14:42:02 2016 Sanchez Loris
 ##
 
 NAME	=	42sh
@@ -38,6 +38,7 @@ SRCS	=	src/main.c \
 		src/build_cd.c \
 		src/build_env.c \
 		src/env_values.c \
+		src/check_options.c
 
 OBJS	=	$(SRCS:.c=.o)
 
