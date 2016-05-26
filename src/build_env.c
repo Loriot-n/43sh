@@ -10,7 +10,7 @@
 
 #include "shell.h"
 
-void	ft_env(t_shell *shell, char *tkn, int end)
+void	ft_env(t_shell *shell)
 {
   int	i;
 
@@ -18,6 +18,4 @@ void	ft_env(t_shell *shell, char *tkn, int end)
   while (shell->env[i])
     printf("%s\n", shell->env[i++]);
   return ;
-  (void)tkn;
-  (void)end;
 }

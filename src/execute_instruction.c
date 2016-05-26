@@ -64,7 +64,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
 {
-  void	(*ptr[7])(t_shell *shell, char *tkn, int end);
+  void	(*ptr[7])(t_shell *shell);
   int  	i;
   int  	tube[2];
 
@@ -81,8 +81,9 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
     dup2(tube[1], 1);
   close(tube[0]);
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
-    (ptr[i])(shell, tkn, end);
+    (ptr[i])(shell);
   close(tube[1]);
   shell->fd_in = tube[0];
+  (void)tkn;
   return (0);
 }

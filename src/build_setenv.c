@@ -66,7 +66,7 @@ static int	check(t_shell *shell)
     }
   if (!shell->cur_exec[1])
     {
-      ft_env(shell, 0, 0);
+      ft_env(shell);
       return (-1);
     }
   if (is_alphanum(shell->cur_exec[1]) == -1)
@@ -74,7 +74,7 @@ static int	check(t_shell *shell)
   return (1);
 }
 
-void	ft_setenv(t_shell *shell, char *tkn, int end)
+void	ft_setenv(t_shell *shell)
 {
   int	i;
 
@@ -89,7 +89,4 @@ void	ft_setenv(t_shell *shell, char *tkn, int end)
     add_env(shell, shell->cur_exec);
   else
     modify_env(shell, shell->cur_exec, i);
-  (void)(shell);
-  (void)(tkn);
-  (void)(end);
 }

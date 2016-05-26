@@ -220,27 +220,27 @@ void	parse_options(t_shell *shell, char *file);
 /*
 ** build_exit.c
 */
-void	ft_exit(t_shell *shell, char *tkn, int end);
+void	ft_exit(t_shell *shell);
 
 /*
 ** build_exit.c
 */
-void	ft_echo(t_shell *shell, char *tkn, int end);
+void	ft_echo(t_shell *shell);
 
 /*
 ** build_setenv.c
 */
-void	ft_setenv(t_shell *shell, char *tkn, int end);
+void	ft_setenv(t_shell *shell);
 
 /*
 ** build_unsetenv.c
 */
-void	ft_unsetenv(t_shell *shell, char *tkn, int end);
+void	ft_unsetenv(t_shell *shell);
 
 /*
 ** build_cd.c
 */
-void	ft_cd(t_shell *shell, char *tkn, int end);
+void	ft_cd(t_shell *shell);
 
 /*
 ** env_values.c
@@ -248,7 +248,7 @@ void	ft_cd(t_shell *shell, char *tkn, int end);
 char	*replace_env(t_shell *shell, char *line);
 char	*get_env(char **env, char *var);
 
-void	ft_env(t_shell *shell, char *tkn, int end);
+void	ft_env(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */

@@ -18,8 +18,8 @@ int		main(int ac, char **av, char **environ)
   (void)(ac);
   (void)(av);
   shell = ft_init_struct();
-  parse_options(shell, ".42shrc");
   ft_fill_env(environ, shell);
+  parse_options(shell, ".42shrc");
   write(1, "$> ", 3);
   ft_launch_shell(shell);
   ft_free_tab(shell->env);

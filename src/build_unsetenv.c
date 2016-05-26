@@ -33,7 +33,7 @@ static int	check(t_shell *shell)
   return (1);
 }
 
-void	ft_unsetenv(t_shell *shell, char *tkn, int end)
+void	ft_unsetenv(t_shell *shell)
 {
   int	i;
   int	j;
@@ -57,7 +57,4 @@ void	ft_unsetenv(t_shell *shell, char *tkn, int end)
 	}
       i++;
     }
-  (void)(shell);
-  (void)(tkn);
-  (void)(end);
 }
