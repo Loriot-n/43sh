@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Wed May 25 17:34:37 2016 CUENAT
+** Last update Thu May 26 14:27:07 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -70,6 +70,7 @@ typedef struct		s_shell
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
+  int			exit;
 }			t_shell;
 
 
