@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Thu May 26 14:36:57 2016 CUENAT
+** Last update Thu May 26 19:32:15 2016 CUENAT
 */
 
 #include "shell.h"
@@ -63,6 +63,7 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 
   i = 0;
   signal(SIGSEGV, segfault);
+  shell->fd_in = 0;
   if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
       || (tmp->separator == OR && shell->res_exec == -1))
     {

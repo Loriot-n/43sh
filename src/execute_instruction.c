@@ -5,28 +5,31 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Thu May 26 14:50:28 2016 CUENAT
+** Last update Thu May 26 22:39:55 2016 CUENAT
 */
 
 #include "shell.h"
 
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 {
-  if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+  if (ft_execute_instr_no_fork(shell, tkn) == -1)
     {
-      if (tkn != NULL)
-	{
-	  if (strcmp(tkn, ">") == 0)
-	    ft_rewrite(shell->cur_exec[0], shell->fd_in);
-	  else if (strcmp(tkn, ">>") == 0)
-	    ft_write_at_end(shell->cur_exec[0], shell->fd_in);
-	  else if (strcmp(tkn, "<") == 0)
-	    {}
-	  else if (strcmp(tkn, "<<") == 0)
-	    {}
-	}
-      dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
-      return (-1);
+       if (tkn != NULL)
+	    {
+	      if (strcmp(tkn, ">") == 0)
+		ft_rewrite(shell->cur_exec[0], shell->fd_in);
+	      else if (strcmp(tkn, ">>") == 0)
+		ft_write_at_end(shell->cur_exec[0], shell->fd_in);
+	      else if (strcmp(tkn, "<") == 0)
+		{}
+	      else if (strcmp(tkn, "<<") == 0)
+		{}
+	      else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+		{
+		  dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
+		  return (-1);
+		}
+	    }
     }
   return (0);
 }
@@ -62,11 +65,10 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
   return (0);
 }
 
-int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
+int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
   void	(*ptr[7])(t_shell *shell);
   int  	i;
-  int  	tube[2];
 
   ptr[0] = &ft_exit;
   ptr[1] = &ft_echo;
@@ -75,15 +77,10 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
   ptr[4] = &ft_cd;
   ptr[5] = &ft_env;
   ptr[6] = NULL;
-  pipe(tube);
-  dup2(shell->fd_in, 0);
-  if (end == 0)
-    dup2(tube[1], 1);
-  close(tube[0]);
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell);
-  close(tube[1]);
-  shell->fd_in = tube[0];
-  (void)tkn;
+  else
+    return (-1);
+  (void)(tkn);
   return (0);
 }

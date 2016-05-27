@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu May 26 14:27:07 2016 CUENAT
+** Last update Thu May 26 19:36:47 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -174,7 +174,7 @@ void	ctrl(int sig);
 ** execute_instruction.c
 */
 int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
-int	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end);
+int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
 
 /*
