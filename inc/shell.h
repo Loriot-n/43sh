@@ -231,6 +231,8 @@ void	ft_echo(t_shell *shell);
 ** build_setenv.c
 */
 void	ft_setenv(t_shell *shell);
+void	add_env(t_shell *shell, char **cmd);
+void	modify_env(t_shell *shell, char **cmd, int pos);
 
 /*
 ** build_unsetenv.c
@@ -258,5 +260,11 @@ void	ft_env(t_shell *shell);
 */
 char	*join(int nb, char sep, ...);
 char	*tab_join(char sep, char **tab);
+
+/*
+** export.c
+*/
+int	st_check(t_shell *shell, char **cur_exec);
+char	**add_export(t_shell *shell, int fd);
 
 #endif /*!SHELL_H_*/
