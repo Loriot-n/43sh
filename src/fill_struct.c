@@ -45,10 +45,27 @@ char	**ft_fill_bin_path(char **env)
 
 int	ft_fill_env(char **env, t_shell *shell)
 {
+  char	*tmp[3];
+  char	*one;
+  int	i;
+
   if (env == NULL || ft_tab_len(env) < 2)
     shell->env = ft_create_env();
   else
-    shell->env = ft_strdup_tab(env);
+    {
+      shell->env = ft_strdup_tab(env);
+      i = 0;
+      while (env[i] && ft_find_line_env(env[i], "SHLVL") == -1)
+        i += 1;
+      if (env[i])
+	{
+	  tmp[1] = "SHLVL";
+	  one = get_env(shell->env, "SHLVL");
+	  one[0]++;
+	  tmp[2] = one;
+	  modify_env(shell, tmp, i);
+	}
+    }
   return (0);
 }
 
