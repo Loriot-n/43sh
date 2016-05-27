@@ -20,7 +20,7 @@ int		main(int ac, char **av, char **environ)
   shell = ft_init_struct();
   ft_fill_env(environ, shell);
   parse_options(shell, ".42shrc");
-  write(1, "$> ", 3);
+  write(2, "$> ", 3);
   ft_launch_shell(shell);
   ft_free_tab(shell->env);
   free_alias(shell->alias);

@@ -126,7 +126,7 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      write(1, "$> ", 3);
+      write(2, "$> ", 3);
     }
   return (0);
 }

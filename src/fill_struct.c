@@ -65,6 +65,7 @@ int	ft_fill_env(char **env, t_shell *shell)
 	  tmp[2] = one;
 	  modify_env(shell, tmp, i);
 	}
+      // if (shell->env = )
     }
   return (0);
 }

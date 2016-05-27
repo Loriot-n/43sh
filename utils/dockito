@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run -it -v /home/qwebify/rendu/PSU:/home/rendu/PSU epitechcontent/blinux:latest /bin/bash -c "cd /home/rendu/PSU/PSU_2015_42sh/; make; cp 42sh utils; cd utils; ./moul.sh 16; /bin/bash" &
+docker run -it -v /home/qwebify/rendu/PSU:/home/rendu/PSU epitechcontent/blinux:latest /bin/bash 
