@@ -1,2 +1,0 @@
-#!/bin/sh
-docker run -it -v /home/qwebify/rendu/PSU:/home/rendu/PSU epitechcontent/blinux:latest /bin/bash 
