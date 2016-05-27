@@ -10,16 +10,28 @@
 
 #include "shell.h"
 
+int	get_fd(char *path)
+{
+  int	fd;
+
+  if ((fd = open(path, O_RDONLY)) < 0)
+    {
+      dprintf(2, "Error while opening %s: %s\n", path, strerror(errno));
+      return (-1);
+    }
+  return (fd);
+}
+
 void	parse_options(t_shell *shell, char *path)
 {
   int	fd;
 
   if (access(path, F_OK | R_OK) != 0)
     return ;
-  if ((fd = open(path, O_RDONLY)) < 0)
-    {
-      dprintf(2, "Error while opening %s: %s\n", path, strerror(errno));
+  if ((fd = get_fd(path)) == -1)
       return ;
-    }
   shell->alias = get_aliases(fd);
+  if ((fd = get_fd(path)) == -1)
+      return ;
+  shell->env = add_export(shell, fd);
 }

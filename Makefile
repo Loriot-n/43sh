@@ -39,6 +39,7 @@ SRCS	=	src/main.c \
 		src/build_env.c \
 		src/env_values.c \
 		src/join.c \
+		src/export.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

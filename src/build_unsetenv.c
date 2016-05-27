@@ -47,13 +47,14 @@ void	ft_unsetenv(t_shell *shell)
 		strlen(shell->cur_exec[i])) != 0 ||
 		shell->env[j][strlen(shell->cur_exec[i])] != '='))
 	j++;
-      if (!shell->env[j] && !(i += 1))
-	continue ;
-      free(shell->env[j]);
-      while (j == 0 || shell->env[j - 1])
+      if (shell->env[j] != NULL)
 	{
-	  shell->env[j] = shell->env[j + 1];
-	  j++;
+	  free(shell->env[j]);
+	  while (j == 0 || shell->env[j - 1])
+	    {
+	      shell->env[j] = shell->env[j + 1];
+	      j++;
+	    }
 	}
       i++;
     }
