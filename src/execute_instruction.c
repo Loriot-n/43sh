@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Thu May 26 22:39:55 2016 CUENAT
+** Last update Fri May 27 16:13:32 2016 CUENAT
 */
 
 #include "shell.h"
@@ -34,11 +34,22 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
   return (0);
 }
 
+void	ft_execute_instr_fork_2(t_shell *shell,
+				int tube[2],
+				int pid)
+{
+  int	status;
+
+  waitpid(pid, &status, WUNTRACED);
+  (WIFEXITED(status)) ?
+    (shell->res_exec = WEXITSTATUS(status)) : (shell->res_exec = -1);
+  close(tube[1]);
+  shell->fd_in = tube[0];
+}
 int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 {
   int		tube[2];
   pid_t		pid;
-  int		status;
 
   pipe(tube);
   if ((pid = fork()) == -1)
@@ -53,15 +64,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
       exit(EXIT_FAILURE);
     }
   else
-    {
-      waitpid(pid, &status, WUNTRACED);
-      if(WIFEXITED(status))
-	shell->res_exec = WEXITSTATUS(status);
-      else
-	shell->res_exec = -1;
-      close(tube[1]);
-      shell->fd_in = tube[0];
-    }
+    ft_execute_instr_fork_2(shell, tube, pid);
   return (0);
 }
 
@@ -82,5 +85,7 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   else
     return (-1);
   (void)(tkn);
+  if (i == 0)
+    return (2);
   return (0);
 }
