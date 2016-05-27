@@ -15,7 +15,7 @@ void	ft_env(t_shell *shell)
   int	i;
 
   i = 0;
-  while (shell->env[i])
+  while (shell->env && shell->env[i])
     printf("%s\n", shell->env[i++]);
   return ;
 }
