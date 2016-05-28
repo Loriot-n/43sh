@@ -12,7 +12,7 @@
 
 int	ft_is_a_build_in(char *cmd)
 {
-  char	*check[7];
+  char	*check[8];
   int	i;
 
   i = 0;
@@ -22,7 +22,8 @@ int	ft_is_a_build_in(char *cmd)
   check[3] = "setenv";
   check[4] = "cd";
   check[5] = "env";
-  check[6] = NULL;
+  check[6] = "source";
+  check[7] = NULL;
   while (check[i])
     {
       if (strcmp(check[i], cmd) == 0)

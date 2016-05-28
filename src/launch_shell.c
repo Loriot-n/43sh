@@ -69,6 +69,7 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
     {
       while (tmp->exec_cmd[i])
 	{
+
 	  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
 	  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
 	    shell->cur_exec[0] =
@@ -94,6 +95,7 @@ int		ft_start_exec(t_shell *shell)
   tmp_list = shell->exec_list;
   while (tmp_list != NULL)
     {
+
       tmp_sub = tmp_list->sub_list;
       while (tmp_sub != NULL)
 	{
@@ -118,7 +120,6 @@ int	ft_launch_shell(t_shell *shell)
       line = replace_env(shell, line);
       line = epur(line);
       line = replace_alias(shell->alias, line);
-      // printf("%s\n", line);
       if (ft_check_input(line) == 0)
 	{
 	  ft_create_list(shell, line);

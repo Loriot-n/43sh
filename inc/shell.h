@@ -251,6 +251,8 @@ char	*replace_env(t_shell *shell, char *line);
 char	*get_env(char **env, char *var);
 
 void	ft_env(t_shell *shell);
+
+void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
