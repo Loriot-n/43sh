@@ -20,7 +20,7 @@ char	*get_history(char **history, char *path)
   while (path[i] && path[i] != '-')
     i++;
   if (!path[i + 1])
-    return (history[0]);
+    return (history[1]);
   j = 0;
   while (history[j] && (j != path[i + 1] - 48 ||
 			strcmp(history[j], getcwd(tmp, PATH_MAX)) == 0))
