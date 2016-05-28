@@ -89,7 +89,6 @@ void		ft_cd(t_shell *shell)
     path = join(2, '\0', getcwd(tmp, PATH_MAX), &path[1]);
   if (path[0] == '-')
     path = get_history(history, path);
-  printf(":%s\n", path);
   if (path && chdir(path) == -1)
     {
       dprintf(2, "%s: Aucun fichier ou dossier de ce type.\n", path);
