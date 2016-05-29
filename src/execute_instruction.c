@@ -16,20 +16,21 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
     {
        if (tkn != NULL)
 	    {
-	      if (strcmp(tkn, ">") == 0)
-		ft_rewrite(shell->cur_exec[0], shell->fd_in);
-	      else if (strcmp(tkn, ">>") == 0)
-		ft_write_at_end(shell->cur_exec[0], shell->fd_in);
-	      else if (strcmp(tkn, "<") == 0)
+	  printf("%s\n", shell->cur_exec[0]);
+	  if (strcmp(tkn, ">") == 0)
+	    ft_rewrite(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, ">>") == 0)
+	    ft_write_at_end(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, "<") == 0)
+	    ft_inredirect(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, "<<") == 0)
 		{}
-	      else if (strcmp(tkn, "<<") == 0)
-		{}
-	      else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
-		{
-		  dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
-		  return (-1);
-		}
+	  else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+	    {
+	      dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
+	      return (-1);
 	    }
+	}
     }
   return (0);
 }

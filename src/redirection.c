@@ -10,13 +10,28 @@
 
 #include "shell.h"
 
+void	ft_inredirect(char *file, int fd_in)
+{
+  int fd0;
+
+  dprintf(2, "caca");
+  if ((fd0 = open(file, O_RDONLY, 0)) == -1)
+    {
+      printf("%s: %s\n", strerror(errno), file);
+      return ;
+    }
+  dup2(fd0, STDIN_FILENO);
+  close(fd0);
+      // in = 0;
+}
+
 void    ft_rewrite(char *file, int fd_in)
 {
   int   fd;
   char  buf[512];
   int   oct;
 
-  if ((fd = open(file , O_CREAT | O_RDWR, S_IRWXU)) == -1)
+  if ((fd = open(file , O_CREAT | O_RDWR | O_TRUNC, 0666)) == -1)
     {
       dprintf(2, "%s: ", file);
       perror("");
