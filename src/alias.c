@@ -47,7 +47,7 @@ t_alias		*get_aliases(int fd)
       tmp = epur(one);
       lexed = split(tmp, " =\"'");
       if (strcmp(lexed[0], "alias") == 0 && check_alias(lexed) == 1)
-	insert_alias(&lexed[4], lexed[1], &list_alias);
+	insert_alias(&lexed[4], lexed[1], &list_alias, 0);
       empty(tmp, one, lexed);
     }
   return (list_alias);

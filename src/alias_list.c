@@ -40,13 +40,15 @@ t_alias		*new_alias(char **cmd, char *alias)
   return (elem);
 }
 
-t_alias			*insert_alias(char **cmd, char *alias, t_alias **head)
+t_alias			*insert_alias(char **cmd, char *alias, t_alias **head,
+				      int whatdo)
 {
   t_alias		*newnode;
   t_alias		*tmp;
 
   tmp = *head;
   newnode = new_alias(cmd, alias);
+  newnode->whatdo = whatdo;
   if (!(*head))
     {
       *head = newnode;

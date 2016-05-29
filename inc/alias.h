@@ -11,11 +11,11 @@
 #ifndef ALIAS_H_
 # define ALIAS_H_
 
-
 typedef struct 		s_alias
 {
   char			*cmd;
   char			*alias;
+  int			whatdo;
   struct s_alias	*next;
 }			t_alias;
 
@@ -26,7 +26,8 @@ typedef struct 		s_alias
 ** alias_list.c
 */
 t_alias		*get_aliases(int fd);
-t_alias		*insert_alias(char **cmd, char *alias, t_alias **head);
+t_alias			*insert_alias(char **cmd, char *alias, t_alias **head,
+				      int whatdo);
 char		*replace_alias(t_alias *alias_list, char *cmd);
 void		free_alias(t_alias *alias);
 
