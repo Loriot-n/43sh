@@ -33,7 +33,7 @@ static int	check(t_shell *shell)
   return (1);
 }
 
-void	ft_unsetenv(t_shell *shell, char *tkn, int end)
+void	ft_unsetenv(t_shell *shell)
 {
   int	i;
   int	j;
@@ -47,17 +47,15 @@ void	ft_unsetenv(t_shell *shell, char *tkn, int end)
 		strlen(shell->cur_exec[i])) != 0 ||
 		shell->env[j][strlen(shell->cur_exec[i])] != '='))
 	j++;
-      if (!shell->env[j] && !(i += 1))
-	continue ;
-      free(shell->env[j]);
-      while (j == 0 || shell->env[j - 1])
+      if (shell->env[j] != NULL)
 	{
-	  shell->env[j] = shell->env[j + 1];
-	  j++;
+	  free(shell->env[j]);
+	  while (j == 0 || shell->env[j - 1])
+	    {
+	      shell->env[j] = shell->env[j + 1];
+	      j++;
+	    }
 	}
       i++;
     }
-  (void)(shell);
-  (void)(tkn);
-  (void)(end);
 }

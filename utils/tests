@@ -1,74 +1,74 @@
-[1]
+[01]
 NAME="Path 1"
-SETUP="PATH='/usr/bin:/bin' ; touch file$$"
+sETUP="PATH='/usr/bin:/bin' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[1-END]
+[01-END]
 
-[2]
+[02]
 NAME="Path 2"
 SETUP="PATH='/bin' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[2-END]
+[02-END]
 
-[3]
+[03]
 NAME="Path 3"
 SETUP="PATH=':/usr/bin:/bin:' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[3-END]
+[03-END]
 
-[4]
+[04]
 NAME="Path 4"
 SETUP="touch file$$;PATH=''"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[4-END]
+[04-END]
 
-[5]
+[05]
 NAME="Path 5"
-SETUP="PATH='/tmp:/bin/ls' ; /usr/bin/touch file$$"
+SETUP="PATH='/tmp:/root/:/bin' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[5-END]
+[05-END]
 
-[6]
+[06]
 NAME="Path 6"
 SETUP="PATH=' ' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[6-END]
+[06-END]
 
-[7]
+[07]
 NAME="Path 7"
 SETUP="PATH='coucou' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[7-END]
+[07-END]
 
-[8]
+[08]
 NAME="Path 8"
 SETUP="PATH='/' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
-[8-END]
+[08-END]
 
-[9]
+[09]
 NAME="Path 9"
 SETUP="PATH='.mybin' ; /usr/bin/touch file$$ ; /bin/mkdir .mybin ; /bin/cp /bin/ls .mybin/"
 CLEAN="/bin/rm -f file$$ ; /bin/rm -Rf .mybin"
 TESTS=
   echo 'ls -la /bin .'
-[9-END]
+[09-END]
 
 [10]
 NAME="Path 10"
@@ -125,11 +125,13 @@ TESTS=
 
 [16]
 NAME="setenv and unsetenv"
-SETUP=""
-CLEAN=""
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RED ; export MYBG=1 ; export LVL=42 ; export NOTE=0"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
 TESTS=
+  echo 'unsetenv HOSTTYPE VENDOR OSTYPE MACHTYPE SHLVL PWD LOGNAME USER GROUP HOST REMOTEHOST'
   echo 'unsetenv _'
   echo 'unsetenv LS_COLORS'
+  echo 'unsetenv NOTE'
   echo 'setenv toto'
   echo 'setenv tata coucou'
   echo 'env'
@@ -151,6 +153,14 @@ TESTS=
   echo "cd -"
   echo "ls"
 [17-END]
+
+[18]
+NAME="cd and error messages"
+SETUP="mkdir testdircd ; chmod 000 testdircd"
+CLEAN="chmod 755 testdircd ; rmdir testdircd"
+TESTS=
+  echo "cd testdircd"
+[18-END]
 
 [19]
 NAME="space and tab"
@@ -287,3 +297,20 @@ TESTS=
   echo "cat fic >> fic"
   echo "cat fic"
 [32-END]
+
+[33]
+NAME="[Bonus] unsetenv *"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "unsetenv *"
+  echo "env"
+[33-END]
+
+[34]
+Name="[Bonus] ls $HOME"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "ls $HOME"
+[34-END]

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:48:14 2016 CUENAT
-** Last update Thu May 26 15:38:04 2016 Sanchez Loris
+** Last update Mon May 30 15:16:04 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -17,13 +17,13 @@ int		main(int ac, char **av, char **environ)
 
 
   shell = ft_init_struct();
-  parse_options(shell, ".42shrc");
   ft_fill_env(environ, shell);
   if (ac != 1)
     {
       check_options(ac, av, shell);
     }
   write(1, "$> ", 3);
+  parse_options(shell, ".42shrc");
   ft_launch_shell(shell);
   ft_free_tab(shell->env);
   free_alias(shell->alias);

@@ -10,10 +10,8 @@
 
 #include "shell.h"
 
-void	ft_exit(t_shell *shell, char *tkn, int end)
+void	ft_exit(t_shell *shell)
 {
-  (void)(tkn);
-  (void)(end);
   printf("exit\n");
   if (shell->cur_exec[1] != NULL)
     exit(my_getnbr(shell->cur_exec[1]));

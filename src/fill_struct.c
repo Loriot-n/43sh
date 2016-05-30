@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Thu May 26 15:32:52 2016 CUENAT
+** Last update Mon May 30 11:25:46 2016 CUENAT
 */
 
 #include "shell.h"
@@ -24,7 +24,7 @@ char	**ft_create_env()
   tmp[0] = ft_strcat("NAME=", info->pw_name);
   tmp[1] = ft_strcat("HOME=", info->pw_dir);
   tmp[2] = ft_strcat("OLDPWD=", getcwd(pwd, PATH_MAX));
-  tmp[3] = strdup("PATH=/bin:/usr/bin");
+  tmp[3] = strdup("PATH=/bin");
   tmp[4] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
   tmp[5] = NULL;
   free(pwd);
@@ -45,12 +45,30 @@ char	**ft_fill_bin_path(char **env)
 
 int	ft_fill_env(char **env, t_shell *shell)
 {
+  char	*tmp[3];
+  char	*one;
+  int	i;
+
   if (env == NULL || ft_tab_len(env) < 2)
     shell->env = ft_create_env();
   else
-    shell->env = ft_strdup_tab(env);
+    {
+      shell->env = ft_strdup_tab(env);
+      i = 0;
+      while (env[i] && ft_find_line_env(env[i], "SHLVL") == -1)
+        i += 1;
+      if (env[i])
+	{
+	  tmp[1] = "SHLVL";
+	  one = get_env(shell->env, "SHLVL");
+	  one[0]++;
+	  tmp[2] = one;
+	  modify_env(shell, tmp, i);
+	}
+    }
   return (0);
 }
+
 t_shell		*ft_init_struct()
 {
   t_shell	*tmp;

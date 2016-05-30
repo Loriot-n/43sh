@@ -2,3 +2,5 @@
 *.gch
 vgcore.*
 42sh
+dockito
+glob.c

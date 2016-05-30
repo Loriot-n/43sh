@@ -71,7 +71,7 @@ void	ft_print_echo(t_shell *shell, int i)
     write(shell->fd_in, " ", 1);
 }
 
-void	ft_echo(t_shell *shell, char *tkn, int end)
+void	ft_echo(t_shell *shell)
 {
   int	i;
 
@@ -90,6 +90,5 @@ void	ft_echo(t_shell *shell, char *tkn, int end)
 	}
       printf("\n");
     }
-  (void)(tkn);
-  (void)(end);
+  return ;
 }

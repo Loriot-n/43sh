@@ -50,10 +50,10 @@ char	*concat(char **lexed, char *value, int pos)
       answer = add_char(strcat(answer, lexed[i]), ' ');
       i++;
     }
-  i += 2;
   if (!(answer = realloc(answer, strlen(answer) + strlen(value) + 2)))
     exit(EXIT_FAILURE);
   answer = add_char(strcat(answer, value), ' ');
+  i += 2;
   while (lexed[i])
     {
       if (!(answer = realloc(answer, strlen(answer) + strlen(lexed[i]) + 2)))
@@ -68,22 +68,26 @@ char	*concat(char **lexed, char *value, int pos)
 char	*replace_env(t_shell *shell, char *line)
 {
   char	**tab;
+  char	**tmp;
   int	i;
   char	*val;
 
   if (check(line) == -1)
     return (line);
-  tab = split(line, "$");
+  tab = split(line, " $");
   i = 0;
   while (tab[i] && strcmp(tab[i], "$") != 0)
     i++;
   if (!tab[i + 1])
     return (line);
-  if (!(val = get_env(shell->env, tab[i + 1])))
+  tmp = split(tab[i + 1], "/");
+  if (!(val = get_env(shell->env, tmp[0])))
     {
-      dprintf(2, "%s: Undefined variable\n", tab[i + 1]);
+      dprintf(2, "%s: Undefined variable\n", tmp[0]);
       return (line);
     }
+  val = join(2, 0, val, tab_join(0, &tmp[0]));
   free(line);
+  ft_free_tab(tmp);
   return (concat(tab, val, i));
 }

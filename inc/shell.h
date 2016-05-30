@@ -5,7 +5,8 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu May 26 16:24:21 2016 Sanchez Loris
+** Last update Mon May 30 15:16:57 2016 Sanchez Loris
+** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -25,7 +26,10 @@
 #include <limits.h>
 #include <errno.h>
 #include <stdarg.h>
+#include "alias.h"
+#include "shell_struct.h"
 #include "get_next_line.h"
+#include "built_ins.h"
 
 #ifndef AND
 # define AND 1
@@ -39,41 +43,6 @@
 # define NO 0
 #endif
 
-typedef	struct		s_sub_list
-{
-  int			separator;
-  char			*cmd;
-  char			**exec_cmd;
-  struct s_sub_list	*next;
-}			t_sub_list;
-
-typedef struct		s_list
-{
-  char			*cmd;
-  t_sub_list		*sub_list;
-  struct s_list		*next;
-}			t_list;
-
-typedef struct 		s_alias
-{
-  char			*cmd;
-  char			*alias;
-  struct s_alias	*next;
-}			t_alias;
-
-typedef struct		s_shell
-{
-  char			**env;
-  char			**path;
-  t_list		*exec_list;
-  t_alias		*alias;
-  int			fd_in;
-  char			**cur_exec;
-  int			res_exec;
-  int			exit;
-}			t_shell;
-
-
 /*
 ** START ----- FILL STRUCT ----- START
 */
@@ -84,6 +53,7 @@ t_shell	*ft_init_struct();
 int	ft_fill_env(char **env, t_shell *shell);
 char	**ft_create_env();
 char	**ft_fill_bin_path(char **env);
+
 /*
 ** fill_list.c
 */
@@ -129,19 +99,11 @@ void	*raoul(char *oldptr, int size);
 int	next_char(char *str, int i);
 
 /*
-** my_str_to_word_tab.c
+** split.c
 */
 char   	*my_strncpy(char *src, int n);
 char	**split(char *str, char *tokens);
 size_t	tab_len(char **str);
-
-/*
-** get_next_line.c
-*/
-char	*get_next_line(int fd);
-char	*go_to_next(char *line, int *i, int *len);
-char	*my_realloc(char *buf, int ctr);
-int	my_strlen(char *str);
 
 /*
 ** my_getnbr.c
@@ -166,14 +128,13 @@ char	*ft_fill_path_for_execve(char *dest, char **path);
 /*
 ** signal.c
 */
-void	segfault(int sig);
 void	ctrl(int sig);
 
 /*
 ** execute_instruction.c
 */
 int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
-int	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end);
+int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
 
 /*
@@ -201,52 +162,19 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 */
 
 /*
-** START ----- ALIAS ----- START
-*/
-/*
-** alias_list.c
-*/
-t_alias		*get_aliases(int fd);
-t_alias		*insert_alias(char **cmd, char *alias, t_alias **head);
-char		*replace_alias(t_alias *alias_list, char *cmd);
-void		free_alias(t_alias *alias);
-
-/*
 **42shconfig.c
 */
 void	parse_options(t_shell *shell, char *file);
 
 /*
-** build_exit.c
-*/
-void	ft_exit(t_shell *shell, char *tkn, int end);
-
-/*
-** build_exit.c
-*/
-void	ft_echo(t_shell *shell, char *tkn, int end);
-
-/*
-** build_setenv.c
-*/
-void	ft_setenv(t_shell *shell, char *tkn, int end);
-
-/*
-** build_unsetenv.c
-*/
-void	ft_unsetenv(t_shell *shell, char *tkn, int end);
-
-/*
-** build_cd.c
-*/
-void	ft_cd(t_shell *shell, char *tkn, int end);
-
-/*
 ** env_values.c
 */
 char	*replace_env(t_shell *shell, char *line);
+char	*get_env(char **env, char *var);
 
-void	ft_env(t_shell *shell, char *tkn, int end);
+void	ft_env(t_shell *shell);
+
+void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
@@ -261,8 +189,14 @@ void	print_usage();
 /*
 ** join.c
 */
-char		*join(int nb, char sep, ...);
+char	*join(int nb, char sep, ...);
 char	*tab_join(char sep, char **tab);
 
+/*
+** export.c
+*/
+int	st_check(t_shell *shell, char **cur_exec);
+char	**add_export(t_shell *shell, int fd);
+void	sig_handler(int sig);
 
 #endif /*!SHELL_H_*/

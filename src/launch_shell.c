@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Thu May 26 14:36:57 2016 CUENAT
+** Last update Mon May 30 11:18:34 2016 CUENAT
 */
 
 #include "shell.h"
@@ -56,18 +56,20 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   res[j] = NULL;
   return (res);
 }
+
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
   int	end;
 
   i = 0;
-  signal(SIGSEGV, segfault);
+  shell->fd_in = 0;
   if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
       || (tmp->separator == OR && shell->res_exec == -1))
     {
       while (tmp->exec_cmd[i])
 	{
+
 	  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
 	  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
 	    shell->cur_exec[0] =
@@ -93,6 +95,7 @@ int		ft_start_exec(t_shell *shell)
   tmp_list = shell->exec_list;
   while (tmp_list != NULL)
     {
+
       tmp_sub = tmp_list->sub_list;
       while (tmp_sub != NULL)
 	{
@@ -110,7 +113,6 @@ int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
 
-  signal(SIGINT, ctrl);
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);
@@ -126,7 +128,8 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      write(1, "$> ", 3);
+      write(2, "$> ", 3);
     }
+  printf("exit");
   return (0);
 }

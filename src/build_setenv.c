@@ -57,28 +57,28 @@ int	is_alphanum(char *str)
   return (1);
 }
 
-static int	check(t_shell *shell)
+int	st_check(t_shell *shell, char **cur_exec)
 {
-  if (tab_len(shell->cur_exec) > 3)
+  if (tab_len(cur_exec) > 3)
     {
       dprintf(2, "setenv: Too many arguments.\n");
       return (-1);
     }
-  if (!shell->cur_exec[1])
+  if (!cur_exec[1])
     {
-      ft_env(shell, 0, 0);
+      ft_env(shell);
       return (-1);
     }
-  if (is_alphanum(shell->cur_exec[1]) == -1)
+  if (is_alphanum(cur_exec[1]) == -1)
     return (-1);
   return (1);
 }
 
-void	ft_setenv(t_shell *shell, char *tkn, int end)
+void	ft_setenv(t_shell *shell)
 {
   int	i;
 
-  if (check(shell) == -1)
+  if (st_check(shell, shell->cur_exec) == -1)
     return ;
   i = 0;
   while (shell->env[i] && (strncmp(shell->env[i], shell->cur_exec[1],
@@ -89,7 +89,4 @@ void	ft_setenv(t_shell *shell, char *tkn, int end)
     add_env(shell, shell->cur_exec);
   else
     modify_env(shell, shell->cur_exec, i);
-  (void)(shell);
-  (void)(tkn);
-  (void)(end);
 }
