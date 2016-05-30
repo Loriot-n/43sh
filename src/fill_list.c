@@ -20,7 +20,7 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
   new->cmd = strdup(epur(tmp_c));
-  new->exec_cmd = split(new->cmd, " |");
+  new->exec_cmd = split_no_const(new->cmd, " |");
   new->separator = *sep;
   new->next = NULL;
   if (list == NULL)
@@ -47,8 +47,9 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep)
       j = i;
       while (tmp->cmd[i])
 	{
-	  if ((tmp->cmd[i] == '&' && tmp->cmd[i + 1] == '&')
-	      || (tmp->cmd[i] == '|' && tmp->cmd[i + 1] == '|'))
+	  if (is_in_const(tmp->cmd, i) == 0 &&
+	      ((tmp->cmd[i] == '&' && tmp->cmd[i + 1] == '&')
+	      || (tmp->cmd[i] == '|' && tmp->cmd[i + 1] == '|')))
 	    break;
 	  i += 1;
 	}
@@ -114,7 +115,7 @@ int	ft_create_list(t_shell *shell, char *line)
   while (line[i])
     {
       j = i;
-      while (line[i] && line[i] != ';')
+      while (line[i] && (is_in_const(line, i) == 1 || line[i] != ';'))
 	i += 1;
       if ((tmp = malloc(sizeof(char) * (i - j + 1))) == NULL)
 	exit(EXIT_FAILURE);

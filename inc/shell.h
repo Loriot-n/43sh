@@ -203,5 +203,11 @@ char	*tab_join(char sep, char **tab);
 int	st_check(t_shell *shell, char **cur_exec);
 char	**add_export(t_shell *shell, int fd);
 void	sig_handler(int sig);
+int	is_const_string(char *line, int check);
+char	**epur_tab(char **tab);
+char	**split_no_const(char *line, char *tokens);
+int	is_in_const(char *line, int pos);
+char 	**add_string(char **tab, char *str);
+void	ft_inredirect(char *file, int fd_in);
 
 #endif /*!SHELL_H_*/

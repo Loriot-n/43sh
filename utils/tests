@@ -308,9 +308,17 @@ TEST=
 [33-END]
 
 [34]
-Name="[Bonus] ls $HOME"
+Name="[Bonus] ls HOME"
 SETUP=""
 CLEAN=""
 TEST=
   echo "ls $HOME"
 [34-END]
+
+[35]
+Name="echo with cmd inside"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "echo \"ls -al | grep Makefile;\""
+[35-END]

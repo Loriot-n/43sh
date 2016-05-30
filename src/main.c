@@ -15,7 +15,8 @@ int		main(int ac, char **av, char **environ)
   t_shell	*shell;
   int		i;
 
-
+  (void)(ac);
+  (void)(av);
   shell = ft_init_struct();
   ft_fill_env(environ, shell);
   if (ac != 1)

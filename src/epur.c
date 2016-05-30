@@ -81,3 +81,16 @@ char	*epur(char *str)
     }
   return (answer);
 }
+
+char	**epur_tab(char **tab)
+{
+  int	i;
+
+  i = 0;
+  while (tab[i])
+    {
+      tab[i] = epur(tab[i]);
+      i++;
+    }
+  return (tab);
+}

@@ -52,3 +52,18 @@ char	*tab_join(char sep, char **tab)
     }
   return (answer);
 }
+
+char 	**add_string(char **tab, char *str)
+{
+  int	len;
+
+  if (tab)
+    len = tab_len(tab);
+  else
+    len = 0;
+  if (!(tab = realloc(tab, sizeof(char *) * (len + 2))))
+    exit(EXIT_FAILURE);
+  tab[len] = strdup(str);
+  tab[len + 1] = NULL;
+  return (tab);
+}
