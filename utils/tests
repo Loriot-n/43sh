@@ -298,3 +298,19 @@ TESTS=
   echo "cat fic"
 [32-END]
 
+[33]
+NAME="[Bonus] unsetenv *"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "unsetenv *"
+  echo "env"
+[33-END]
+
+[34]
+Name="[Bonus] ls $HOME"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "ls $HOME"
+[34-END]
