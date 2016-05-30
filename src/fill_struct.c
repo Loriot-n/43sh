@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Thu May 26 15:32:52 2016 CUENAT
+** Last update Mon May 30 11:13:16 2016 CUENAT
 */
 
 #include "shell.h"
@@ -65,7 +65,6 @@ int	ft_fill_env(char **env, t_shell *shell)
 	  tmp[2] = one;
 	  modify_env(shell, tmp, i);
 	}
-      // if (shell->env = )
     }
   return (0);
 }
