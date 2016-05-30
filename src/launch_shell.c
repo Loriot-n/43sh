@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 30 16:53:10 2016 CUENAT
+** Last update Mon May 30 19:24:21 2016 CUENAT
 */
 
 #include "shell.h"
@@ -26,11 +26,7 @@ char	*ft_fill_null_path(char *dest)
       free(dest);
       return (tmp);
     }
-  else
-    {
-      free(tmp);
-      return (dest);
-    }
+  free(tmp);
   return (dest);
 }
 
