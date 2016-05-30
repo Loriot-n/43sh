@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 30 16:22:38 2016 CUENAT
+** Last update Mon May 30 16:53:10 2016 CUENAT
 */
 
 #include "shell.h"
@@ -83,10 +83,26 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   return (res);
 }
 
+int	ft_main_read_function(t_shell *shell, t_sub_list *tmp, char *tkn, int i)
+{
+  int	end;
+
+  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
+  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
+    shell->cur_exec[0] =
+      ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
+  (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
+  ft_choose_type_execution(shell, tkn, end);
+  free(tkn);
+  if (tmp->exec_cmd[i] != NULL)
+    tkn = strdup(tmp->exec_cmd[i]);
+  ft_free_tab(shell->cur_exec);
+  return (i);
+}
+
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
-  int	end;
 
   i = 0;
   shell->fd_in = 0;
@@ -95,17 +111,7 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
     {
       while (tmp->exec_cmd[i])
 	{
-
-	  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
-	  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
-	    shell->cur_exec[0] =
-	      ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
-	  (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
-	  ft_choose_type_execution(shell, tkn, end);
-	  free(tkn);
-	  if (tmp->exec_cmd[i] != NULL)
-	    tkn = strdup(tmp->exec_cmd[i]);
-	  ft_free_tab(shell->cur_exec);
+	  i = ft_main_read_function(shell, tmp, tkn, i);
 	  (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
 	}
     }
