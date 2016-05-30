@@ -26,7 +26,6 @@ char	**add_export(t_shell *shell, int fd)
 	  tmp[1] = tab[1];
 	  tmp[2] = tab[4];
 	  tmp[3] = NULL;
-	  printf("ok %s %s\n", tab[1], tab[4]);
 	  if (st_check(shell, tmp) == -1)
 	    continue ;
 	  i = 0;

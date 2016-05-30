@@ -16,20 +16,20 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
     {
        if (tkn != NULL)
 	    {
-	      if (strcmp(tkn, ">") == 0)
-		ft_rewrite(shell->cur_exec[0], shell->fd_in);
-	      else if (strcmp(tkn, ">>") == 0)
-		ft_write_at_end(shell->cur_exec[0], shell->fd_in);
-	      else if (strcmp(tkn, "<") == 0)
+	  if (strcmp(tkn, ">") == 0)
+	    ft_rewrite(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, ">>") == 0)
+	    ft_write_at_end(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, "<") == 0)
+	    ft_inredirect(shell->cur_exec[0], shell->fd_in);
+	  else if (strcmp(tkn, "<<") == 0)
 		{}
-	      else if (strcmp(tkn, "<<") == 0)
-		{}
-	      else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
-		{
-		  dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
-		  return (-1);
-		}
+	  else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+	    {
+	      dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
+	      return (-1);
 	    }
+	}
     }
   return (0);
 }
@@ -70,7 +70,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
-  void	(*ptr[7])(t_shell *shell);
+  void	(*ptr[8])(t_shell *shell);
   int  	i;
 
   ptr[0] = &ft_exit;
@@ -79,7 +79,8 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[3] = &ft_setenv;
   ptr[4] = &ft_cd;
   ptr[5] = &ft_env;
-  ptr[6] = NULL;
+  ptr[6] = &ft_source;
+  ptr[7] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell);
   else

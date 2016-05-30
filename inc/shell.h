@@ -25,7 +25,10 @@
 #include <limits.h>
 #include <errno.h>
 #include <stdarg.h>
+#include "alias.h"
+#include "shell_struct.h"
 #include "get_next_line.h"
+#include "built_ins.h"
 
 #ifndef AND
 # define AND 1
@@ -38,41 +41,6 @@
 #ifndef NO
 # define NO 0
 #endif
-
-typedef	struct		s_sub_list
-{
-  int			separator;
-  char			*cmd;
-  char			**exec_cmd;
-  struct s_sub_list	*next;
-}			t_sub_list;
-
-typedef struct		s_list
-{
-  char			*cmd;
-  t_sub_list		*sub_list;
-  struct s_list		*next;
-}			t_list;
-
-typedef struct 		s_alias
-{
-  char			*cmd;
-  char			*alias;
-  struct s_alias	*next;
-}			t_alias;
-
-typedef struct		s_shell
-{
-  char			**env;
-  char			**path;
-  t_list		*exec_list;
-  t_alias		*alias;
-  int			fd_in;
-  char			**cur_exec;
-  int			res_exec;
-  int			exit;
-}			t_shell;
-
 
 /*
 ** START ----- FILL STRUCT ----- START
@@ -137,14 +105,6 @@ char	**split(char *str, char *tokens);
 size_t	tab_len(char **str);
 
 /*
-** get_next_line.c
-*/
-char	*get_next_line(int fd);
-char	*go_to_next(char *line, int *i, int *len);
-char	*my_realloc(char *buf, int ctr);
-int	my_strlen(char *str);
-
-/*
 ** my_getnbr.c
 */
 int	my_getnbr(char *str);
@@ -202,47 +162,9 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 */
 
 /*
-** START ----- ALIAS ----- START
-*/
-/*
-** alias_list.c
-*/
-t_alias		*get_aliases(int fd);
-t_alias		*insert_alias(char **cmd, char *alias, t_alias **head);
-char		*replace_alias(t_alias *alias_list, char *cmd);
-void		free_alias(t_alias *alias);
-
-/*
 **42shconfig.c
 */
 void	parse_options(t_shell *shell, char *file);
-
-/*
-** build_exit.c
-*/
-void	ft_exit(t_shell *shell);
-
-/*
-** build_exit.c
-*/
-void	ft_echo(t_shell *shell);
-
-/*
-** build_setenv.c
-*/
-void	ft_setenv(t_shell *shell);
-void	add_env(t_shell *shell, char **cmd);
-void	modify_env(t_shell *shell, char **cmd, int pos);
-
-/*
-** build_unsetenv.c
-*/
-void	ft_unsetenv(t_shell *shell);
-
-/*
-** build_cd.c
-*/
-void	ft_cd(t_shell *shell);
 
 /*
 ** env_values.c
@@ -251,6 +173,8 @@ char	*replace_env(t_shell *shell, char *line);
 char	*get_env(char **env, char *var);
 
 void	ft_env(t_shell *shell);
+
+void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
