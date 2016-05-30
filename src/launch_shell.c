@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 30 11:18:34 2016 CUENAT
+** Last update Mon May 30 16:06:26 2016 CUENAT
 */
 
 #include "shell.h"
@@ -16,6 +16,26 @@ char	*ft_fill_path_for_execve(char *dest, char **path)
   int	i;
 
   i = 0;
+  if (path == NULL)
+    {
+      if ((tmp = malloc(sizeof(char) * (strlen("/bin") + strlen(dest) + 2)))
+	  == NULL)
+	exit(EXIT_FAILURE);
+      strcpy(tmp, "/bin");
+      tmp[strlen(tmp) + 1] = '\0';
+      tmp[strlen(tmp)] = '/';
+      strcat(tmp, dest);
+      if (access(tmp, X_OK) == 0)
+	{
+	  free(dest);
+	  return (tmp);
+	}
+      else
+	{
+	  free(tmp);
+	  return (dest);
+	}
+    }
   while (path != NULL && path[i])
     {
       if ((tmp = malloc(sizeof(char) *

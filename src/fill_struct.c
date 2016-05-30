@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Mon May 30 11:25:46 2016 CUENAT
+** Last update Mon May 30 16:01:09 2016 CUENAT
 */
 
 #include "shell.h"
@@ -24,7 +24,6 @@ char	**ft_create_env()
   tmp[0] = ft_strcat("NAME=", info->pw_name);
   tmp[1] = ft_strcat("HOME=", info->pw_dir);
   tmp[2] = ft_strcat("OLDPWD=", getcwd(pwd, PATH_MAX));
-  tmp[3] = strdup("PATH=/bin");
   tmp[4] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
   tmp[5] = NULL;
   free(pwd);
