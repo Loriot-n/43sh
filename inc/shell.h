@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu May 26 15:19:57 2016 Sanchez Loris
+** Last update Thu May 26 16:24:21 2016 Sanchez Loris
 */
 
 #ifndef SHELL_H_
@@ -24,6 +24,7 @@
 #include <signal.h>
 #include <limits.h>
 #include <errno.h>
+#include <stdarg.h>
 #include "get_next_line.h"
 
 #ifndef AND
@@ -69,6 +70,7 @@ typedef struct		s_shell
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
+  int			exit;
 }			t_shell;
 
 
@@ -254,5 +256,13 @@ void	ft_env(t_shell *shell, char *tkn, int end);
 */
 void	check_options(int ac, char **av, t_shell *shell);
 void	exec_simple_cmd(char *line, t_shell *shell);
+void	print_usage();
+
+/*
+** join.c
+*/
+char		*join(int nb, char sep, ...);
+char	*tab_join(char sep, char **tab);
+
 
 #endif /*!SHELL_H_*/

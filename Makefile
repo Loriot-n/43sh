@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Thu May 26 14:42:02 2016 Sanchez Loris
+## Last update Thu May 26 15:38:58 2016 Sanchez Loris
 ##
 
 NAME	=	42sh
@@ -15,7 +15,7 @@ CC	=	gcc
 SRCS	=	src/main.c \
 		src/fill_struct.c \
 		src/parse_string.c \
-		src/my_str_to_wordtab.c \
+		src/split.c \
 		src/get_next_line.c \
 		src/launch_shell.c \
 		src/epur_str.c \
@@ -38,7 +38,8 @@ SRCS	=	src/main.c \
 		src/build_cd.c \
 		src/build_env.c \
 		src/env_values.c \
-		src/check_options.c
+		src/check_options.c \
+		src/join.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

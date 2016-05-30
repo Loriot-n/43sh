@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Thu May 26 14:04:49 2016 CUENAT
+** Last update Thu May 26 15:32:52 2016 CUENAT
 */
 
 #include "shell.h"
@@ -61,5 +61,6 @@ t_shell		*ft_init_struct()
   tmp->path = NULL;
   tmp->exec_list = NULL;
   tmp->alias = NULL;
+  tmp->res_exec = 0;
   return (tmp);
 }

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Thu May 26 14:05:43 2016 CUENAT
+** Last update Thu May 26 14:36:57 2016 CUENAT
 */
 
 #include "shell.h"
@@ -114,7 +114,6 @@ int	ft_launch_shell(t_shell *shell)
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);
-      shell->res_exec = 0;
       line = replace_env(shell, line);
       line = epur(line);
       line = replace_alias(shell->alias, line);

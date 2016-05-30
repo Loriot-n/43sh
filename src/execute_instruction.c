@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Wed May 25 17:23:57 2016 CUENAT
+** Last update Thu May 26 14:50:28 2016 CUENAT
 */
 
 #include "shell.h"
@@ -24,12 +24,9 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	    {}
 	  else if (strcmp(tkn, "<<") == 0)
 	    {}
-	  else
-	    {
-	      dprintf(2, "%s: Command not found.", shell->cur_exec[0]);
-	      return (-1);
-	    }
 	}
+      dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
+      return (-1);
     }
   return (0);
 }
@@ -56,7 +53,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
     {
       waitpid(pid, &status, WUNTRACED);
       if(WIFEXITED(status))
-	shell->res_exec = 0;
+	shell->res_exec = WEXITSTATUS(status);
       else
 	shell->res_exec = -1;
       close(tube[1]);
@@ -86,6 +83,6 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn, int end)
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell, tkn, end);
   close(tube[1]);
-    shell->fd_in = tube[0];
+  shell->fd_in = tube[0];
   return (0);
 }

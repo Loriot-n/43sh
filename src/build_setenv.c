@@ -15,13 +15,7 @@ void	modify_env(t_shell *shell, char **cmd, int pos)
   char	*new;
 
   new = strdup(cmd[1]);
-  new = add_char(new, '=');
-  if (cmd[2])
-    {
-      if (!(new = realloc(new, strlen(new) + strlen(cmd[2]) + 1)))
-	exit(EXIT_FAILURE);
-      new = strcat(new, cmd[2]);
-    }
+  new = join(2, '=', cmd[1], cmd[2]);
   free(shell->env[pos]);
   shell->env[pos] = new;
 }
@@ -34,15 +28,7 @@ void	add_env(t_shell *shell, char **cmd)
   len = tab_len(shell->env);
   if (!(shell->env = realloc(shell->env, sizeof(char *) * (len + 2))))
     exit(EXIT_FAILURE);
-  new = strdup(cmd[1]);
-  new = add_char(new, '=');
-  if (cmd[2])
-    {
-      if (!(new = realloc(new, sizeof(char) * strlen(new) +
-			  strlen(cmd[2]) + 2)))
-	exit(EXIT_FAILURE);
-      new = strcat(new, cmd[2]);
-    }
+  new = join(2, '=', cmd[1], cmd[2]);
   shell->env[len] = new;
   shell->env[len + 1] = NULL;
 }
