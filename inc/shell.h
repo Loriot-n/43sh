@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu May 26 19:36:47 2016 CUENAT
+** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -127,7 +127,6 @@ char	*ft_fill_path_for_execve(char *dest, char **path);
 /*
 ** signal.c
 */
-void	segfault(int sig);
 void	ctrl(int sig);
 
 /*

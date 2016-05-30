@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Thu May 26 19:32:15 2016 CUENAT
+** Last update Mon May 30 11:18:34 2016 CUENAT
 */
 
 #include "shell.h"
@@ -62,7 +62,6 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
   int	end;
 
   i = 0;
-  signal(SIGSEGV, segfault);
   shell->fd_in = 0;
   if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
       || (tmp->separator == OR && shell->res_exec == -1))
@@ -113,7 +112,6 @@ int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
 
-  signal(SIGINT, ctrl);
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);

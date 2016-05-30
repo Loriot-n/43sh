@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Fri May 27 16:13:32 2016 CUENAT
+** Last update Mon May 30 12:20:22 2016 CUENAT
 */
 
 #include "shell.h"
@@ -51,14 +51,19 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
   int		tube[2];
   pid_t		pid;
 
-  pipe(tube);
+  if (pipe(tube) == -1)
+    return (-1);
   if ((pid = fork()) == -1)
     exit(EXIT_FAILURE);
   else if (pid == 0)
     {
-      dup2(shell->fd_in, 0);
+      if (dup2(shell->fd_in, 0) == -1)
+	return (-1);
       if (end == 0)
-	dup2(tube[1], 1);
+	{
+	  if (dup2(tube[1], 1) == -1)
+	    return (-1);
+	}
       close(tube[0]);
       ft_redirect_or_pipe(shell, tkn);
       exit(EXIT_FAILURE);
