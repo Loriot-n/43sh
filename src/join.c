@@ -53,7 +53,7 @@ char	*tab_join(char sep, char **tab)
   return (answer);
 }
 
-char **	add_string(char **tab, char *str)
+char 	**add_string(char **tab, char *str)
 {
   int	len;
 

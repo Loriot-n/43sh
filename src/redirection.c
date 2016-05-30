@@ -22,6 +22,7 @@ void	ft_inredirect(char *file, int fd_in)
     }
   dup2(fd0, STDIN_FILENO);
   close(fd0);
+  (void)fd_in;
 }
 
 void    ft_rewrite(char *file, int fd_in)
