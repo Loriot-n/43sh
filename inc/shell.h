@@ -5,6 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
+** Last update Mon May 30 15:16:57 2016 Sanchez Loris
 ** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
@@ -177,6 +178,13 @@ void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
+
+/*
+** check_options.c
+*/
+void	check_options(int ac, char **av, t_shell *shell);
+void	exec_simple_cmd(char *line, t_shell *shell);
+void	print_usage();
 
 /*
 ** join.c
