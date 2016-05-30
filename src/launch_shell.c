@@ -5,10 +5,11 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Thu May 26 17:01:54 2016 Nicolas Loriot
+** Last update Mon May 30 11:41:22 2016 Nicolas Loriot
 */
 
 #include "shell.h"
+#include "arrows.h"
 
 char	*ft_fill_path_for_execve(char *dest, char **path)
 {
@@ -104,9 +105,11 @@ int		ft_start_exec(t_shell *shell)
 int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
+  t_win	*win;
 
   signal(SIGINT, ctrl);
-  while ((line = get_next_line(0)) != NULL)
+  win = init_window();
+  while ((line = get_line(win)) != NULL)
     {
       append_history(line);
       shell->path = ft_fill_bin_path(shell->env);
