@@ -17,6 +17,11 @@ int		main(int ac, char **av, char **environ)
 
   (void)(ac);
   (void)(av);
+  // char **tab = split_no_const(strdup("echo \"ls -al | grep Makefile\""), " |");
+  // printf("echo \"ls -al | grep Makefile\"\n");
+  // for (int i = 0; tab[i]; i++)
+  //   printf("%s\n", tab[i]);
+  // return (0);
   shell = ft_init_struct();
   ft_fill_env(environ, shell);
   parse_options(shell, ".42shrc");

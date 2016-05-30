@@ -18,7 +18,7 @@ SRCS	=	src/main.c \
 		src/split.c \
 		src/get_next_line.c \
 		src/launch_shell.c \
-		src/epur_str.c \
+		src/epur.c \
 		src/string_utils.c \
 		src/check_input.c \
 		src/fill_list.c \
@@ -41,6 +41,7 @@ SRCS	=	src/main.c \
 		src/join.c \
 		src/export.c \
 		src/build_source.c \
+		src/check_input2.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

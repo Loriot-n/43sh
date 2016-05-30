@@ -191,5 +191,7 @@ char	*tab_join(char sep, char **tab);
 int	st_check(t_shell *shell, char **cur_exec);
 char	**add_export(t_shell *shell, int fd);
 void	sig_handler(int sig);
+int	is_const_string(char *line, int check);
+char	**epur_tab(char **tab);
 
 #endif /*!SHELL_H_*/
