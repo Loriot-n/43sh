@@ -190,5 +190,6 @@ char	*tab_join(char sep, char **tab);
 */
 int	st_check(t_shell *shell, char **cur_exec);
 char	**add_export(t_shell *shell, int fd);
+void	sig_handler(int sig);
 
 #endif /*!SHELL_H_*/

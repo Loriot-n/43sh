@@ -10,11 +10,19 @@
 
 #include "shell.h"
 
-void	segfault(int sig)
+void	sig_handler(int sig)
 {
-  (void)(sig);
-  printf("segmentation fault\n$> ");
-  exit(EXIT_FAILURE);
+  if (WIFEXITED(sig))
+    return;
+  else if (WIFSIGNALED(sig))
+    {
+      if (WTERMSIG(sig) == SIGSEGV)
+	dprintf(2, "%s %s\n", "Segmentation fault", ((WCOREDUMP(sig) ?
+						"(core dumped)" : "\0")));
+	else if (WTERMSIG(sig) == SIGFPE)
+	  dprintf(2, "%s %s \n", "Floating exception", ((WCOREDUMP(sig) ?
+  						"(core dumped)" : "\0")));
+      }
 }
 
 void	ctrl(int sig)

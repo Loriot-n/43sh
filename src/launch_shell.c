@@ -56,13 +56,15 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   res[j] = NULL;
   return (res);
 }
+
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
   int	end;
 
   i = 0;
-  signal(SIGSEGV, segfault);
+  signal(SIGINT, sig_handler);
+  signal(SIGSEGV, sig_handler);
   shell->fd_in = 0;
   if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
       || (tmp->separator == OR && shell->res_exec == -1))
