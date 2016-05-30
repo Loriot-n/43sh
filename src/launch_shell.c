@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 30 16:06:26 2016 CUENAT
+** Last update Mon May 30 16:08:56 2016 CUENAT
 */
 
 #include "shell.h"
@@ -133,6 +133,7 @@ int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
 
+  signal(SIGINT, ctrl);
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);

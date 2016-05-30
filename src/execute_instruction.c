@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Mon May 30 15:32:46 2016 CUENAT
+** Last update Mon May 30 16:08:19 2016 CUENAT
 */
 
 #include "shell.h"
@@ -73,6 +73,7 @@ int		ft_final_exec(t_shell *shell, char *tkn, int end)
     }
   else
     ft_execute_instr_no_fork(shell, tkn);
+  return (0);
 }
 
 int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
