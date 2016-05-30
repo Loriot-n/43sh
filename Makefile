@@ -44,6 +44,7 @@ SRCS	=	src/main.c \
 		src/export.c \
 		src/build_source.c \
 		src/check_input2.c \
+		src/globing.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

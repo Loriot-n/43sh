@@ -86,7 +86,7 @@ char	*replace_env(t_shell *shell, char *line)
       dprintf(2, "%s: Undefined variable\n", tmp[0]);
       return (line);
     }
-  val = join(2, 0, val, tab_join(0, &tmp[0]));
+  val = join(2, 0, val, tab_join(0, &tmp[1]));
   free(line);
   ft_free_tab(tmp);
   return (concat(tab, val, i));

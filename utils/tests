@@ -299,7 +299,7 @@ TESTS=
 [32-END]
 
 [33]
-NAME="[Bonus] unsetenv *"
+NAME="unsetenv all"
 SETUP=""
 CLEAN=""
 TEST=
@@ -308,7 +308,7 @@ TEST=
 [33-END]
 
 [34]
-Name="[Bonus] ls HOME"
+Name="ls HOME"
 SETUP=""
 CLEAN=""
 TEST=
@@ -320,5 +320,21 @@ Name="echo with cmd inside"
 SETUP=""
 CLEAN=""
 TEST=
-  echo "echo \"ls -al | grep Makefile;\""
+  echo "echo "ls -al | grep Makefile;""
 [35-END]
+
+[36]
+Name="man ls"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "man ls"
+[36-END]
+
+[37]
+NAME="exit abc"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "exit abc"
+[37-END]
