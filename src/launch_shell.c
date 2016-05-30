@@ -56,6 +56,7 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   res[j] = NULL;
   return (res);
 }
+
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
@@ -129,5 +130,6 @@ int	ft_launch_shell(t_shell *shell)
       free(line);
       write(2, "$> ", 3);
     }
+  printf("exit");
   return (0);
 }

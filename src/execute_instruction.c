@@ -12,6 +12,7 @@
 
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 {
+
   if (ft_execute_instr_no_fork(shell, tkn) == -1)
     {
        if (tkn != NULL)
@@ -41,6 +42,7 @@ void	ft_execute_instr_fork_2(t_shell *shell,
   int	status;
 
   waitpid(pid, &status, WUNTRACED);
+  sig_handler(status);
   (WIFEXITED(status)) ?
     (shell->res_exec = WEXITSTATUS(status)) : (shell->res_exec = -1);
   close(tube[1]);
