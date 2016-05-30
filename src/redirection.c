@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 13:59:30 2016 CUENAT
-** Last update Wed May 25 14:20:39 2016 CUENAT
+** Last update Mon May 30 11:16:44 2016 CUENAT
 */
 
 #include "shell.h"
@@ -22,7 +22,6 @@ void	ft_inredirect(char *file, int fd_in)
     }
   dup2(fd0, STDIN_FILENO);
   close(fd0);
-      // in = 0;
 }
 
 void    ft_rewrite(char *file, int fd_in)

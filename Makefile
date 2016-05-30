@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Wed May 25 16:14:34 2016 CUENAT
+## Last update Mon May 30 16:18:50 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -17,6 +17,7 @@ SRCS	=	src/main.c \
 		src/parse_string.c \
 		src/split.c \
 		src/get_next_line.c \
+		src/launch_main_shell.c \
 		src/launch_shell.c \
 		src/epur.c \
 		src/string_utils.c \
@@ -38,6 +39,7 @@ SRCS	=	src/main.c \
 		src/build_cd.c \
 		src/build_env.c \
 		src/env_values.c \
+		src/check_options.c \
 		src/join.c \
 		src/export.c \
 		src/build_source.c \

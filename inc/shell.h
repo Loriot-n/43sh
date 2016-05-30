@@ -5,7 +5,8 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu May 26 19:36:47 2016 CUENAT
+** Last update Mon May 30 16:22:30 2016 CUENAT
+** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -116,18 +117,22 @@ int	my_getnbr(char *str);
 ** START ----- LAUNCH / CHECK / SHELL ----- START
 */
 /*
-** launch_shell.c
+** launch_main_shell.c
 */
 int	ft_launch_shell(t_shell *shell);
 int	ft_start_exec(t_shell *shell);
+
+/*
+** launch_shell.c
+*/
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char  *tkn);
 char	**ft_fill_tab_for_execve(char **cmd, int *i);
 char	*ft_fill_path_for_execve(char *dest, char **path);
+char	*ft_fill_null_path(char *dest);
 
 /*
 ** signal.c
 */
-void	segfault(int sig);
 void	ctrl(int sig);
 
 /*
@@ -178,6 +183,13 @@ void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
+
+/*
+** check_options.c
+*/
+void	check_options(int ac, char **av, t_shell *shell);
+void	exec_simple_cmd(char *line, t_shell *shell);
+void	print_usage();
 
 /*
 ** join.c
