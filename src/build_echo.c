@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 15:52:42 2016 CUENAT
-** Last update Thu May 26 15:31:49 2016 CUENAT
+** Last update Mon May 30 16:11:07 2016 CUENAT
 */
 
 #include "shell.h"
@@ -67,8 +67,8 @@ void	ft_print_echo(t_shell *shell, int i)
     }
   else
     printf("%s", shell->cur_exec[i]);
-  if (shell->cur_exec[i] != NULL)
-    write(shell->fd_in, " ", 1);
+  if (shell->cur_exec[i + 1] != NULL)
+    printf(" ");
 }
 
 void	ft_echo(t_shell *shell)

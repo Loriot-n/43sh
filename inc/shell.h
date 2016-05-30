@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Mon May 30 15:16:57 2016 Sanchez Loris
+** Last update Mon May 30 16:22:30 2016 CUENAT
 ** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
@@ -117,13 +117,18 @@ int	my_getnbr(char *str);
 ** START ----- LAUNCH / CHECK / SHELL ----- START
 */
 /*
-** launch_shell.c
+** launch_main_shell.c
 */
 int	ft_launch_shell(t_shell *shell);
 int	ft_start_exec(t_shell *shell);
+
+/*
+** launch_shell.c
+*/
 int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char  *tkn);
 char	**ft_fill_tab_for_execve(char **cmd, int *i);
 char	*ft_fill_path_for_execve(char *dest, char **path);
+char	*ft_fill_null_path(char *dest);
 
 /*
 ** signal.c
