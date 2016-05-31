@@ -5,30 +5,30 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Mon May 30 16:08:19 2016 CUENAT
+** Last update Tue May 31 11:57:51 2016 CUENAT
 */
 
 #include "shell.h"
 
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 {
-  if (ft_execute_instr_no_fork(shell, tkn) == -1)
-    {
-      if (tkn != NULL)
+   if (tkn != NULL)
 	{
 	  if (strcmp(tkn, ">") == 0)
-	    ft_rewrite(shell->cur_exec[0], shell->fd_in);
+	    ft_rewrite(shell->file);
 	  else if (strcmp(tkn, ">>") == 0)
-	    ft_write_at_end(shell->cur_exec[0], shell->fd_in);
+	    ft_write_at_end(shell->file);
 	  else if (strcmp(tkn, "<") == 0)
-	    ft_inredirect(shell->cur_exec[0], shell->fd_in);
+	    ft_inredirect(shell->file);
 	  else if (strcmp(tkn, "<<") == 0)
 	    {}
-	   else if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
-	     {
-	       dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
-	       return (-1);
-	     }
+	}
+  if (ft_execute_instr_no_fork(shell, tkn) == -1)
+    {
+      if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+	{
+	  dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
+	  return (-1);
 	}
     }
   return (0);
@@ -44,11 +44,11 @@ void	ft_execute_instr_fork_2(t_shell *shell,
   sig_handler(status);
   (WIFEXITED(status)) ?
     (shell->res_exec = WEXITSTATUS(status)) : (shell->res_exec = -1);
-  close(tube[1]);
-  shell->fd_in = tube[0];
+   shell->fd_in = tube[0];
+   close(tube[1]);
 }
 
-int		ft_final_exec(t_shell *shell, char *tkn, int end)
+int		ft_final_exec(t_shell *shell, char *tkn)
 {
   int		tube[2];
   pid_t		pid;
@@ -62,8 +62,6 @@ int		ft_final_exec(t_shell *shell, char *tkn, int end)
       else if (pid == 0)
 	{
 	  dup2(shell->fd_in, 0);
-	  if (end == 0)
-	    dup2(tube[1], 1);
 	  close(tube[0]);
 	  ft_redirect_or_pipe(shell, tkn);
 	  exit(EXIT_FAILURE);
@@ -100,7 +98,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	ft_execute_instr_fork_2(shell, tube, pid);
     }
   else
-    ft_final_exec(shell, tkn, end);
+    ft_final_exec(shell, tkn);
   return (0);
 }
 

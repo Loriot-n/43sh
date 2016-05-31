@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Mon May 30 20:05:04 2016 CUENAT
 */
 
 #ifndef SHELL_STRUCT_H_
@@ -32,6 +32,7 @@ typedef struct		s_shell
   char			**path;
   t_list		*exec_list;
   t_alias		*alias;
+  char			*file;
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
