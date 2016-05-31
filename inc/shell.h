@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <glob.h>
+#include <ncurses.h>
 #include "shell_struct.h"
 #include "alias.h"
 #include "get_next_line.h"

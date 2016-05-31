@@ -23,7 +23,6 @@ int		main(int ac, char **av, char **environ)
     {
       check_options(ac, av, shell);
     }
-  write(1, "$> ", 3);
   parse_options(shell, ".42shrc");
   ft_launch_shell(shell);
   ft_free_tab(shell->env);

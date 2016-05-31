@@ -79,5 +79,6 @@ t_shell		*ft_init_struct()
   tmp->exec_list = NULL;
   tmp->alias = NULL;
   tmp->res_exec = 0;
+  tmp->isa_tty = isatty(0);
   return (tmp);
 }
