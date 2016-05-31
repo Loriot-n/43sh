@@ -4,5 +4,6 @@ vgcore.*
 42sh
 dockito
 glob.c
-42sh.42sh_history
+42sh
+.42sh_history
 .syntastic_c_config
