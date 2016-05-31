@@ -18,7 +18,7 @@ char	*get_env(char **env, char *var)
   i = 0;
   while (env[i] && ft_find_line_env(env[i], var) == -1)
     i += 1;
-  if (!env[i])
+  if (!env[i] || !var)
     return (NULL);
   tmp = env[i];
   return (&tmp[strlen(var) + 1]);
@@ -78,7 +78,7 @@ char	*replace_env(t_shell *shell, char *line)
   i = 0;
   while (tab[i] && strcmp(tab[i], "$") != 0)
     i++;
-  if (!tab[i + 1])
+  if (!tab[i] || !tab[i + 1])
     return (line);
   tmp = split(tab[i + 1], "/");
   if (!(val = get_env(shell->env, tmp[0])))
@@ -86,7 +86,7 @@ char	*replace_env(t_shell *shell, char *line)
       dprintf(2, "%s: Undefined variable\n", tmp[0]);
       return (line);
     }
-  val = join(2, 0, val, tab_join(0, &tmp[0]));
+  val = join(2, 0, val, tab_join(0, &tmp[1]));
   free(line);
   ft_free_tab(tmp);
   return (concat(tab, val, i));

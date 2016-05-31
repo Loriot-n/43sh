@@ -24,7 +24,7 @@ int	ft_is_a_build_in(char *cmd)
   check[5] = "env";
   check[6] = "source";
   check[7] = NULL;
-  while (check[i])
+  while (cmd && check[i])
     {
       if (strcmp(check[i], cmd) == 0)
 	return (i);

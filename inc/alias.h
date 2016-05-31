@@ -10,6 +10,7 @@
 
 #ifndef ALIAS_H_
 # define ALIAS_H_
+# include "shell_struct.h"
 
 typedef struct 		s_alias
 {
@@ -25,7 +26,7 @@ typedef struct 		s_alias
 /*
 ** alias_list.c
 */
-t_alias		*get_aliases(int fd);
+t_alias		*get_aliases(t_shell *shell, char **tab);
 t_alias			*insert_alias(char **cmd, char *alias, t_alias **head,
 				      int whatdo);
 char		*replace_alias(t_alias *alias_list, char *cmd);

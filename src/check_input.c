@@ -84,7 +84,7 @@ int	ft_check_input(char *line)
   bad_tkn = "{}^:!,";
   tab = split(line, tkn);
   check = 1;
-  while (tab[i])
+  while (tab && tab[i])
     {
       if ((check = is_const_string(tab[i], check) == 1) &&
 	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1

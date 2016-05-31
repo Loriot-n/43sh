@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 11:56:29 2016 CUENAT
+** Last update Tue May 31 12:00:21 2016 CUENAT
 ** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
@@ -26,8 +26,9 @@
 #include <limits.h>
 #include <errno.h>
 #include <stdarg.h>
-#include "alias.h"
+#include <glob.h>
 #include "shell_struct.h"
+#include "alias.h"
 #include "get_next_line.h"
 #include "built_ins.h"
 
@@ -210,5 +211,6 @@ char	**epur_tab(char **tab);
 char	**split_no_const(char *line, char *tokens);
 int	is_in_const(char *line, int pos);
 char 	**add_string(char **tab, char *str);
+char	*replace_glob(char *line);
 
 #endif /*!SHELL_H_*/

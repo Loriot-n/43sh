@@ -15,7 +15,7 @@ int	ft_find_line_env(char *env, char *cmp)
   int	i;
 
   i = 0;
-  while (cmp[i])
+  while (cmp && cmp[i])
     {
       if (cmp[i] != env[i])
 	return (-1);

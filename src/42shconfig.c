@@ -14,6 +14,8 @@ int	get_fd(char *path)
 {
   int	fd;
 
+  if (access(path, F_OK | R_OK) != 0)
+    return (-1);
   if ((fd = open(path, O_RDONLY)) < 0)
     {
       dprintf(2, "Error while opening %s: %s\n", path, strerror(errno));
@@ -25,13 +27,22 @@ int	get_fd(char *path)
 void	parse_options(t_shell *shell, char *path)
 {
   int	fd;
+  char	**tmp;
+  char	*one;
+  int	i;
 
-  if (access(path, F_OK | R_OK) != 0)
+  if ((fd = get_fd(path)) == -1)
     return ;
-  if ((fd = get_fd(path)) == -1)
-      return ;
-  shell->alias = get_aliases(fd);
-  if ((fd = get_fd(path)) == -1)
-      return ;
-  shell->env = add_export(shell, fd);
+  i = 0;
+  if (!(tmp = malloc(sizeof(char *) * 1)))
+    exit(EXIT_FAILURE);
+  tmp[0] = NULL;
+  while ((one = get_next_line(fd)) && i < 100)
+    {
+      if (!(tmp = realloc(tmp, sizeof(char *) * (tab_len(tmp) + 2))))
+	exit(EXIT_FAILURE);
+      exec_simple_cmd(epur(one), shell);
+      free(one);
+      i++;
+    }
 }

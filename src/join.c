@@ -42,7 +42,7 @@ char	*tab_join(char sep, char **tab)
   int	i;
   char	*answer;
 
-  i = 1;
+  i = 0;
   if (!(answer = calloc(1, 1)))
     exit(EXIT_FAILURE);
   while (tab[i])

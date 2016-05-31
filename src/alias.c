@@ -34,23 +34,21 @@ int	check_alias(char **lexed)
   return (1);
 }
 
-t_alias		*get_aliases(int fd)
+t_alias		*get_aliases(t_shell *shell, char **tab)
 {
-  char		*one;
+  int		i;
   char		**lexed;
-  char		*tmp;
-  t_alias	*list_alias;
 
-  list_alias = NULL;
-  while ((one = get_next_line(fd)))
+  i = 0;
+  while (tab[i])
     {
-      tmp = epur(one);
-      lexed = split(tmp, " =\"'");
+      lexed = split(tab[i], " =\"'");
       if (strcmp(lexed[0], "alias") == 0 && check_alias(lexed) == 1)
-	insert_alias(&lexed[4], lexed[1], &list_alias, 0);
-      empty(tmp, one, lexed);
+	insert_alias(&lexed[4], lexed[1], &(shell->alias), 0);
+      ft_free_tab(lexed);
+      i++;
     }
-  return (list_alias);
+  return (shell->alias);
 }
 
 char	*replace_alias(t_alias *alias_list, char *cmd)
