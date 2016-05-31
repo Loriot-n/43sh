@@ -1,2 +1,3 @@
 alias l="ls -la"
 export HOME="/home/qwebify/"
+ls

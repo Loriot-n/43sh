@@ -66,7 +66,7 @@ static char	*get_home(t_shell *shell)
   char		*path;
   struct passwd	*info;
 
-  if (!(path = get_env(shell->env, "$HOME")))
+  if (!(path = get_env(shell, "$HOME")))
     {
       info = getpwuid(geteuid());
       path = ft_strcat("HOME=", info->pw_dir);

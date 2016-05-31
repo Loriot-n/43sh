@@ -176,7 +176,7 @@ void	parse_options(t_shell *shell, char *file);
 ** env_values.c
 */
 char	*replace_env(t_shell *shell, char *line);
-char	*get_env(char **env, char *var);
+char	*get_env(t_shell *shell, char *var);
 
 void	ft_env(t_shell *shell);
 
