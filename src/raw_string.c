@@ -1,11 +1,11 @@
 /*
 ** raw_string.c for 42sh in /home/nico/rendu/S02/Unix/PSU_2015_42sh/src
-** 
+**
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-** 
+**
 ** Started on  Mon May 30 15:20:40 2016 Nicolas Loriot
-** Last update Mon May 30 18:48:35 2016 Nicolas Loriot
+** Last update Tue May 31 10:37:50 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -36,18 +36,19 @@ void		set_line(t_raw *raw, char *str, int cursor)
   raw->line->input->len = len;
   raw->line->cursor = cursor;
   if (raw->line->cursor < 0 || raw->line->cursor > len)
-    raw->line->cursor;
+    raw->line->cursor = 0;
 }
 
-int		*insert_char(t_raw *raw, char ch)
+int		insert_char(t_raw *raw, char ch)
 {
   int		len;
   int		cur;
   char		*tmp;
 
+  assert(raw->safe);
   cur = raw->line->cursor;
-  len = raw->line->input->len;
   raw->line->input->len++;
+  len = raw->line->input->len;
   tmp = raw_alloc(len + 1);
   memcpy(tmp, raw->line->input->buffer, cur);
   tmp[cur] = ch;

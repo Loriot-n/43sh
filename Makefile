@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Fri May 27 15:35:03 2016 Nicolas Loriot
+## Last update Tue May 31 12:10:19 2016 Nicolas Loriot
 ##
 
 NAME	=	42sh
@@ -29,10 +29,17 @@ SRCS	=	src/main.c \
 		src/signal.c \
 		src/cmd_history.c \
 		src/get_input.c \
+		src/raw_char.c \
+		src/raw_history.c \
+		src/raw_string.c \
+		src/raw_utils.c \
+		src/escape_char.c \
+		src/extended_esc.c \
+		src/input_signals.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-I inc -W -Wall -Wextra -g3 -lncurses
+CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter
 
 all:		$(NAME)
 

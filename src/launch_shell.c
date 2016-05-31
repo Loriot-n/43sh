@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Mon May 30 11:41:22 2016 Nicolas Loriot
+** Last update Tue May 31 10:44:45 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -105,13 +105,14 @@ int		ft_start_exec(t_shell *shell)
 int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
-  t_win	*win;
+  t_raw	*raw;
 
+  raw = init_raw("exit");
   signal(SIGINT, ctrl);
-  win = init_window();
-  while ((line = get_line(win)) != NULL)
+  while ((line = get_line(raw, "$> ")) != NULL)
     {
-      append_history(line);
+      /* append_history(line); */
+      printf("%s\n", line);
       shell->path = ft_fill_bin_path(shell->env);
       shell->res_exec = 0;
       line = epur(line);
@@ -124,7 +125,7 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      write(1, "$> ", 2);
+      // write(1, "$> ", 2);
     }
   return (0);
 }

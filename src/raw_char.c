@@ -1,45 +1,65 @@
 /*
 ** raw_char.c for 42sf in /home/nico/rendu/S02/Unix/PSU_2015_42sh/src
-** 
+**
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-** 
+**
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Mon May 30 18:55:26 2016 Nicolas Loriot
+** Last update Tue May 31 14:29:15 2016 Nicolas Loriot
 */
 
 #include "shell.h"
 #include "arrows.h"
 
-int		*get_std_escape(t_raw *raw, char ch, int *enter)
+int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
-  int		*err;
-  void		(*f[7])(t_raw *raw, int *err, int *enter);
+  int		err;
+  int		(*f[7])(t_raw *raw, char *ch, int *enter, int *move);
   char		*val;
+  int		i;
 
+  i = 0;
+  err = 0;
   val = "\003\004\011\015\010\033\000";
   f[0] = &end_of_text;
-  return (err);
+  f[1] = &end_of_file;
+  f[2] = &tabulation;
+  f[3] = &carriage_ret;
+  f[4] = &backspace;
+  f[5] = &get_escape;
+  f[6] = NULL;
+  while (val[i] && val[i] != ch[0])
+    i++;
+  if (i < 6)
+    return (f[i](raw, ch, enter, move));
+  else
+    return (BELL);
 }
 
-int		get_raw_input(t_raw *raw)
+void		get_raw_input(t_raw *raw)
 {
   int		*enter;
-  int		*err;
-  int		move;
-  char		ch;
+  int		err;
+  int		*move;
 
-  enter = 0;
-  err = SUCCESS;
+  enter = raw_alloc(sizeof(int));
+  move = raw_alloc(sizeof(int));
+  *move = 0;
   read_mode(raw, 1);
-  while (!enter)
+  *enter = 0;
+  while (!*enter)
     {
+      raw->rd = raw_alloc(sizeof(char) * 10);
       raw->line->oldcursor = raw->line->cursor;
-      if (read(raw->term->fd, &ch, 1) < 0)
+      if (read(raw->term->fd, raw->rd, 10) < 0)
 	continue ;
-      if (ch > 31 && ch < 127)
-	err = insert_char(raw, ch);
+      if (raw->rd[0] > 31 && raw->rd[0] < 127)
+	err = insert_char(raw, raw->rd[0]);
       else
-	err = get_std_escape(raw, ch, enter);
+	err = get_std_escape(raw, raw->rd, enter, move);
+      (err != SUCCESS) ? (input_error(err)) : (0);
+      redraw(raw, *move);
+      free(raw->rd);
     }
+  read_mode(raw, 0);
 }
