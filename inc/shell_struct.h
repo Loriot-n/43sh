@@ -38,6 +38,7 @@ typedef struct		s_shell
   int			fd_in;
   char			**cur_exec;
   int			res_exec;
+  int			isa_tty;
   int			exit;
 }			t_shell;
 

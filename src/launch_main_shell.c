@@ -38,11 +38,12 @@ int		ft_start_exec(t_shell *shell)
 int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
-  /* t_raw	*raw; */
+  t_raw	*raw;
 
   signal(SIGINT, ctrl);
-  /* raw = init_raw("exit"); */
-  while ((line = get_next_line(0)) != NULL)
+  raw = init_raw("exit");
+  while (((shell->isa_tty == 1 &&
+	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
     {
       shell->path = ft_fill_bin_path(shell->env);
       line = replace_env(shell, line);
@@ -58,8 +59,6 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      write(1, "$> ", 3);
     }
-  printf("exit");
   return (0);
 }
