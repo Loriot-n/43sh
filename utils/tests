@@ -308,7 +308,7 @@ TEST=
 [33-END]
 
 [34]
-Name="ls HOME"
+NAME="ls HOME"
 SETUP=""
 CLEAN=""
 TEST=
@@ -316,7 +316,7 @@ TEST=
 [34-END]
 
 [35]
-Name="echo with cmd inside"
+NAME="echo with cmd inside"
 SETUP=""
 CLEAN=""
 TEST=
@@ -324,7 +324,7 @@ TEST=
 [35-END]
 
 [36]
-Name="man ls"
+NAME="man ls"
 SETUP=""
 CLEAN=""
 TEST=
@@ -338,3 +338,28 @@ CLEAN=""
 TEST=
   echo "exit abc"
 [37-END]
+
+[38]
+NAME="Shitty redirect"
+SETUP=""
+CLEAN="rm -f caca toto"
+TEST=
+  echo "ls > caca toto"
+  echo "cat caca toto"
+[38-END]
+
+[39]
+NAME="echo with env inside"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "echo "ls $HOME""
+[39-END]
+
+[40]
+NAME="Redirecting non existing command"
+SETUP=""
+CLEAN="rm -f ok"
+TEST=
+  echo "caca > ok"
+[40-END]
