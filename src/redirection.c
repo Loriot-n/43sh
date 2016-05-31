@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 13:59:30 2016 CUENAT
-** Last update Tue May 31 11:52:18 2016 CUENAT
+** Last update Tue May 31 12:24:04 2016 CUENAT
 */
 
 #include "shell.h"
@@ -14,7 +14,6 @@ void	ft_inredirect(char *file)
 {
   int fd0;
 
-  dprintf(2, "caca");
   if ((fd0 = open(file, O_RDONLY, 0)) == -1)
     {
       printf("%s: %s\n", strerror(errno), file);

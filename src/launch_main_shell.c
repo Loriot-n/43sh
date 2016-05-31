@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Tue May 31 12:18:25 2016 CUENAT
+** Last update Tue May 31 14:08:29 2016 CUENAT
 */
 
 
@@ -26,7 +26,8 @@ int		ft_start_exec(t_shell *shell)
 	{
 	  tkn = strdup("\0");
 	  shell->fd_in = 0;
-	  ft_create_exec_function(shell, tmp_sub, tkn);
+	  if (ft_create_exec_function(shell, tmp_sub, tkn) == -1)
+	    return (-1);
 	  tmp_sub = tmp_sub->next;
 	}
       tmp_list = tmp_list->next;
