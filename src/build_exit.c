@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 15:19:23 2016 CUENAT
-** Last update Wed May 25 15:37:33 2016 CUENAT
+** Last update Tue May 31 12:15:09 2016 CUENAT
 */
 
 #include "shell.h"
@@ -26,12 +26,12 @@ int	only_nb(char *cmd)
 
 void	ft_exit(t_shell *shell)
 {
-  if (only_nb(shell->cur_exec[1]))
+  /*if (only_nb(shell->cur_exec[1]))
     {
       dprintf(2, "exit: Expression Syntax.\n");
       shell->res_exec = 1;
       return ;
-    }
+    }*/
   printf("exit\n");
   if (shell->cur_exec[1] != NULL)
     exit(my_getnbr(shell->cur_exec[1]));
