@@ -363,3 +363,55 @@ CLEAN="rm -f ok"
 TEST=
   echo "caca > ok"
 [40-END]
+
+[41]
+NAME="Triple Redirect"
+SETUP=""
+CLEAN="rm -f ok caca"
+TEST=
+  echo "ls > ok > caca"
+[41-END]
+
+[42]
+NAME="Globing"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "cat ../src/*.c"
+[42-END]
+
+[43]
+NAME="SIGFPE and SIGSEGV error messages"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "./fpe"
+  echo "./sigsegv"
+[43-END]
+
+[45]
+NAME="Alias"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "alias l ls -la"
+  echo "l"
+[45-END]
+
+[46]
+NAME="Hard alias"
+SETUP=""
+CLEAN="rm -f ok"
+TEST=
+  echo "alias l ls -la > ok"
+  echo "l"
+[46-END]
+
+[47]
+NAME="unalias"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "alias l ls -la"
+  echo "unalias l"
+[47-END]
