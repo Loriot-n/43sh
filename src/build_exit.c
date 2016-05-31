@@ -26,7 +26,7 @@ int	only_nb(char *cmd)
 
 void	ft_exit(t_shell *shell)
 {
-  if (only_nb(shell->cur_exec[1]))
+  if (only_nb(shell->cur_exec[1]) == -1)
     {
       dprintf(2, "exit: Expression Syntax.\n");
       shell->res_exec = 1;
