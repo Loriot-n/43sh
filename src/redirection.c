@@ -5,10 +5,25 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 13:59:30 2016 CUENAT
-** Last update Tue May 31 16:39:32 2016 CUENAT
+** Last update Tue May 31 17:26:53 2016 CUENAT
 */
 
 #include "shell.h"
+
+void	ft_double_inredirect(char *file)
+{
+  char	*input;
+  while ((input = get_next_line(0)) != NULL)
+    {
+      if (strcmp(input, file) == 0)
+	{
+	  free(input);
+	  break;
+	}
+      free(input);
+    }
+
+}
 
 void	ft_inredirect(char *file)
 {

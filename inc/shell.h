@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 12:00:21 2016 CUENAT
+** Last update Tue May 31 17:25:50 2016 CUENAT
 ** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
@@ -155,6 +155,7 @@ int	ft_is_a_build_in(char *cmd);
 void	ft_write_at_end(char *file);
 void	ft_rewrite(char *file);
 void	ft_inredirect(char *file);
+void	ft_double_inredirect(char *file);
 
 /*
 ** check_input.c

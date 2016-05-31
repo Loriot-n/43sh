@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 31 16:12:14 2016 CUENAT
+** Last update Tue May 31 17:26:10 2016 CUENAT
 */
 
 #include "shell.h"
@@ -21,7 +21,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	  else if (strcmp(tkn, "<") == 0)
 	    ft_inredirect(shell->file);
 	  else if (strcmp(tkn, "<<") == 0)
-	    {}
+	    ft_double_inredirect(shell->file);
 	}
   if (ft_execute_instr_no_fork(shell, tkn) == -1)
     {
