@@ -5,8 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 17:25:50 2016 CUENAT
-** Last update Mon May 30 11:22:13 2016 CUENAT
+** Last update Tue May 31 17:31:57 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -19,6 +18,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
@@ -214,4 +214,13 @@ int	is_in_const(char *line, int pos);
 char 	**add_string(char **tab, char *str);
 char	*replace_glob(char *line);
 
+/*
+** START ------ HISTORY -------- END
+*/
+
+void		append_history(char *value);
+
+/*
+** END ------- HISTORY --------- END
+*/
 #endif /*!SHELL_H_*/

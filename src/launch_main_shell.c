@@ -5,10 +5,10 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Tue May 31 14:08:29 2016 CUENAT
+** Last update Tue May 31 16:38:19 2016 Nicolas Loriot
 */
 
-
+#include "arrows.h"
 #include "shell.h"
 
 int		ft_start_exec(t_shell *shell)
@@ -38,8 +38,10 @@ int		ft_start_exec(t_shell *shell)
 int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
+  /* t_raw	*raw; */
 
   signal(SIGINT, ctrl);
+  /* raw = init_raw("exit"); */
   while ((line = get_next_line(0)) != NULL)
     {
       shell->path = ft_fill_bin_path(shell->env);
@@ -56,7 +58,7 @@ int	ft_launch_shell(t_shell *shell)
 	}
       ft_free_tab(shell->path);
       free(line);
-      write(2, "$> ", 3);
+      write(1, "$> ", 3);
     }
   printf("exit");
   return (0);

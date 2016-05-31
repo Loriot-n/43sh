@@ -5,10 +5,11 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Tue May 31 15:57:22 2016 CUENAT
+** Last update Tue May 31 17:31:30 2016 CUENAT
 */
 
 #include "shell.h"
+#include "arrows.h"
 
 char	*ft_fill_null_path(char *dest)
 {
