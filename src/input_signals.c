@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 19:16:31 2016 Nicolas Loriot
-** Last update Tue May 31 14:14:39 2016 Nicolas Loriot
+** Last update Tue May 31 15:22:06 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -37,6 +37,7 @@ int		carriage_ret(t_raw *raw, char *ch, int *enter, int *move)
 
 int		backspace(t_raw *raw, char *ch, int *enter, int *move)
 {
-  write(1, "h", 1);
+  write(2, "h", 1);
+  *move = 1;
   return (backspace_char(raw));
 }

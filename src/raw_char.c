@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Tue May 31 14:29:15 2016 Nicolas Loriot
+** Last update Tue May 31 15:18:05 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -14,23 +14,24 @@
 int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
   int		err;
-  int		(*f[7])(t_raw *raw, char *ch, int *enter, int *move);
+  int		(*f[8])(t_raw *raw, char *ch, int *enter, int *move);
   char		*val;
   int		i;
 
   i = 0;
   err = 0;
-  val = "\003\004\011\015\010\033\000";
+  val = "\003\004\011\015\010\177\033\000";
   f[0] = &end_of_text;
   f[1] = &end_of_file;
   f[2] = &tabulation;
   f[3] = &carriage_ret;
   f[4] = &backspace;
-  f[5] = &get_escape;
-  f[6] = NULL;
+  f[5] = &backspace;
+  f[6] = &get_escape;
+  f[7] = NULL;
   while (val[i] && val[i] != ch[0])
     i++;
-  if (i < 6)
+  if (i < 7)
     return (f[i](raw, ch, enter, move));
   else
     return (BELL);
@@ -53,6 +54,8 @@ void		get_raw_input(t_raw *raw)
       raw->line->oldcursor = raw->line->cursor;
       if (read(raw->term->fd, raw->rd, 10) < 0)
 	continue ;
+      /* for (int j = 0; raw->d[j]; j++) */
+	/* fprintf(stderr, "%o", raw->rd[j]); */
       if (raw->rd[0] > 31 && raw->rd[0] < 127)
 	err = insert_char(raw, raw->rd[0]);
       else
