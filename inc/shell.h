@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Mon May 30 16:22:30 2016 CUENAT
+** Last update Tue May 31 12:00:21 2016 CUENAT
 ** Last update Mon May 30 11:22:13 2016 CUENAT
 */
 
@@ -152,8 +152,10 @@ int	ft_is_a_build_in(char *cmd);
 /*
 ** redirection.c
 */
-void	ft_write_at_end(char *file, int fd_in);
-void	ft_rewrite(char *file, int fd_in);
+void	ft_write_at_end(char *file);
+void	ft_rewrite(char *file);
+void	ft_inredirect(char *file);
+
 /*
 ** check_input.c
 */
@@ -209,7 +211,6 @@ char	**epur_tab(char **tab);
 char	**split_no_const(char *line, char *tokens);
 int	is_in_const(char *line, int pos);
 char 	**add_string(char **tab, char *str);
-void	ft_inredirect(char *file, int fd_in);
 char	*replace_glob(char *line);
 
 #endif /*!SHELL_H_*/
