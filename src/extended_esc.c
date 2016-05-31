@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 21:48:19 2016 Nicolas Loriot
-** Last update Tue May 31 15:21:14 2016 Nicolas Loriot
+** Last update Tue May 31 16:05:00 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -35,7 +35,6 @@ int		end_key(t_raw *raw, char *ch, int *enter, int *move)
 
 int		get_extended_escape(t_raw *raw, char *ch, char prev_seq, int *move)
 {
-  char	new_seq;
   int	*enter;
   int	(*f[6])(t_raw *raw, char *ch, int *enter, int *move);
   char	*val;

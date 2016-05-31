@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Tue May 31 15:18:05 2016 Nicolas Loriot
+** Last update Tue May 31 16:03:56 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -13,13 +13,11 @@
 
 int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
-  int		err;
   int		(*f[8])(t_raw *raw, char *ch, int *enter, int *move);
   char		*val;
   int		i;
 
   i = 0;
-  err = 0;
   val = "\003\004\011\015\010\177\033\000";
   f[0] = &end_of_text;
   f[1] = &end_of_file;

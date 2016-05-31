@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 21:27:30 2016 Nicolas Loriot
-** Last update Tue May 31 14:17:56 2016 Nicolas Loriot
+** Last update Tue May 31 16:14:09 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -45,8 +45,7 @@ int		up_arrow(t_raw *raw, char *ch, int *enter, int *move)
 
 int		get_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
-  char		seq[2];
-  int		(*f[6])(t_raw *raw, char *ch, int *enter, int *move);
+  int		(*f[7])(t_raw *raw, char *ch, int *enter, int *move);
   char		*val;
   int		i;
 

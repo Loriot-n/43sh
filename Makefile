@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Tue May 31 16:00:29 2016 Nicolas Loriot
+## Last update Tue May 31 16:03:03 2016 Nicolas Loriot
 ##
 
 NAME	=	42sh
@@ -45,7 +45,6 @@ SRCS	=	src/main.c \
 		src/build_source.c \
 		src/check_input2.c \
 		src/globing.c \
-		src/signal.c \
 		src/cmd_history.c \
 		src/get_input.c \
 		src/raw_char.c \

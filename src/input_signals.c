@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 19:16:31 2016 Nicolas Loriot
-** Last update Tue May 31 15:39:41 2016 Nicolas Loriot
+** Last update Tue May 31 16:08:05 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -13,14 +13,14 @@
 
 int		end_of_text(t_raw *raw, char *ch, int *enter, int *move)
 {
-  read_mode(raw, 0);
-  exit(0);
+  *enter = 1;
   return (SUCCESS);
 }
 
 int		end_of_file(t_raw *raw, char *ch, int *enter, int *move)
 {
-  *enter = 1;
+  read_mode(raw, 0);
+  exit(0);
   return (SUCCESS);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Mon May 30 17:25:14 2016 Nicolas Loriot
+** Last update Tue May 31 16:04:35 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -42,10 +42,10 @@ void		free_hist(t_hist *hist)
 
 int		hist(t_raw *raw, int set, int size)
 {
-  if (size <= 0)
-    return (-1);
+  return (-1);
 }
 
 t_hist		*hist_cpy(t_raw *raw)
 {
+  return (NULL);
 }
