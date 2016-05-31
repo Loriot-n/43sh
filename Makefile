@@ -58,7 +58,7 @@ SRCS	=	src/main.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter
+CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter -lncurses
 
 all:		$(NAME)
 

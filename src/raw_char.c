@@ -13,12 +13,12 @@
 
 int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
-  int		(*f[8])(t_raw *raw, char *ch, int *enter, int *move);
+  int		(*f[9])(t_raw *raw, char *ch, int *enter, int *move);
   char		*val;
   int		i;
 
   i = 0;
-  val = "\003\004\011\015\010\177\033\000";
+  val = "\003\004\011\015\010\177\033\000\012";
   f[0] = &end_of_text;
   f[1] = &end_of_file;
   f[2] = &tabulation;
@@ -26,7 +26,8 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
   f[4] = &backspace;
   f[5] = &backspace;
   f[6] = &get_escape;
-  f[7] = NULL;
+  f[7] = &carriage_ret;
+  f[8] = NULL;
   while (val[i] && val[i] != ch[0])
     i++;
   if (i < 7)
@@ -50,10 +51,8 @@ void		get_raw_input(t_raw *raw)
     {
       raw->rd = raw_alloc(sizeof(char) * 10);
       raw->line->oldcursor = raw->line->cursor;
-      if (read(raw->term->fd, raw->rd, 10) < 0)
+      if (read(0, raw->rd, 10) < 0)
 	continue ;
-      /* for (int j = 0; raw->d[j]; j++) */
-	/* fprintf(stderr, "%o", raw->rd[j]); */
       if (raw->rd[0] > 31 && raw->rd[0] < 127)
 	err = insert_char(raw, raw->rd[0]);
       else

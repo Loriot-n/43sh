@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Tue May 31 15:29:22 2016 CUENAT
 */
 
 #include "shell.h"
@@ -49,7 +49,7 @@ int	is_alphanum(char *str)
 	  (str[i] < '0' || str[i] > '9') && str[i] != '_')
 	{
 	  dprintf(2, "setenv: Variable name must contain");
-	  dprintf(2, "alphanumeric characters.\n");
+	  dprintf(2, " alphanumeric characters.\n");
 	  return (-1);
 	}
       i++;

@@ -39,7 +39,7 @@ char		*get_line(t_raw *raw, char *prompt)
   set_line(raw, "", 0);
   raw->line->prompt->buffer = prompt;
   raw->line->prompt->len = strlen(raw->line->prompt->buffer);
-  write(raw->term->fd, raw->line->prompt->buffer, strlen(prompt));
+  write(1, raw->line->prompt->buffer, strlen(prompt));
   get_raw_input(raw);
   read_mode(raw, 0);
   write(1, "\n", 1);

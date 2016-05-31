@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 15:59:59 2016 Nicolas Loriot
+** Last update Tue May 31 17:31:57 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <glob.h>
+#include <ncurses.h>
 #include "shell_struct.h"
 #include "alias.h"
 #include "get_next_line.h"
@@ -155,6 +156,7 @@ int	ft_is_a_build_in(char *cmd);
 void	ft_write_at_end(char *file);
 void	ft_rewrite(char *file);
 void	ft_inredirect(char *file);
+void	ft_double_inredirect(char *file);
 
 /*
 ** check_input.c

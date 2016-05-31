@@ -20,6 +20,8 @@ int		end_of_text(t_raw *raw, char *ch, int *enter, int *move)
 int		end_of_file(t_raw *raw, char *ch, int *enter, int *move)
 {
   read_mode(raw, 0);
+  printf("exit");
+  putchar(10);
   exit(0);
   return (SUCCESS);
 }
