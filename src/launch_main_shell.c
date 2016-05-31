@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Mon May 30 16:18:21 2016 CUENAT
+** Last update Tue May 31 12:18:25 2016 CUENAT
 */
 
 
@@ -45,7 +45,7 @@ int	ft_launch_shell(t_shell *shell)
       line = replace_env(shell, line);
       line = epur(line);
       line = replace_alias(shell->alias, line);
-      // line = replace_glob(line);
+      //line = replace_glob(line);
       if (ft_check_input(line) == 0)
 	{
 	  ft_create_list(shell, line);
