@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 21:48:19 2016 Nicolas Loriot
-** Last update Tue May 31 16:05:00 2016 Nicolas Loriot
+** Last update Tue May 31 17:45:23 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -21,7 +21,7 @@ int		home_key(t_raw *raw, char *ch, int *enter, int *move)
 {
   (void)enter;
   raw->line->cursor = 0;
-  *move = 1;
+  *move = 0;
   return (SUCCESS);
 }
 
@@ -29,7 +29,7 @@ int		end_key(t_raw *raw, char *ch, int *enter, int *move)
 {
   (void)enter;
   raw->line->cursor = raw->line->input->len;
-  *move = 1;
+  *move = 0;
   return (SUCCESS);
 }
 

@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Tue May 31 16:03:03 2016 Nicolas Loriot
+## Last update Tue May 31 21:10:59 2016 Nicolas Loriot
 ##
 
 NAME	=	42sh
@@ -54,6 +54,7 @@ SRCS	=	src/main.c \
 		src/escape_char.c \
 		src/extended_esc.c \
 		src/input_signals.c \
+		src/raw_free.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

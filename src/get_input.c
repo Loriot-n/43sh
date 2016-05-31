@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Fri May 27 12:08:05 2016 Nicolas Loriot
-** Last update Tue May 31 15:34:15 2016 Nicolas Loriot
+** Last update Tue May 31 21:22:20 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -25,7 +25,7 @@ t_raw		*init_raw(char *to_send)
   new->line->input->len = 0;
   new->line->oldcursor = 0;
   new->line->cursor = 0;
-  new->term->fd = STDOUT_FILENO;
+  new->term->fd = STDIN_FILENO;
   new->term->mode = 0;
   tcgetattr(0, &new->term->origin);
   new->buffer = NULL;
