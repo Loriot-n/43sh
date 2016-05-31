@@ -11,6 +11,8 @@
 #ifndef SHELL_STRUCT_H_
 # define SHELL_STRUCT_H_
 
+typedef struct 	s_alias t_alias;
+
 typedef	struct		s_sub_list
 {
   int			separator;

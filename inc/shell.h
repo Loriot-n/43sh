@@ -27,8 +27,8 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <glob.h>
-#include "alias.h"
 #include "shell_struct.h"
+#include "alias.h"
 #include "get_next_line.h"
 #include "built_ins.h"
 
@@ -210,5 +210,6 @@ char	**split_no_const(char *line, char *tokens);
 int	is_in_const(char *line, int pos);
 char 	**add_string(char **tab, char *str);
 void	ft_inredirect(char *file, int fd_in);
+char	*replace_glob(char *line);
 
 #endif /*!SHELL_H_*/
