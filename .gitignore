@@ -1,4 +1,5 @@
 *.o
 *.gch
 vgcore.*
-42sh
+42sh.42sh_history
+.syntastic_c_config
