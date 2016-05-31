@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 12:36:39 2016 Nicolas Loriot
-** Last update Tue May 31 15:22:41 2016 Nicolas Loriot
+** Last update Tue May 31 15:35:40 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -67,9 +67,9 @@ void		redraw(t_raw *raw, int change)
       dprintf(raw->term->fd, "%s", raw->line->input->buffer);
       if (raw->line->input->len)
 	dprintf(raw->term->fd, C_CUR_MOVE_BACK, raw->line->input->len);
+      ioctl(raw->term->fd, I_FLUSH, FLUSHR);
     }
   if (raw->line->cursor)
     dprintf(raw->term->fd, C_CUR_MOVE_FORWARD, raw->line->cursor);
   ioctl(raw->term->fd, I_FLUSH, FLUSHR);
-  fsync(raw->term->fd);
 }

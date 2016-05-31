@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Fri May 27 12:08:05 2016 Nicolas Loriot
-** Last update Tue May 31 14:04:47 2016 Nicolas Loriot
+** Last update Tue May 31 15:34:15 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -26,7 +26,6 @@ t_raw		*init_raw(char *to_send)
   new->line->oldcursor = 0;
   new->line->cursor = 0;
   new->term->fd = STDOUT_FILENO;
-  /* if (!isatty(new->term->fd)) */
   new->term->mode = 0;
   tcgetattr(0, &new->term->origin);
   new->buffer = NULL;
@@ -41,7 +40,6 @@ char		*get_line(t_raw *raw, char *prompt)
   raw->line->prompt->buffer = prompt;
   raw->line->prompt->len = strlen(raw->line->prompt->buffer);
   write(raw->term->fd, raw->line->prompt->buffer, strlen(prompt));
-  ioctl(raw->term->fd, I_FLUSH, FLUSHR);
   get_raw_input(raw);
   read_mode(raw, 0);
   write(1, "\n", 1);
@@ -52,6 +50,6 @@ char		*get_line(t_raw *raw, char *prompt)
 void		input_error(int err)
 {
   if (err == BELL)
-    fprintf(stderr, C_BELL);
+    dprintf(STDERR_FILENO, C_BELL);
   ioctl(STDERR_FILENO, I_FLUSH, FLUSHR);
 }
