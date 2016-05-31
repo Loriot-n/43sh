@@ -77,17 +77,18 @@ int	ft_check_input(char *line)
   char	*bad_tkn;
   char	**tab;
   int	i;
+  int	check;
 
   i = 0;
   tkn = "|&; ";
   bad_tkn = "{}^:!,";
   tab = split(line, tkn);
-  while (tab[i])
+  check = 1;
+  while (tab && tab[i])
     {
-      if (ft_look_bad_tkn(tab[i], bad_tkn) == -1 ||
-	  ft_look_and(tab, i) == -1 ||
-	  ft_look_or(tab, i) == -1 ||
-	  ft_look_dot(tab, i) == -1)
+      if ((check = is_const_string(tab[i], check) == 1) &&
+	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
+	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
 	  printf("Bad token at word %d \"%s\"\n", i, tab[i]);
 	  return (-1);

@@ -16,10 +16,11 @@
 # endif /* !READ_SIZE */
 
 char	*get_next_line(const int fd);
-int	my_strlen(char *str);
 char	*my_strcpy(char *dest, char *src);
-char	*my_realloc(char *buff, int ctr);
 void	my_putstr(char *str);
 void	my_putchar(char c);
+char	*go_to_next(char *line, int *i, int *len);
+char	*my_realloc(char *buf, int ctr);
+int	my_strlen(char *str);
 
 #endif /* !GET_NEXT_LINE_H */

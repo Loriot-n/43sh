@@ -79,5 +79,18 @@ char	*epur(char *str)
       if (str[i])
 	i++;
     }
-  return (add_char(answer, '\0'));
+  return (answer);
+}
+
+char	**epur_tab(char **tab)
+{
+  int	i;
+
+  i = 0;
+  while (tab[i])
+    {
+      tab[i] = epur(tab[i]);
+      i++;
+    }
+  return (tab);
 }

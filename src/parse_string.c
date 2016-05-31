@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:49:11 2016 CUENAT
-** Last update Wed May 18 17:28:00 2016 CUENAT
+** Last update Thu May 26 14:04:18 2016 CUENAT
 */
 
 #include "shell.h"
@@ -15,7 +15,7 @@ int	ft_find_line_env(char *env, char *cmp)
   int	i;
 
   i = 0;
-  while (cmp[i])
+  while (cmp && cmp[i])
     {
       if (cmp[i] != env[i])
 	return (-1);

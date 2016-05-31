@@ -5,21 +5,36 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 16:30:52 2016 CUENAT
-** Last update Thu May 19 16:43:33 2016 CUENAT
+** Last update Thu May 26 14:06:15 2016 CUENAT
 */
 
 #include "shell.h"
+
+void		free_alias(t_alias *alias)
+{
+  t_alias	*tmp;
+
+  while (alias)
+    {
+      tmp = alias;
+      free(alias->cmd);
+      free(alias->alias);
+      alias = alias->next;
+      free(tmp);
+    }
+}
 
 void	ft_free_tab(char **tab)
 {
   int	i;
 
   i = 0;
-  while (tab[i])
+  while (tab != NULL && tab[i])
     {
       free(tab[i]);
       i += 1;
     }
+  free(tab);
 }
 
 void	ft_free_struct(t_shell *shell)

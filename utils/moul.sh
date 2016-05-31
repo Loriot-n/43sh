@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo $$
-
-SHELL="./42sh"
+MYSHELL="$PWD/42sh"
 REFER="/bin/tcsh -f"
 
 CAT=`which cat`
@@ -18,48 +16,68 @@ EXPR=`which expr`
 MKDIR=`which mkdir`
 CP=`which cp`
 
+STDERR_DEBUG=1
+
 disp_test()
 {
   id=$1
   $CAT tests | $GREP -A1000 "\[$id\]" | $GREP -B1000 "^\[$id-END\]" | $GREP -v "^\[.*\]"
 }
 
-run_script()
+prepare_test()
 {
-  SC="$1"
-  echo "$SC" > /tmp/.tmp.$$
-  . /tmp/.tmp.$$
-  $RM -f /tmp/.tmp.$$
+  local testfn="/tmp/.test.$$"
+  local runnerfn="/tmp/.run.$$"
+  local refoutfn="/tmp/.output.refer.$$"
+  local shoutfn="/tmp/.output.shell.$$"
+
+  WRAPPER="$runnerfn"
+
+  echo "#!/bin/bash" > $runnerfn
+  echo "$SETUP" >> $runnerfn
+  echo "/bin/bash -c '"$testfn" | "$REFER" ; echo exit \$?' > "$refoutfn" 2>&1" >> $runnerfn
+  echo "/bin/bash -c '"$testfn" | "$MYSHELL" ; echo exit \$?' > "$shoutfn" 2>&1" >> $runnerfn
+  echo "$CLEAN" >> $runnerfn
+
+  echo "#!/bin/bash" > $testfn
+  echo "$TESTS" | $TR "²" "\n" >> $testfn
+
+  chmod 755 $testfn
+  chmod 755 $runnerfn
 }
 
 load_test()
 {
   id=$1
-  debug=1
+  debug=$2
   SETUP=`disp_test "$id" | $GREP "SETUP=" | $SED s/'SETUP='// | $SED s/'"'//g`
   CLEAN=`disp_test "$id" | $GREP "CLEAN=" | $SED s/'CLEAN='// | $SED s/'"'//g`
   NAME=`disp_test "$id" | $GREP "NAME=" | $SED s/'NAME='// | $SED s/'"'//g`
   TESTS=`disp_test "$id" | $GREP -v "SETUP=" | $GREP -v "CLEAN=" | $GREP -v "NAME=" | $GREP -v "TESTS=" | $TR "\n" "²" | $SED s/"²$"//`
-  run_script "$SETUP"
-  echo "#!/bin/bash" >/tmp/.test.$$
-  echo "$TESTS" | $TR "²" "\n" >> /tmp/.test.$$
-  $CHMOD 755 /tmp/.test.$$
-  /bin/bash -c "/tmp/.test.$$ | $REFER ; echo exit "'$?' > /tmp/.output.refer.$$ 2>&1
-  /bin/bash -c "/tmp/.test.$$ | $SHELL ; echo exit "'$?' > /tmp/.output.shell.$$ 2>&1
-  nb=`$CAT /tmp/.output.refer.$$ | $WC -l`
+
+  prepare_test
+
+  if [ $jenkins -eq 1 ]
+  then
+    $WRAPPER
+  else
+    $WRAPPER
+  fi
+
+  nb=`$CAT /tmp/.output.refer.$$ | $GREP -v '^\[1\]' | $WC -l`
   i=1
   ok=1
   while [ $i -le $nb ]
   do
-    l=`$CAT /tmp/.output.refer.$$ | $HEAD -$i | $TAIL -1`
-    a=`$CAT /tmp/.output.shell.$$ | $GREP -- "$l" | $WC -l`
+    l=`$CAT /tmp/.output.refer.$$ | $GREP -v '^\[1\]' | $HEAD -$i | $TAIL -1`
+    a=`$CAT /tmp/.output.shell.$$ | $GREP -v '^\[1\]' | $GREP -- "$l$" | $WC -l`
     if [ $a -eq 0 ]
     then
       ok=0
     fi
     i=`$EXPR $i + 1`
   done
-  run_script "$CLEAN"
+
   if [ $ok -eq 1 ]
   then
     if [ $debug -ge 1 ]
@@ -67,9 +85,9 @@ load_test()
       echo "Test $id ($NAME) : OK"
       if [ $debug -eq 2 ]
       then
-        echo "Output $SHELL :"
+        echo "Output $MYSHELL :"
         $CAT -e /tmp/.output.shell.$$
-        echo ""
+        echo "" 
         echo "Output $REFER :"
         $CAT -e /tmp/.output.refer.$$
         echo ""
@@ -80,16 +98,27 @@ load_test()
   else
     if [ $debug -ge 1 ]
     then
-      echo "Test $id ($NAME) : KO - Check output in /tmp/test.$$/$id/"
+      echo "Test $id ($NAME) : KO - Check output in /tmp/test.$$/$id/" 
       $MKDIR -p /tmp/test.$$/$id 2>/dev/null
       $CP /tmp/.output.refer.$$ /tmp/test.$$/$id/tcsh.out
       $CP /tmp/.output.shell.$$ /tmp/test.$$/$id/mysh.out
     else
-      echo "KO"
+      if [ $STDERR_DEBUG -eq 1 ]
+      then
+        echo "Test $id ($NAME) : KO" >&2
+        echo "---------- TCSH Output : ----------" >&2
+        $CAT "/tmp/.output.refer.$$" >&2
+        echo "---------- END ----------" >&2
+        echo "---------- 42SH Output : ----------" >&2
+        $CAT /tmp/.output.shell.$$ >&2
+        echo "---------- END ----------" >&2
+        echo "" >&2
+        echo "KO"
+      else
+        echo "KO"
+      fi
     fi
   fi
-  $RM -f /tmp/.test.$$
-  $RM -f /tmp/.output*$$
 }
 
 make_manifest()
@@ -112,7 +141,7 @@ make_manifest()
   echo '      "output": ['
   echo '        {'
   echo '          "name": "'$NAME'",'
-  echo '          "cmd": "./moul.sh '$lst'",'
+  echo '          "cmd": "./moul.sh -j '$lst'",'
   echo '          "expected": "^OK"'
   echo '        }'
   echo '      ]'
@@ -134,21 +163,31 @@ done
 
 if [ ! -f tests ]
 then
-  echo "No tests file. Please read README.ME"
+  echo "No tests file. Please read README.ME" >&2
   exit 1
 fi
 
-if [ ! -x $SHELL ]
+if [ ! -f $MYSHELL ]
 then
-  echo "Can't exec $SHELL"
+  echo "$MYSHELL not found" >&2
   exit 1
+fi
+
+jenkins=0
+if [ $# -ne 0 ]
+then
+  if [ "$1" = "-j" ]
+  then
+    jenkins=1
+    shift
+  fi
 fi
 
 if [ $# -eq 2 ]
 then
-  echo "Debug mode"
-  echo "Shell : $SHELL"
-  echo "Reference : $REFER"
+  echo "Debug mode" >&2
+  echo "Shell : $MYSHELL" >&2
+  echo "Reference : $REFER" >&2
   echo ""
 fi
 
@@ -165,16 +204,16 @@ else
   then
     echo "Making manifest.json"
     make_manifest > manifest.json
-  else
+  else 
     if [ $# -eq 1 ]
     then
       load_test $1 0
     else
       if [ "X$1" = "X-d" ]
       then
-        (load_test $2 2)
+        load_test $2 2
       else
-        (load_test $1 2)
+        load_test $1 2
       fi
     fi
   fi

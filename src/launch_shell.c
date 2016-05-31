@@ -5,10 +5,30 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Wed May 25 12:05:36 2016 CUENAT
+** Last update Tue May 31 14:11:02 2016 CUENAT
 */
 
 #include "shell.h"
+
+char	*ft_fill_null_path(char *dest)
+{
+  char	*tmp;
+
+  if ((tmp = malloc(sizeof(char) * (strlen("/bin") + strlen(dest) + 2)))
+      == NULL)
+    exit(EXIT_FAILURE);
+  strcpy(tmp, "/bin");
+  tmp[strlen(tmp) + 1] = '\0';
+  tmp[strlen(tmp)] = '/';
+  strcat(tmp, dest);
+  if (access(tmp, X_OK) == 0)
+    {
+      free(dest);
+      return (tmp);
+    }
+  free(tmp);
+  return (dest);
+}
 
 char	*ft_fill_path_for_execve(char *dest, char **path)
 {
@@ -16,7 +36,9 @@ char	*ft_fill_path_for_execve(char *dest, char **path)
   int	i;
 
   i = 0;
-  while (path[i])
+  if (path == NULL)
+    return (ft_fill_null_path(dest));
+  while (path != NULL && path[i])
     {
       if ((tmp = malloc(sizeof(char) *
 			(strlen(dest) + strlen(path[i]) + 2))) == NULL)
@@ -56,71 +78,52 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
   res[j] = NULL;
   return (res);
 }
-int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp)
+
+int	ft_main_read_function(t_shell *shell, t_sub_list *tmp, char *tkn, int i)
+{
+  int	end;
+
+  shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
+  if (shell->cur_exec[0] == NULL)
+    return (-1);
+  if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
+    shell->cur_exec[0] =
+      ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
+  if (tmp->exec_cmd[i] != NULL)
+    {
+      tkn = strdup(tmp->exec_cmd[i]);
+      if (strcmp(tkn, "<") == 0 || strcmp(tkn, "<<") == 0
+	  || strcmp(tkn, ">") == 0 || strcmp(tkn, ">>") == 0)
+	{
+	  i += 1;
+	  shell->file = strdup(tmp->exec_cmd[i]);
+	}
+    }
+  (tmp->exec_cmd[i] != NULL && tmp->exec_cmd[i + 1] != NULL) ?
+    (end = 0) : (end = 1);
+  ft_choose_type_execution(shell, tkn, end);
+  free(tkn);
+  if (tmp->exec_cmd[i] != NULL)
+    tkn = strdup(tmp->exec_cmd[i]);
+  ft_free_tab(shell->cur_exec);
+  return (i);
+}
+
+int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
 {
   int	i;
-  char	*tkn;
-  int	end;
 
   i = 0;
   shell->fd_in = 0;
-  tkn = strdup("\0");
-  signal(SIGSEGV, segfault);
-  while (tmp->exec_cmd[i])
+  if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
+      || (tmp->separator == OR && shell->res_exec == -1))
     {
-      shell->cur_exec = ft_fill_tab_for_execve(tmp->exec_cmd, &i);
-      shell->cur_exec[0] =
-	ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
-      (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
-      ft_execute_instr(shell, tkn, end);
-      free(tkn);
-      if (tmp->exec_cmd[i] != NULL)
-	tkn = strdup(tmp->exec_cmd[i]);
-      ft_free_tab(shell->cur_exec);
-      (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
-    }
-  return (0);
-}
-
-int		ft_start_exec(t_shell *shell)
-{
-  t_list	*tmp_list;
-  t_sub_list	*tmp_sub;
-
-  tmp_list = shell->exec_list;
-  while (tmp_list != NULL)
-    {
-      tmp_sub = tmp_list->sub_list;
-      while (tmp_sub != NULL)
+      while (tmp->exec_cmd[i])
 	{
-	  ft_create_exec_function(shell, tmp_sub);
-	  tmp_sub = tmp_sub->next;
+	  if ((i = ft_main_read_function(shell, tmp, tkn, i)) == -1)
+	    return (-1);
+	  (tmp->exec_cmd[i] != NULL) ? (i += 1) : 0;
 	}
-      tmp_list = tmp_list->next;
-    }
-  return (0);
-}
-
-int	ft_launch_shell(t_shell *shell)
-{
-  char	*line;
-
-  signal(SIGINT, ctrl);
-  while ((line = get_next_line(0)) != NULL)
-    {
-      shell->path = ft_fill_bin_path(shell->env);
-      shell->res_exec = 0;
-      line = epur(line);
-      if (ft_check_input(line) == 0)
-	{
-	  ft_create_list(shell, line);
-	  ft_create_sub_list(shell);
-	  ft_start_exec(shell);
-	  ft_free_struct(shell);
-	}
-      ft_free_tab(shell->path);
-      free(line);
-      write(1, "$> ", 2);
     }
   return (0);
 }

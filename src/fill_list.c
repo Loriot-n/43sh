@@ -5,23 +5,22 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 11:25:16 2016 CUENAT
-** Last update Tue May 24 16:47:08 2016 CUENAT
+** Last update Wed May 25 15:41:41 2016 CUENAT
 */
 
 #include "shell.h"
 
 t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
 					char *tmp_c,
-					int *sep,
-					t_shell *shell)
+					int *sep)
 {
   t_sub_list	*tmp;
   t_sub_list	*new;
 
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
-  new->cmd = replace_alias(shell->alias, strdup(epur(tmp_c)));
-  new->exec_cmd = split(new->cmd, " |");
+  new->cmd = strdup(epur(tmp_c));
+  new->exec_cmd = split_no_const(new->cmd, " |");
   new->separator = *sep;
   new->next = NULL;
   if (list == NULL)
@@ -36,7 +35,7 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   return (list);
 }
 
-void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
+void	ft_parse_string_sub_list(t_list *tmp, int *sep)
 {
   int  	i;
   int  	j;
@@ -48,8 +47,9 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
       j = i;
       while (tmp->cmd[i])
 	{
-	  if ((tmp->cmd[i] == '&' && tmp->cmd[i + 1] == '&')
-	      || (tmp->cmd[i] == '|' && tmp->cmd[i + 1] == '|'))
+	  if (is_in_const(tmp->cmd, i) == 0 &&
+	      ((tmp->cmd[i] == '&' && tmp->cmd[i + 1] == '&')
+	      || (tmp->cmd[i] == '|' && tmp->cmd[i + 1] == '|')))
 	    break;
 	  i += 1;
 	}
@@ -59,8 +59,7 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep, t_shell *shell)
 	      exit(EXIT_FAILURE);
 	  strncpy(tmp_c, &tmp->cmd[j], (i - j));
 	  tmp_c[i - j] = '\0';
-	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep,
-						 shell);
+	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep);
 	  *sep = NO;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '&') ? (*sep = AND) : 0;
 	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '|') ? (*sep = OR) : 0;
@@ -78,7 +77,7 @@ int		ft_create_sub_list(t_shell *shell)
   while (tmp != NULL)
     {
       separator = NO;
-      ft_parse_string_sub_list(tmp, &separator, shell);
+      ft_parse_string_sub_list(tmp, &separator);
       tmp = tmp->next;
     }
   return (0);
@@ -116,7 +115,7 @@ int	ft_create_list(t_shell *shell, char *line)
   while (line[i])
     {
       j = i;
-      while (line[i] && line[i] != ';')
+      while (line[i] && (is_in_const(line, i) == 1 || line[i] != ';'))
 	i += 1;
       if ((tmp = malloc(sizeof(char) * (i - j + 1))) == NULL)
 	exit(EXIT_FAILURE);
@@ -124,7 +123,7 @@ int	ft_create_list(t_shell *shell, char *line)
       tmp[i - j] = '\0';
       if (tmp != NULL || tmp[0] != '\0')
 	shell->exec_list = ft_add_at_end(shell->exec_list, tmp);
-      i += 1;
+      i = (line[i]) ? i + 1 : i;
       free(tmp);
     }
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Mon May 23 18:26:21 2016 CUENAT
+** Last update Mon May 30 16:01:09 2016 CUENAT
 */
 
 #include "shell.h"
@@ -24,8 +24,7 @@ char	**ft_create_env()
   tmp[0] = ft_strcat("NAME=", info->pw_name);
   tmp[1] = ft_strcat("HOME=", info->pw_dir);
   tmp[2] = ft_strcat("OLDPWD=", getcwd(pwd, PATH_MAX));
-  tmp[3] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
-  tmp[4] = strdup("PATH=/bin:/usr/bin");
+  tmp[4] = ft_strcat("PWD=", getcwd(pwd, PATH_MAX));
   tmp[5] = NULL;
   free(pwd);
   return (tmp);
@@ -36,7 +35,7 @@ char	**ft_fill_bin_path(char **env)
   int	i;
 
   i = 0;
-  while (ft_find_line_env(env[i], "PATH=") == -1)
+  while (env[i] && ft_find_line_env(env[i], "PATH=") == -1)
     i += 1;
   if (env[i] != NULL)
     return (split(&env[i][5], ":"));
@@ -45,12 +44,30 @@ char	**ft_fill_bin_path(char **env)
 
 int	ft_fill_env(char **env, t_shell *shell)
 {
+  char	*tmp[3];
+  char	*one;
+  int	i;
+
   if (env == NULL || ft_tab_len(env) < 2)
     shell->env = ft_create_env();
   else
-    shell->env = ft_strdup_tab(env);
+    {
+      shell->env = ft_strdup_tab(env);
+      i = 0;
+      while (env[i] && ft_find_line_env(env[i], "SHLVL") == -1)
+        i += 1;
+      if (env[i])
+	{
+	  tmp[1] = "SHLVL";
+	  one = get_env(shell, "SHLVL");
+	  one[0]++;
+	  tmp[2] = one;
+	  modify_env(shell, tmp, i);
+	}
+    }
   return (0);
 }
+
 t_shell		*ft_init_struct()
 {
   t_shell	*tmp;
@@ -60,6 +77,7 @@ t_shell		*ft_init_struct()
   tmp->env = NULL;
   tmp->path = NULL;
   tmp->exec_list = NULL;
-  tmp->alias = get_aliases(".42shrc");
+  tmp->alias = NULL;
+  tmp->res_exec = 0;
   return (tmp);
 }
