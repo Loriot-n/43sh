@@ -89,7 +89,6 @@ int	ft_main_read_function(t_shell *shell, t_sub_list *tmp, char *tkn, int i)
       ft_fill_path_for_execve(shell->cur_exec[0], shell->path);
   (tmp->exec_cmd[i] != NULL) ? (end = 0) : (end = 1);
   ft_choose_type_execution(shell, tkn, end);
-  free(tkn);
   if (tmp->exec_cmd[i] != NULL)
     tkn = strdup(tmp->exec_cmd[i]);
   ft_free_tab(shell->cur_exec);

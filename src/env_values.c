@@ -18,7 +18,7 @@ char	*get_env(char **env, char *var)
   i = 0;
   while (env[i] && ft_find_line_env(env[i], var) == -1)
     i += 1;
-  if (!env[i])
+  if (!env[i] || !var)
     return (NULL);
   tmp = env[i];
   return (&tmp[strlen(var) + 1]);
@@ -78,7 +78,7 @@ char	*replace_env(t_shell *shell, char *line)
   i = 0;
   while (tab[i] && strcmp(tab[i], "$") != 0)
     i++;
-  if (!tab[i + 1])
+  if (!tab[i] || !tab[i + 1])
     return (line);
   tmp = split(tab[i + 1], "/");
   if (!(val = get_env(shell->env, tmp[0])))

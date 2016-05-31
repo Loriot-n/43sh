@@ -12,6 +12,8 @@
 
 int	is_const_string(char *line, int check)
 {
+  if (!line)
+    return (check);
   if (line[0] == '"' || line[strlen(line) - 1] == '"' || line[0] == '\'' ||
       line[strlen(line) - 1] == '\'')
     return ((check == 1) ? 0 : 1);
