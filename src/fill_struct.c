@@ -59,7 +59,7 @@ int	ft_fill_env(char **env, t_shell *shell)
       if (env[i])
 	{
 	  tmp[1] = "SHLVL";
-	  one = get_env(shell->env, "SHLVL");
+	  one = get_env(shell, "SHLVL");
 	  one[0]++;
 	  tmp[2] = one;
 	  modify_env(shell, tmp, i);

@@ -10,12 +10,20 @@
 
 #include "shell.h"
 
-char	*get_env(char **env, char *var)
+char	*get_env(t_shell *shell, char *var)
 {
   int	i;
   char	*tmp;
+  char	**env;
+  char	one[15];
 
   i = 0;
+  env = shell->env;
+  if (var && strcmp(var, "?") == 0)
+    {
+      sprintf(one, "%d", shell->res_exec);
+      return (strdup(one));
+    }
   while (env[i] && ft_find_line_env(env[i], var) == -1)
     i += 1;
   if (!env[i] || !var)
@@ -81,7 +89,7 @@ char	*replace_env(t_shell *shell, char *line)
   if (!tab[i] || !tab[i + 1])
     return (line);
   tmp = split(tab[i + 1], "/");
-  if (!(val = get_env(shell->env, tmp[0])))
+  if (!(val = get_env(shell, tmp[0])))
     {
       dprintf(2, "%s: Undefined variable\n", tmp[0]);
       return (line);

@@ -23,8 +23,6 @@ char		*replace_glob(char *line)
   glob_flags = 0;
   if (!(results = malloc(sizeof(glob_t) * 1)))
     exit(EXIT_FAILURE);
-  if (!tmp[i])
-    results = NULL;
   while (tmp[i])
     {
       (i > 1) ? glob_flags |= (GLOB_APPEND | GLOB_NOCHECK) : 0;
@@ -32,6 +30,7 @@ char		*replace_glob(char *line)
 	tmp[i] = epur(tab_join(' ', results->gl_pathv));
       i++;
     }
-  globfree(results);
+  if (tmp[0])
+    globfree(results);
   return (tab_join(' ', tmp));
 }
