@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Tue May 31 16:04:35 2016 Nicolas Loriot
+** Last update Tue May 31 20:59:47 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -19,8 +19,8 @@ t_hist		*new_hist(int size)
   new->max = size + 1;
   new->index = -1;
   new->len = 0;
-  new->history = raw_alloc(sizeof(char *) * new->max);
-  memset(new->history, 0, sizeof(char *) * new->max);
+  new->tab = raw_alloc(sizeof(char *) * new->max);
+  memset(new->tab, 0, sizeof(char *) * new->max);
   new->buffer = NULL;
   new->original = NULL;
   return (new);
@@ -31,18 +31,29 @@ void		free_hist(t_hist *hist)
   int		i;
 
   i = 0;
-  while (hist->history[i])
-    free(hist->history[i++]);
-  free(hist->history);
+  while (hist->tab[i])
+    free(hist->tab[i++]);
+  free(hist->tab);
   free(hist->buffer);
   free(hist->original);
   hist->len = 0;
   hist->max = 0;
 }
 
-int		hist(t_raw *raw, int set, int size)
+void		hist_add_str(t_raw *raw, char *str)
 {
-  return (-1);
+  int		index;
+
+  index = 0;
+  if (raw->history->index > -1)
+    index = raw->history->index;
+  if (index < raw->history->len && !strcmp(raw->history->tab[index], str))
+    return ;
+  if (raw->history->index < 0)
+    {
+      if (raw->history->len >= raw->history->max)
+	free(raw->history->tab[raw->history->max - 1]);
+    }
 }
 
 t_hist		*hist_cpy(t_raw *raw)

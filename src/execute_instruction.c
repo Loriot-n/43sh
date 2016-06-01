@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 31 17:26:10 2016 CUENAT
+** Last update Tue May 31 23:40:42 2016 CUENAT
 */
 
 #include "shell.h"
@@ -44,11 +44,13 @@ void	ft_execute_instr_fork_2(t_shell *shell,
   int	status;
 
   waitpid(pid, &status, WUNTRACED);
+  close(tube[1]);
   sig_handler(status);
   (WIFEXITED(status)) ?
-    (shell->res_exec = WEXITSTATUS(status)) : (shell->res_exec = -1);
-   shell->fd_in = tube[0];
-   close(tube[1]);
+    (shell->res_exec = WEXITSTATUS(status)) 0 : (shell->res_exec = -1);
+  close(shell->fd_in);
+  shell->fd_in = dup(tube[0]);
+  close(tube[0]);
 }
 
 int		ft_final_exec(t_shell *shell, char *tkn)
@@ -67,6 +69,7 @@ int		ft_final_exec(t_shell *shell, char *tkn)
 	  dup2(shell->fd_in, 0);
 	  close(tube[0]);
 	  ft_redirect_or_pipe(shell, tkn);
+	  close(tube[1]);
 	  exit(EXIT_FAILURE);
 	}
       else
@@ -82,23 +85,23 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
   int		tube[2];
   pid_t		pid;
 
-  if (pipe(tube) == -1)
-    return (-1);
   if (end == 0)
     {
+      if (pipe(tube) == -1)
+	return (-1);
       if ((pid = fork()) == -1)
 	exit(EXIT_FAILURE);
       else if (pid == 0)
 	{
 	  dup2(shell->fd_in, 0);
+	  close(tube[0]);
 	  if (end == 0)
 	    dup2(tube[1], 1);
-	  close(tube[0]);
 	  ft_redirect_or_pipe(shell, tkn);
 	  exit(EXIT_FAILURE);
 	}
       else
-	ft_execute_instr_fork_2(shell, tube, pid);
+	  ft_execute_instr_fork_2(shell, tube, pid);
     }
   else
     ft_final_exec(shell, tkn);

@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Tue May 31 16:03:56 2016 Nicolas Loriot
+** Last update Tue May 31 21:15:19 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -67,5 +67,7 @@ void		get_raw_input(t_raw *raw)
       redraw(raw, *move);
       free(raw->rd);
     }
+  free(move);
+  free(enter);
   read_mode(raw, 0);
 }

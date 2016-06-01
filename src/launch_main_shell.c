@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Tue May 31 16:38:19 2016 Nicolas Loriot
+** Last update Tue May 31 21:23:41 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -60,5 +60,7 @@ int	ft_launch_shell(t_shell *shell)
       ft_free_tab(shell->path);
       free(line);
     }
+  raw_free(raw);
+  printf("exit");
   return (0);
 }

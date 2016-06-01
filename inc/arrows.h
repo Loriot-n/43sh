@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Thu May 26 17:19:15 2016 Nicolas Loriot
-** Last update Tue May 31 12:49:44 2016 Nicolas Loriot
+** Last update Tue May 31 21:05:29 2016 Nicolas Loriot
 */
 
 #ifndef ARROWS_H_
@@ -42,7 +42,7 @@ typedef struct		s_term
 
 typedef struct		s_hist
 {
-  char			**history;
+  char			**tab;
   char			*original;
   char			*buffer;
   int			len;
@@ -74,18 +74,27 @@ typedef enum		s_status
 # define C_CUR_MOVE_FORWARD	"\x1b[%dC"
 # define C_CUR_MOVE_BACK	"\x1b[%dD"
 
-/* # ifndef ASSERT */
-/* #  define assert(cond, desc) do { if(!(cond)) {fprintf(stderr, "rawline: %s: condition '%s' failed -- '%s'\n", __func__, #cond, desc); abort();}} while (0) */
-/* # endif */
 char		*get_line(t_raw *raw, char *prompt);
 t_raw		*init_raw(char *to_send);
 void		get_raw_input(t_raw *raw);
 void		read_mode(t_raw *raw, int state);
 void		input_error(int err);
+void		raw_free(t_raw *raw);
+
+/*
+** Raw Functions
+*/
+
 void		*raw_alloc(size_t size);
 void		*raw_realloc(void *oldptr, size_t size);
 void		*raw_calloc(size_t nmemb, size_t size);
 char		*raw_strdup(char *src);
+void		raw_memmove(void *src, void *dest, size_t size);
+
+/*
+** Line Editing
+*/
+
 void		redraw(t_raw *raw, int change);
 void		set_line(t_raw *raw, char *str, int cursor);
 int		insert_char(t_raw *raw, char ch);
