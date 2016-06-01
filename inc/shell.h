@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 17:31:57 2016 CUENAT
+** Last update Wed Jun  1 13:17:30 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -186,9 +186,6 @@ void	parse_options(t_shell *shell, char *file);
 char	*replace_env(t_shell *shell, char *line);
 char	*get_env(t_shell *shell, char *var);
 
-void	ft_env(t_shell *shell);
-
-void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */

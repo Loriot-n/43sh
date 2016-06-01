@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Tue May 31 21:00:14 2016 CUENAT
+** Last update Wed Jun  1 13:09:12 2016 CUENAT
 */
 
 #include "shell.h"
@@ -75,7 +75,7 @@ static char	*get_home(t_shell *shell)
   return (path);
 }
 
-void		ft_cd(t_shell *shell)
+int		ft_cd(t_shell *shell)
 {
   char		*path;
   static char	**history = NULL;
@@ -93,7 +93,8 @@ void		ft_cd(t_shell *shell)
     {
       dprintf(2, "%s: %s.\n", path, strerror(errno));
       shell->res_exec = 1;
-      return ;
+      return -1;
     }
   history = fill_history(history, getcwd(tmp, PATH_MAX));
+  return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 31 23:40:42 2016 CUENAT
+** Last update Wed Jun  1 13:23:37 2016 CUENAT
 */
 
 #include "shell.h"
@@ -43,11 +43,16 @@ void	ft_execute_instr_fork_2(t_shell *shell,
 {
   int	status;
 
+  status = 0;
   waitpid(pid, &status, WUNTRACED);
-  close(tube[1]);
   sig_handler(status);
-  (WIFEXITED(status)) ?
-    (shell->res_exec = WEXITSTATUS(status)) 0 : (shell->res_exec = -1);
+  if (WIFEXITED(status) && status != 0)
+    {
+
+      dprintf(2, "------%s  %d------\n", shell->cur_exec[0], status);
+      shell->res_exec = 1;
+    }
+  close(tube[1]);
   close(shell->fd_in);
   shell->fd_in = dup(tube[0]);
   close(tube[0]);
@@ -97,8 +102,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	  close(tube[0]);
 	  if (end == 0)
 	    dup2(tube[1], 1);
-	  ft_redirect_or_pipe(shell, tkn);
-	  exit(EXIT_FAILURE);
+	  exit(ft_redirect_or_pipe(shell, tkn));
 	}
       else
 	  ft_execute_instr_fork_2(shell, tube, pid);
@@ -110,7 +114,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
-  void	(*ptr[8])(t_shell *shell);
+  int	(*ptr[8])(t_shell *shell);
   int  	i;
 
   ptr[0] = &ft_exit;
