@@ -28,6 +28,23 @@ int		end_of_file(t_raw *raw, char *ch, int *enter, int *move)
 
 int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
 {
+  char		*line;
+  char		**pros;
+  char		*tmp;
+
+  line = strdup(raw->line->input->buffer);
+  tmp = strdup(get_env(g_shell, "PATH"));
+  if (!tmp)
+    tmp = strdup("/bin");
+  pros = autocomplete(line, tmp, DT_REG);
+  *move = 0;
+  if (!pros || !pros[0])
+    return (BELL);
+  free(tmp);
+  set_line(raw, pros[0], strlen(pros[0]));
+  tmp = raw->line->input->buffer;
+  raw->line->input->buffer = strdup(pros[0]);
+  free(tmp);
   return (BELL);
 }
 

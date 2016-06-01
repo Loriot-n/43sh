@@ -41,22 +41,9 @@ void		set_line(t_raw *raw, char *str, int cursor)
 
 int		insert_char(t_raw *raw, char ch)
 {
-  int		len;
-  int		cur;
-  char		*tmp;
-
   assert(raw->safe);
-  cur = raw->line->cursor;
   raw->line->input->len++;
-  len = raw->line->input->len;
-  tmp = raw_alloc(len + 1);
-  memcpy(tmp, raw->line->input->buffer, cur);
-  tmp[cur] = ch;
-  memcpy(tmp + cur + 1, raw->line->input->buffer + cur, len - cur - 1);
-  tmp[len] = 0;
-  raw->line->input->buffer = raw_realloc(raw->line->input->buffer, len + 1);
-  memcpy(raw->line->input->buffer, tmp, len + 1);
-  free(tmp);
+  raw->line->input->buffer = add_char(raw->line->input->buffer, ch);
   raw->line->cursor++;
   return (SUCCESS);
 }

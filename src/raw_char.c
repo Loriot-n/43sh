@@ -31,7 +31,10 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
   while (val[i] && val[i] != ch[0])
     i++;
   if (i < 7)
-    return (f[i](raw, ch, enter, move));
+    {
+      raw->complete = (i == 2) ? raw->complete + 1 : 0;
+      return (f[i](raw, ch, enter, move));
+    }
   else
     return (BELL);
 }
@@ -54,7 +57,10 @@ void		get_raw_input(t_raw *raw)
       if (read(0, raw->rd, 10) < 0)
 	continue ;
       if (raw->rd[0] > 31 && raw->rd[0] < 127)
-	err = insert_char(raw, raw->rd[0]);
+	{
+	  err = insert_char(raw, raw->rd[0]);
+	  raw->complete = 0;
+	}
       else
 	err = get_std_escape(raw, raw->rd, enter, move);
       (err != SUCCESS) ? (input_error(err)) : (0);

@@ -20,10 +20,9 @@ int		main(int ac, char **av, char **environ)
   shell = ft_init_struct();
   ft_fill_env(environ, shell);
   if (ac != 1)
-    {
-      check_options(ac, av, shell);
-    }
+    check_options(ac, av, shell);
   parse_options(shell, ".42shrc");
+  g_shell = shell;
   ft_launch_shell(shell);
   ft_free_tab(shell->env);
   free_alias(shell->alias);

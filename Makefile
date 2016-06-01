@@ -54,6 +54,8 @@ SRCS	=	src/main.c \
 		src/escape_char.c \
 		src/extended_esc.c \
 		src/input_signals.c \
+		src/autocomplete.c \
+		src/magic_quotes.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

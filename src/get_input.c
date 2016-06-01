@@ -28,6 +28,7 @@ t_raw		*init_raw(char *to_send)
   new->term->fd = STDOUT_FILENO;
   new->term->mode = 0;
   tcgetattr(0, &new->term->origin);
+  new->complete = 0;
   new->buffer = NULL;
   new->safe = 1;
   new->to_return = raw_strdup(to_send);

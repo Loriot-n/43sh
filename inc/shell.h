@@ -26,6 +26,7 @@
 #include <limits.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <dirent.h>
 #include <glob.h>
 #include <ncurses.h>
 #include "shell_struct.h"
@@ -44,6 +45,9 @@
 #ifndef NO
 # define NO 0
 #endif
+
+typedef struct dirent t_dir;
+t_shell *g_shell;
 
 /*
 ** START ----- FILL STRUCT ----- START
@@ -224,4 +228,7 @@ void		append_history(char *value);
 /*
 ** END ------- HISTORY --------- END
 */
+
+char	**autocomplete(char *begin, char *path, int check);
+
 #endif /*!SHELL_H_*/

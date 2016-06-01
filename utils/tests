@@ -320,7 +320,7 @@ NAME="echo with cmd inside"
 SETUP=""
 CLEAN=""
 TEST=
-  echo "echo "ls -al | grep Makefile;""
+  echo "echo 'ls -al | grep Makefile;'
 [35-END]
 
 [36]
@@ -353,7 +353,7 @@ NAME="echo with env inside"
 SETUP=""
 CLEAN=""
 TEST=
-  echo "echo "ls $HOME""
+  echo "echo 'ls $HOME'"
 [39-END]
 
 [40]
@@ -371,14 +371,6 @@ CLEAN="rm -f ok caca"
 TEST=
   echo "ls > ok > caca"
 [41-END]
-
-[42]
-NAME="Globing"
-SETUP=""
-CLEAN=""
-TEST=
-  echo "cat ../src/*.c"
-[42-END]
 
 [43]
 NAME="SIGFPE and SIGSEGV error messages"
