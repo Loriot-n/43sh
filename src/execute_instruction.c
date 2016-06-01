@@ -46,8 +46,8 @@ void	ft_execute_instr_fork_2(t_shell *shell,
   waitpid(pid, &status, WUNTRACED);
   close(tube[1]);
   sig_handler(status);
-  (WIFEXITED(status)) ?
-    (shell->res_exec = WEXITSTATUS(status)) 0 : (shell->res_exec = -1);
+  // (WIFEXITED(status)) ?
+  //   (shell->res_exec = WEXITSTATUS(status)) 0 : (shell->res_exec = -1);
   close(shell->fd_in);
   shell->fd_in = dup(tube[0]);
   close(tube[0]);

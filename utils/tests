@@ -407,3 +407,11 @@ TEST=
   echo "alias l ls -la"
   echo "unalias l"
 [47-END]
+
+[48]
+NAME="Magic quotes"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "ls `echo $HOME`"
+[48-END]
