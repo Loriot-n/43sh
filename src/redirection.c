@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 13:59:30 2016 CUENAT
-** Last update Tue May 31 17:26:53 2016 CUENAT
+** Last update Wed Jun  1 16:07:23 2016 CUENAT
 */
 
 #include "shell.h"
@@ -25,7 +25,7 @@ void	ft_double_inredirect(char *file)
 
 }
 
-void	ft_inredirect(char *file)
+void	ft_inredirect(char *file, int fd_in)
 {
   int fd0;
 
@@ -34,7 +34,7 @@ void	ft_inredirect(char *file)
       dprintf(2, "%s: %s\n",file, strerror(errno));
       return ;
     }
-  dup2(fd0, STDIN_FILENO);
+  dup2(fd0, 0);
   close(fd0);
 }
 
