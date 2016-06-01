@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Tue May 31 23:30:48 2016 CUENAT
+** Last update Wed Jun  1 13:29:26 2016 CUENAT
 */
 
 #include "shell.h"
@@ -115,10 +115,10 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
   int	i;
 
   i = 0;
-  shell->res_exec = 0;
   if (tmp->separator == NO || (tmp->separator == AND && shell->res_exec == 0)
-      || (tmp->separator == OR && shell->res_exec == -1))
+      || (tmp->separator == OR && shell->res_exec != 0))
     {
+      shell->res_exec = 0;
       shell->fd_in = dup(0);
       while (tmp->exec_cmd[i])
 	{
