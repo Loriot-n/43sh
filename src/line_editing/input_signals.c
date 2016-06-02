@@ -30,7 +30,25 @@ int		end_of_file(t_raw *raw, char *ch, int *enter, int *move)
 
 int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
 {
-  return (BELL);
+  char		**pros;
+  char		**tmp;
+  char		*path;
+
+  if (!raw->line->input->buffer || !raw->line->input->buffer[0])
+    return (BELL);
+  tmp = split(raw->beg, " ;&|");
+  path = strdup(".");
+  if (tab_len(tmp) == 1 || is_sep(tmp[tab_len(tmp) - 1]) == 1)
+    path = get_env(g_shell, "PATH");
+  pros = autocomplete(tmp[tab_len(tmp) - 1], path, DT_REG);
+  if (!pros)
+    return (BELL);
+  (raw->complete - 1 >=  tab_len(pros)) ? raw->complete = 1 : 0;
+  tmp[tab_len(tmp) - 1] = strdup(pros[raw->complete - 1]);
+  raw->line->input->buffer = epur(tab_join(' ', tmp));
+  raw->line->input->len = strlen(raw->line->input->buffer);
+  raw->line->cursor = strlen(raw->line->input->buffer);
+  return (SUCCESS);
 }
 
 int		carriage_ret(t_raw *raw, char *ch, int *enter, int *move)

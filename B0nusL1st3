@@ -1,8 +1,0 @@
-unsetenv *
-source .42shrc
-.42shrc:
-    alias
-    export
-gestion des variables d'env: ls $HOME
-concaténation des variables d'env: ls $HOME/rendu
-./42sh -c 'ls -a'

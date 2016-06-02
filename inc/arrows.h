@@ -61,6 +61,8 @@ typedef struct		s_raw
   char			*buffer;
   char			*rd;
   int			safe;
+  unsigned int		complete;
+  char			*beg;
 }			t_raw;
 
 typedef enum		s_status

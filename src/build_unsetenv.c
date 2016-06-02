@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Wed Jun  1 13:10:51 2016 CUENAT
 */
 
 #include "shell.h"
@@ -33,13 +33,13 @@ static int	check(t_shell *shell)
   return (1);
 }
 
-void	ft_unsetenv(t_shell *shell)
+int	ft_unsetenv(t_shell *shell)
 {
   int	i;
   int	j;
 
   if ((i = 1) && check(shell) == -1)
-    return ;
+    return (-1);
   while (shell->cur_exec[i])
     {
       j = 0;
@@ -58,4 +58,5 @@ void	ft_unsetenv(t_shell *shell)
 	}
       i++;
     }
+  return (0);
 }

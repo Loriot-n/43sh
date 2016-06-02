@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 17:31:57 2016 CUENAT
+** Last update Thu Jun  2 15:03:16 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -26,6 +26,7 @@
 #include <limits.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <dirent.h>
 #include <glob.h>
 #include <ncurses.h>
 #include "shell_struct.h"
@@ -44,6 +45,9 @@
 #ifndef NO
 # define NO 0
 #endif
+
+typedef struct dirent t_dir;
+t_shell *g_shell;
 
 /*
 ** START ----- FILL STRUCT ----- START
@@ -71,6 +75,7 @@ int	ft_create_sub_list(t_shell *shell);
 */
 void	ft_free_struct(t_shell *shell);
 void	ft_free_tab(char **tab);
+
 /*
 ** END ----- FILL STRUCT ----- END
 */
@@ -142,7 +147,7 @@ void	ctrl(int sig);
 */
 int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
 int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
-int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
+int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in);
 
 /*
 ** choose_type_execution.c
@@ -155,7 +160,7 @@ int	ft_is_a_build_in(char *cmd);
 */
 void	ft_write_at_end(char *file);
 void	ft_rewrite(char *file);
-void	ft_inredirect(char *file);
+void	ft_inredirect(char *file, int fd_in);
 void	ft_double_inredirect(char *file);
 
 /*
@@ -166,6 +171,13 @@ int	ft_look_dot(char **tab, int i);
 int	ft_look_and(char **tab, int i);
 int	ft_look_or(char **tab, int i);
 int	ft_look_bad_tkn(char *word, char *tkn);
+
+/*
+** check_input2.c
+*/
+int	ft_check_redirect(char **tab, int i);
+int	ft_check_input_redirect(char **tab, int i);
+
 
 /*
 ** END ----- PARSE / UTILS STRING ----- END
@@ -182,9 +194,6 @@ void	parse_options(t_shell *shell, char *file);
 char	*replace_env(t_shell *shell, char *line);
 char	*get_env(t_shell *shell, char *var);
 
-void	ft_env(t_shell *shell);
-
-void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */
@@ -224,4 +233,8 @@ void		append_history(char *value);
 /*
 ** END ------- HISTORY --------- END
 */
+
+char	**autocomplete(char *begin, char *path, int check);
+int	is_sep(char *sep);
+
 #endif /*!SHELL_H_*/

@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 12:36:39 2016 Nicolas Loriot
-** Last update Thu Jun 02 13:06:14 2016 Nicolas Loriot
+** Last update Thu Jun 02 18:22:32 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -51,8 +51,6 @@ void		read_mode(t_raw *raw, int state)
 
 int		draw_next_line(t_raw *raw, int multi, int enter)
 {
-  int		actual;
-
   if (enter == 1 && multi == 0)
     return (0);
   if (multi >= 1 && raw->line->input->len < raw->term->ws.ws_col)
@@ -81,7 +79,7 @@ void		redraw(t_raw *raw, int change, int enter)
     dprintf(raw->term->fd, C_CUR_MOVE_BACK, raw->line->oldcursor);
   if (!change)
     {
-      if (multi = draw_next_line(raw, multi, enter))
+      if ((multi = (draw_next_line(raw, multi, enter))))
 	return ;
       dprintf(raw->term->fd, C_LN_CLEAR_LINE, 0);
       dprintf(raw->term->fd, "%s", raw->line->input->buffer);

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 15:52:42 2016 CUENAT
-** Last update Mon May 30 16:11:07 2016 CUENAT
+** Last update Thu Jun  2 18:17:14 2016 CUENAT
 */
 
 #include "shell.h"
@@ -63,19 +63,26 @@ void	ft_print_echo(t_shell *shell, int i)
   if (ft_check_token_start("'\"`", shell->cur_exec[i][0]) == 0)
     {
       write(shell->fd_in, &shell->cur_exec[i][1],
-	    strlen(&shell->cur_exec[i][1]) - 1);
+	    strlen(&shell->cur_exec[i][1]));
     }
   else
-    printf("%s", shell->cur_exec[i]);
+    write(1, shell->cur_exec[i], strlen(shell->cur_exec[i]));
   if (shell->cur_exec[i + 1] != NULL)
-    printf(" ");
+    write(1, " ", 1);
 }
 
-void	ft_echo(t_shell *shell)
+int	ft_echo(t_shell *shell)
 {
   int	i;
+  int	n;
 
   i = 1;
+  n = 0;
+  if (shell->cur_exec[1] != NULL && strcmp(shell->cur_exec[1], "-n") == 0)
+    {
+      n = 1;
+      i = 2;
+    }
   if (shell->cur_exec[1] == NULL)
     printf("\n");
   else
@@ -88,7 +95,7 @@ void	ft_echo(t_shell *shell)
 	      i += 1;
 	    }
 	}
-      printf("\n");
+      (n == 0) ? (write(1, "\n", 1)) : 0;
     }
-  return ;
+  return (0);
 }

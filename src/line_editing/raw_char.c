@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Thu Jun 02 13:15:00 2016 Nicolas Loriot
+** Last update Thu Jun 02 18:20:21 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -31,7 +31,14 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
   while (val[i] && val[i] != ch[0])
     i++;
   if (i < 7)
-    return (f[i](raw, ch, enter, move));
+    {
+      raw->complete = (i == 2) ? raw->complete + 1 : 0;
+      if (i == 2)
+	(!raw->beg) ? raw->beg = strdup(raw->line->input->buffer) : 0;
+      else
+	raw->beg = NULL;
+      return (f[i](raw, ch, enter, move));
+    }
   else
     return (BELL);
 }
@@ -52,8 +59,14 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
       raw->line->oldcursor = raw->line->cursor;
       if (read(0, raw->rd, 10) < 0)
 	continue ;
-      (raw->rd[0] > 31 && raw->rd[0] < 127) ? err = insert_char
-	(raw, raw->rd[0]) : (err = get_std_escape(raw, raw->rd, enter, move));
+      if (raw->rd[0] > 31 && raw->rd[0] < 127)
+	{
+	  err = insert_char(raw, raw->rd[0]);
+	  raw->complete = 0;
+	  raw->beg = NULL;
+	}
+      else
+	err = get_std_escape(raw, raw->rd, enter, move);
       (err != SUCCESS) ? (input_error(err)) : (0);
       if (err == ERROR && raw->line->input->buffer[0] == 0)
 	return ;
