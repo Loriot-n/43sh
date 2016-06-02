@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Tue May 31 17:31:57 2016 CUENAT
+** Last update Wed Jun  1 16:06:29 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -75,6 +75,7 @@ int	ft_create_sub_list(t_shell *shell);
 */
 void	ft_free_struct(t_shell *shell);
 void	ft_free_tab(char **tab);
+
 /*
 ** END ----- FILL STRUCT ----- END
 */
@@ -146,7 +147,7 @@ void	ctrl(int sig);
 */
 int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
 int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
-int	ft_redirect_or_pipe(t_shell *shell, char *tkn);
+int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in);
 
 /*
 ** choose_type_execution.c
@@ -159,7 +160,7 @@ int	ft_is_a_build_in(char *cmd);
 */
 void	ft_write_at_end(char *file);
 void	ft_rewrite(char *file);
-void	ft_inredirect(char *file);
+void	ft_inredirect(char *file, int fd_in);
 void	ft_double_inredirect(char *file);
 
 /*
@@ -186,9 +187,6 @@ void	parse_options(t_shell *shell, char *file);
 char	*replace_env(t_shell *shell, char *line);
 char	*get_env(t_shell *shell, char *var);
 
-void	ft_env(t_shell *shell);
-
-void	ft_source(t_shell *shell);
 /*
 ** END ----- LAUNCH / CHECK/ SHELL ----- END
 */

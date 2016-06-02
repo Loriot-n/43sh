@@ -33,6 +33,10 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
   if (i < 7)
     {
       raw->complete = (i == 2) ? raw->complete + 1 : 0;
+      if (i == 2)
+	(!raw->beg) ? raw->beg = strdup(raw->line->input->buffer) : 0;
+      else
+	raw->beg = NULL;
       return (f[i](raw, ch, enter, move));
     }
   else

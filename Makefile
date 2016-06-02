@@ -57,6 +57,7 @@ SRCS	=	src/main.c \
 		src/autocomplete.c \
 		src/magic_quotes.c \
 		src/raw_free.c \
+		src/tabulation.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

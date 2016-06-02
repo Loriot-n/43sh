@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Tue May 31 15:29:22 2016 CUENAT
+** Last update Wed Jun  1 13:07:20 2016 CUENAT
 */
 
 #include "shell.h"
@@ -74,12 +74,13 @@ int	st_check(t_shell *shell, char **cur_exec)
   return (1);
 }
 
-void	ft_setenv(t_shell *shell)
+int 	ft_setenv(t_shell *shell)
 {
   int	i;
 
   if (st_check(shell, shell->cur_exec) == -1)
-    return ;
+    return -1;
+      ;
   i = 0;
   while (shell->env[i] && (strncmp(shell->env[i], shell->cur_exec[1],
 				  strlen(shell->cur_exec[1])) != 0 ||
@@ -89,4 +90,5 @@ void	ft_setenv(t_shell *shell)
     add_env(shell, shell->cur_exec);
   else
     modify_env(shell, shell->cur_exec, i);
+  return (0);
 }

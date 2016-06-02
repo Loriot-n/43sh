@@ -5,12 +5,12 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Tue May 31 23:40:42 2016 CUENAT
+** Last update Wed Jun  1 16:06:49 2016 CUENAT
 */
 
 #include "shell.h"
 
-int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
+int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in)
 {
    if (tkn != NULL)
 	{
@@ -19,7 +19,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn)
 	  else if (strcmp(tkn, ">>") == 0)
 	    ft_write_at_end(shell->file);
 	  else if (strcmp(tkn, "<") == 0)
-	    ft_inredirect(shell->file);
+	    ft_inredirect(shell->file, fd_in);
 	  else if (strcmp(tkn, "<<") == 0)
 	    ft_double_inredirect(shell->file);
 	}
@@ -43,11 +43,12 @@ void	ft_execute_instr_fork_2(t_shell *shell,
 {
   int	status;
 
+  status = 0;
   waitpid(pid, &status, WUNTRACED);
-  close(tube[1]);
   sig_handler(status);
-  // (WIFEXITED(status)) ?
-  //   (shell->res_exec = WEXITSTATUS(status)) 0 : (shell->res_exec = -1);
+  if (WIFEXITED(status) && status != 0)
+    shell->res_exec = 1;
+  close(tube[1]);
   close(shell->fd_in);
   shell->fd_in = dup(tube[0]);
   close(tube[0]);
@@ -68,7 +69,7 @@ int		ft_final_exec(t_shell *shell, char *tkn)
 	{
 	  dup2(shell->fd_in, 0);
 	  close(tube[0]);
-	  ft_redirect_or_pipe(shell, tkn);
+	  ft_redirect_or_pipe(shell, tkn, shell->fd_in);
 	  close(tube[1]);
 	  exit(EXIT_FAILURE);
 	}
@@ -97,8 +98,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	  close(tube[0]);
 	  if (end == 0)
 	    dup2(tube[1], 1);
-	  ft_redirect_or_pipe(shell, tkn);
-	  exit(EXIT_FAILURE);
+	  exit(ft_redirect_or_pipe(shell, tkn, shell->fd_in));
 	}
       else
 	  ft_execute_instr_fork_2(shell, tube, pid);
@@ -110,7 +110,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
-  void	(*ptr[8])(t_shell *shell);
+  int	(*ptr[8])(t_shell *shell);
   int  	i;
 
   ptr[0] = &ft_exit;

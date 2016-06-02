@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 15:52:42 2016 CUENAT
-** Last update Mon May 30 16:11:07 2016 CUENAT
+** Last update Wed Jun  1 13:09:31 2016 CUENAT
 */
 
 #include "shell.h"
@@ -71,7 +71,7 @@ void	ft_print_echo(t_shell *shell, int i)
     printf(" ");
 }
 
-void	ft_echo(t_shell *shell)
+int	ft_echo(t_shell *shell)
 {
   int	i;
 
@@ -90,5 +90,5 @@ void	ft_echo(t_shell *shell)
 	}
       printf("\n");
     }
-  return ;
+  return (0);
 }
