@@ -235,5 +235,6 @@ void		append_history(char *value);
 */
 
 char	**autocomplete(char *begin, char *path, int check);
+int	is_sep(char *sep);
 
 #endif /*!SHELL_H_*/

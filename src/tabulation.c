@@ -41,3 +41,11 @@ char	*get_beg(char *line)
   ft_free_tab(tmp);
   return (one);
 }
+
+int	is_sep(char *sep)
+{
+  if (strcmp(sep, "&&") == 0 || strcmp(sep, "||") == 0 ||
+      strcmp(sep, ";") == 0)
+    return (1);
+  return (0);
+}

@@ -64,6 +64,7 @@ void		get_raw_input(t_raw *raw)
 	{
 	  err = insert_char(raw, raw->rd[0]);
 	  raw->complete = 0;
+	  raw->beg = NULL;
 	}
       else
 	err = get_std_escape(raw, raw->rd, enter, move);
