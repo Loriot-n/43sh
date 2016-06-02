@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Thu Jun  2 14:58:24 2016 CUENAT
+** Last update Thu Jun  2 15:16:30 2016 CUENAT
 */
 
 #include "shell.h"
@@ -27,7 +27,7 @@ int	ft_look_and(char **tab, int i)
 {
   if (tab[i][0] ==  '&')
     {
-      if (tab[i + 1] == NULL)
+      if (tab[i + 1] == NULL && tab_len(tab) > 1)
 	return (-1);
       else if (i != 0 && (strchr(tab[i - 1], '&') != NULL
 	       || strchr(tab[i - 1], '|') != NULL
