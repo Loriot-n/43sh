@@ -35,7 +35,6 @@ int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
   if (!raw->line->input->buffer)
     return (BELL);
   tmp = split(raw->beg, " ;&|");
-  beg = tmp[tab_len(tmp) - 1];
   path = strdup(".");
   if (tab_len(tmp) == 1)
     path = get_env(g_shell, "PATH");
