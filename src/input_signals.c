@@ -30,7 +30,6 @@ int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
 {
   char		**pros;
   char		**tmp;
-  char		*beg;
   char		*path;
 
   if (!raw->line->input->buffer)
