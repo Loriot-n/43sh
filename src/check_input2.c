@@ -5,10 +5,24 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Wed Jun  1 21:45:11 2016 CUENAT
+** Last update Thu Jun  2 15:04:57 2016 CUENAT
 */
 
 #include "shell.h"
+
+int	ft_check_input_redirect(char **tab, int i)
+{
+  if (strcmp(tab[i], "<") == 0 || strcmp(tab[i], "<<") == 0)
+    {
+      if (i - 2 >= 0  && (strcmp(tab[i - 2], "|") == 0
+			  || strcmp(tab[i - 2], "<") == 0
+			  || strcmp(tab[i - 1], "<<") == 0))
+	return (-1);
+      else if (tab[i + 1] == NULL)
+	return (-1);
+    }
+  return (0);
+}
 
 int	ft_check_redirect(char **tab, int i)
 {

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Thu Jun  2 14:46:47 2016 CUENAT
+** Last update Thu Jun  2 14:58:24 2016 CUENAT
 */
 
 #include "shell.h"
@@ -27,13 +27,11 @@ int	ft_look_and(char **tab, int i)
 {
   if (tab[i][0] ==  '&')
     {
-      if (i == 0)
+      if (tab[i + 1] == NULL)
 	return (-1);
-      if (strlen(tab[i]) > 2 || i == 0 || tab[i + 1] == NULL)
-	return (-1);
-      else if (strchr(tab[i - 1], '&') != NULL
+      else if (i != 0 && (strchr(tab[i - 1], '&') != NULL
 	       || strchr(tab[i - 1], '|') != NULL
-	       || strchr(tab[i - 1], ';') != NULL)
+			  || strchr(tab[i - 1], ';') != NULL))
 	return (-1);
     }
   return (0);
@@ -98,6 +96,11 @@ int	ft_check_input(char *line)
       if (ft_check_redirect(tab, i) == -1)
 	{
 	  dprintf(2, "Ambiguous output redirect.\n");
+	  return (-1);
+	}
+       if (ft_check_input_redirect(tab, i) == -1)
+	{
+	  dprintf(2, "Ambiguous input redirect.\n");
 	  return (-1);
 	}
       i += 1;

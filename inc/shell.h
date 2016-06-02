@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu Jun  2 12:27:25 2016 CUENAT
+** Last update Thu Jun  2 15:03:16 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -176,6 +176,7 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 ** check_input2.c
 */
 int	ft_check_redirect(char **tab, int i);
+int	ft_check_input_redirect(char **tab, int i);
 
 
 /*
