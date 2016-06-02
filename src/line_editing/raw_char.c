@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Thu Jun 02 18:20:21 2016 Nicolas Loriot
+** Last update Thu Jun 02 18:46:06 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -71,7 +71,7 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
       if (err == ERROR && raw->line->input->buffer[0] == 0)
 	return ;
       redraw(raw, *move, *enter);
-      (raw->history->index > 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
+      (raw->history->index >= 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
       free(raw->rd);
     }
   free(move);

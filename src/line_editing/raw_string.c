@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 15:20:40 2016 Nicolas Loriot
-** Last update Tue May 31 15:20:18 2016 Nicolas Loriot
+** Last update Thu Jun 02 18:42:00 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -30,7 +30,6 @@ void		set_line(t_raw *raw, char *str, int cursor)
   int		len;
 
   len = strlen(str);
-
   raw->line->input->buffer = raw_realloc(raw->line->input->buffer, len + 1);
   strncpy(raw->line->input->buffer, str, len);
   raw->line->input->buffer[len] = 0;
@@ -42,9 +41,22 @@ void		set_line(t_raw *raw, char *str, int cursor)
 
 int		insert_char(t_raw *raw, char ch)
 {
+  int		len;
+  int		cur;
+  char		*tmp;
+
   assert(raw->safe);
+  cur = raw->line->cursor;
   raw->line->input->len++;
-  raw->line->input->buffer = add_char(raw->line->input->buffer, ch);
+  len = raw->line->input->len;
+  tmp = raw_alloc(len + 1);
+  memcpy(tmp, raw->line->input->buffer, cur);
+  tmp[cur] = ch;
+  memcpy(tmp + cur + 1, raw->line->input->buffer + cur, len - cur - 1);
+  tmp[len] = 0;
+  raw->line->input->buffer = raw_realloc(raw->line->input->buffer, len + 1);
+  memcpy(raw->line->input->buffer, tmp, len + 1);
+  free(tmp);
   raw->line->cursor++;
   return (SUCCESS);
 }
