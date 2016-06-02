@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Fri May 27 12:08:05 2016 Nicolas Loriot
-** Last update Tue May 31 21:22:20 2016 Nicolas Loriot
+** Last update Thu Jun 02 12:47:18 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -25,8 +25,10 @@ t_raw		*init_raw(char *to_send)
   new->line->input->len = 0;
   new->line->oldcursor = 0;
   new->line->cursor = 0;
+  new->term->nb_line = 0;
   new->term->fd = STDIN_FILENO;
   new->term->mode = 0;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &new->term->ws);
   tcgetattr(0, &new->term->origin);
   new->complete = 0;
   new->beg = NULL;
@@ -36,15 +38,55 @@ t_raw		*init_raw(char *to_send)
   return (new);
 }
 
+int		set_hist(t_raw *raw, int set, int size)
+{
+  if (size <= 0)
+    return (-1);
+  if (set)
+    raw->history = new_hist(size);
+  else
+    {
+      free_hist(raw->history);
+      free(raw->history);
+    }
+  return (0);
+}
+
+t_hist		*init_hist(t_raw *raw)
+{
+  t_hist	*hist;
+  int		i;
+
+  i = 0;
+  hist = new_hist(raw->history->max - 1);
+  while (i < raw->history->len)
+    {
+      hist->tab[i] = raw_strdup(raw->history->tab[i]);
+      i++;
+    }
+  hist->len = raw->history->len;
+  return (hist);
+}
+
 char		*get_line(t_raw *raw, char *prompt)
 {
+  t_hist	*hist;
+
   set_line(raw, "", 0);
+  raw->history->index = -1;
   raw->line->prompt->buffer = prompt;
   raw->line->prompt->len = strlen(raw->line->prompt->buffer);
   write(1, raw->line->prompt->buffer, strlen(prompt));
-  get_raw_input(raw);
+  hist = init_hist(raw);
+  read_mode(raw, 1);
+  get_raw_input(raw, hist);
   read_mode(raw, 0);
   write(1, "\n", 1);
+  if (strlen(raw->line->input->buffer))
+    hist_add_str(raw, raw->line->input->buffer);
+  /* free_hist(raw->history); */
+  /* free(raw->history); */
+  raw->history = hist;
   raw->buffer = raw_strdup(raw->line->input->buffer);
   return (raw->buffer);
 }
@@ -52,6 +94,5 @@ char		*get_line(t_raw *raw, char *prompt)
 void		input_error(int err)
 {
   if (err == BELL)
-    dprintf(STDERR_FILENO, C_BELL);
-  ioctl(STDERR_FILENO, I_FLUSH, FLUSHR);
+    write(2, "\a", 1);
 }

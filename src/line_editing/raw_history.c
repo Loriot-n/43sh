@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Tue May 31 20:59:47 2016 Nicolas Loriot
+** Last update Thu Jun 02 18:17:59 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -53,7 +53,38 @@ void		hist_add_str(t_raw *raw, char *str)
     {
       if (raw->history->len >= raw->history->max)
 	free(raw->history->tab[raw->history->max - 1]);
+      raw_memmove(raw->history->tab + 1, raw->history->tab, sizeof(char *) *
+		  (raw->history->max - 1));
+      raw->history->index = 0;
+      raw->history->len++;
+      if (raw->history->len > raw->history->max)
+	raw->history->len = raw->history->max;
+      raw->history->tab[0] = NULL;
     }
+  if (raw->history->index > -1)
+    free(raw->history->tab[raw->history->index]);
+  raw->history->tab[raw->history->index] = raw_strdup(str);
+}
+
+int		raw_hist_move(t_raw *raw, int move)
+{
+  if (raw->history->index + move < -1 ||
+      raw->history->index + move >= raw->history->len)
+    return (BELL);
+  if (raw->history->index < 0)
+    {
+      free(raw->history->original);
+      raw->history->original = raw_strdup(raw->line->input->buffer);
+    }
+  free(raw->line->input->buffer);
+  raw->history->index += move;
+  if (raw->history->index < 0)
+    raw->line->input->buffer = raw_strdup(raw->history->original);
+  else
+    raw->line->input->buffer =
+      raw_strdup(raw->history->tab[raw->history->index]);
+  raw->line->input->len = strlen(raw->line->input->buffer);
+  return (SUCCESS);
 }
 
 t_hist		*hist_cpy(t_raw *raw)
