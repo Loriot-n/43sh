@@ -1,11 +1,11 @@
 /*
 ** raw_history.c for 42sh in /home/nico/rendu/S02/Unix/PSU_2015_42sh/src
-** 
+**
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-** 
+**
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Thu Jun 02 19:29:18 2016 Nicolas Loriot
+** Last update Thu Jun  2 20:25:09 2016 CUENAT
 */
 
 #include "shell.h"
@@ -31,7 +31,7 @@ void		free_hist(t_hist *hist)
   int		i;
 
   i = 0;
-  while (hist->tab[i])
+  while (hist->tab && hist->tab[i])
     free(hist->tab[i++]);
   free(hist->tab);
   free(hist->buffer);
@@ -86,4 +86,3 @@ int		raw_hist_move(t_raw *raw, int move)
   raw->line->input->len = strlen(raw->line->input->buffer);
   return (SUCCESS);
   }
-

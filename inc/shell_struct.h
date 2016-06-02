@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Mon May 30 20:05:04 2016 CUENAT
+** Last update Thu Jun  2 21:57:46 2016 CUENAT
 */
 
 #ifndef SHELL_STRUCT_H_
@@ -40,6 +40,7 @@ typedef struct		s_shell
   int			res_exec;
   int			isa_tty;
   int			exit;
+  int			nb_fork;
 }			t_shell;
 
 #endif /* !SHELL_STRUCT_H_ */

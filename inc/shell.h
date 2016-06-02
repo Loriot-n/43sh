@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Thu Jun  2 15:03:16 2016 CUENAT
+** Last update Thu Jun  2 22:05:55 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -148,6 +148,7 @@ void	ctrl(int sig);
 int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
 int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in);
+void	ft_execute_instr_fork_2(t_shell *shell);
 
 /*
 ** choose_type_execution.c
