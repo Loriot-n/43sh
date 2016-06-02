@@ -30,8 +30,9 @@ void		set_line(t_raw *raw, char *str, int cursor)
   int		len;
 
   len = strlen(str);
+
   raw->line->input->buffer = raw_realloc(raw->line->input->buffer, len + 1);
-  memcpy(raw->line->input->buffer, str, len);
+  strncpy(raw->line->input->buffer, str, len);
   raw->line->input->buffer[len] = 0;
   raw->line->input->len = len;
   raw->line->cursor = cursor;

@@ -28,24 +28,25 @@ int		end_of_file(t_raw *raw, char *ch, int *enter, int *move)
 
 int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
 {
-  char		*line;
   char		**pros;
-  char		*tmp;
+  char		**tmp;
+  char		*path;
 
-  line = strdup(raw->line->input->buffer);
-  tmp = strdup(get_env(g_shell, "PATH"));
-  if (!tmp)
-    tmp = strdup("/bin");
-  pros = autocomplete(line, tmp, DT_REG);
-  *move = 0;
-  if (!pros || !pros[0])
+  if (!raw->line->input->buffer)
     return (BELL);
-  free(tmp);
-  set_line(raw, pros[0], strlen(pros[0]));
-  tmp = raw->line->input->buffer;
-  raw->line->input->buffer = strdup(pros[0]);
-  free(tmp);
-  return (BELL);
+  tmp = split(raw->beg, " ;&|");
+  path = strdup(".");
+  if (tab_len(tmp) == 1)
+    path = get_env(g_shell, "PATH");
+  pros = autocomplete(tmp[tab_len(tmp) - 1], path, DT_REG);
+  if (!pros)
+    return (BELL);
+  (raw->complete - 1 >=  tab_len(pros)) ? raw->complete = 1 : 0;
+  tmp[tab_len(tmp) - 1] = strdup(pros[raw->complete - 1]);
+  raw->line->input->buffer = epur(tab_join(' ', tmp));
+  raw->line->input->len = strlen(raw->line->input->buffer);
+  raw->line->cursor = strlen(raw->line->input->buffer);
+  return (SUCCESS);
 }
 
 int		carriage_ret(t_raw *raw, char *ch, int *enter, int *move)

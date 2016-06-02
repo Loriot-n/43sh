@@ -55,7 +55,7 @@ char	**autocomplete(char *begin, char *path, int check)
 	      ent->d_type == check)
 	    answer = add_string(answer, ent->d_name);
 	}
-      j = (one[j + 1]) ? 2 : 1;
+      j += (one[j + 1]) ? 2 : 1;
       closedir(dir);
     }
   ft_free_tab(one);
