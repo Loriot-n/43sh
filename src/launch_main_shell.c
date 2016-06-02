@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Thu Jun 02 18:21:26 2016 Nicolas Loriot
+** Last update Thu Jun 02 19:28:02 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -60,6 +60,8 @@ int	ft_launch_shell(t_shell *shell)
 	  ft_free_struct(shell);
 	}
       ft_free_tab(shell->path);
+      if (strlen(raw->line->input->buffer))
+	hist_add_str(raw, raw->line->input->buffer);
       free(line);
     }
   raw_free(raw);

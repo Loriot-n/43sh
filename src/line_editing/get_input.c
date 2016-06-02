@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Fri May 27 12:08:05 2016 Nicolas Loriot
-** Last update Thu Jun 02 12:47:18 2016 Nicolas Loriot
+** Last update Thu Jun 02 19:27:01 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -82,8 +82,6 @@ char		*get_line(t_raw *raw, char *prompt)
   get_raw_input(raw, hist);
   read_mode(raw, 0);
   write(1, "\n", 1);
-  if (strlen(raw->line->input->buffer))
-    hist_add_str(raw, raw->line->input->buffer);
   /* free_hist(raw->history); */
   /* free(raw->history); */
   raw->history = hist;

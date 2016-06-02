@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Thu Jun 02 18:17:59 2016 Nicolas Loriot
+** Last update Thu Jun 02 19:29:18 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -53,7 +53,7 @@ void		hist_add_str(t_raw *raw, char *str)
     {
       if (raw->history->len >= raw->history->max)
 	free(raw->history->tab[raw->history->max - 1]);
-      raw_memmove(raw->history->tab + 1, raw->history->tab, sizeof(char *) *
+      memmove(raw->history->tab + 1, raw->history->tab, sizeof(char *) *
 		  (raw->history->max - 1));
       raw->history->index = 0;
       raw->history->len++;
@@ -85,9 +85,5 @@ int		raw_hist_move(t_raw *raw, int move)
       raw_strdup(raw->history->tab[raw->history->index]);
   raw->line->input->len = strlen(raw->line->input->buffer);
   return (SUCCESS);
-}
+  }
 
-t_hist		*hist_cpy(t_raw *raw)
-{
-  return (NULL);
-}

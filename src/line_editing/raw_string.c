@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 15:20:40 2016 Nicolas Loriot
-** Last update Thu Jun 02 18:42:00 2016 Nicolas Loriot
+** Last update Thu Jun 02 19:08:31 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -45,7 +45,6 @@ int		insert_char(t_raw *raw, char ch)
   int		cur;
   char		*tmp;
 
-  assert(raw->safe);
   cur = raw->line->cursor;
   raw->line->input->len++;
   len = raw->line->input->len;
