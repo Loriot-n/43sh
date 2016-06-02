@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Tue May 31 21:23:41 2016 Nicolas Loriot
+** Last update Thu Jun 02 12:28:34 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -42,6 +42,7 @@ int	ft_launch_shell(t_shell *shell)
 
   signal(SIGINT, ctrl);
   raw = init_raw("exit");
+  set_hist(raw, 1, 2);
   while (((shell->isa_tty == 1 &&
 	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
     {

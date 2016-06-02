@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Tue May 31 21:10:59 2016 Nicolas Loriot
+## Last update Thu Jun 02 12:01:54 2016 Nicolas Loriot
 ##
 
 NAME	=	42sh
@@ -46,19 +46,20 @@ SRCS	=	src/main.c \
 		src/check_input2.c \
 		src/globing.c \
 		src/cmd_history.c \
-		src/get_input.c \
-		src/raw_char.c \
-		src/raw_history.c \
-		src/raw_string.c \
-		src/raw_utils.c \
-		src/escape_char.c \
-		src/extended_esc.c \
-		src/input_signals.c \
-		src/raw_free.c \
+		src/line_editing/get_input.c \
+		src/line_editing/raw_char.c \
+		src/line_editing/raw_history.c \
+		src/line_editing/raw_string.c \
+		src/line_editing/raw_utils.c \
+		src/line_editing/escape_char.c \
+		src/line_editing/extended_esc.c \
+		src/line_editing/input_signals.c \
+		src/line_editing/raw_memfunc.c \
+		src/line_editing/raw_free.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter -lncurses
+CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter
 
 all:		$(NAME)
 

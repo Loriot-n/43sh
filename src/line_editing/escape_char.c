@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 21:27:30 2016 Nicolas Loriot
-** Last update Tue May 31 16:14:09 2016 Nicolas Loriot
+** Last update Thu Jun 02 12:15:11 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -35,12 +35,20 @@ int		right_arrow(t_raw *raw, char *ch, int *enter, int *move)
 
 int		down_arrow(t_raw *raw, char *ch, int *enter, int *move)
 {
-  return (BELL);
+  int		err;
+
+  err = raw_hist_move(raw, -1);
+  raw->line->cursor = raw->line->input->len;
+  return (err);
 }
 
 int		up_arrow(t_raw *raw, char *ch, int *enter, int *move)
 {
-  return (BELL);
+  int		err;
+
+  err = raw_hist_move(raw, 1);
+  raw->line->cursor = raw->line->input->len;
+  return (err);
 }
 
 int		get_escape(t_raw *raw, char *ch, int *enter, int *move)

@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Tue May 31 21:15:19 2016 Nicolas Loriot
+** Last update Thu Jun 02 13:15:00 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -36,7 +36,7 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
     return (BELL);
 }
 
-void		get_raw_input(t_raw *raw)
+void		get_raw_input(t_raw *raw, t_hist *hist)
 {
   int		*enter;
   int		err;
@@ -44,24 +44,23 @@ void		get_raw_input(t_raw *raw)
 
   enter = raw_alloc(sizeof(int));
   move = raw_alloc(sizeof(int));
-  *move = 0;
-  read_mode(raw, 1);
   *enter = 0;
   while (!*enter)
     {
+      *move = 0;
       raw->rd = raw_alloc(sizeof(char) * 10);
       raw->line->oldcursor = raw->line->cursor;
       if (read(0, raw->rd, 10) < 0)
 	continue ;
-      if (raw->rd[0] > 31 && raw->rd[0] < 127)
-	err = insert_char(raw, raw->rd[0]);
-      else
-	err = get_std_escape(raw, raw->rd, enter, move);
+      (raw->rd[0] > 31 && raw->rd[0] < 127) ? err = insert_char
+	(raw, raw->rd[0]) : (err = get_std_escape(raw, raw->rd, enter, move));
       (err != SUCCESS) ? (input_error(err)) : (0);
-      redraw(raw, *move);
+      if (err == ERROR && raw->line->input->buffer[0] == 0)
+	return ;
+      redraw(raw, *move, *enter);
+      (raw->history->index > 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
       free(raw->rd);
     }
   free(move);
   free(enter);
-  read_mode(raw, 0);
 }
