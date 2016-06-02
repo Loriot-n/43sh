@@ -72,7 +72,7 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
 	return ;
       redraw(raw, *move, *enter);
       (raw->history->index >= 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
-      free(raw->rd);
+      // free(raw->rd);
     }
   free_hist(raw->history);
   free(move);
