@@ -415,3 +415,11 @@ CLEAN=""
 TEST=
   echo "ls `echo $HOME`"
 [48-END]
+
+[49]
+NAME="Globing"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "cat src/*.c"
+[49-END]
