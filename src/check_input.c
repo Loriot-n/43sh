@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Mon May 23 10:34:14 2016 CUENAT
+** Last update Thu Jun  2 14:32:32 2016 CUENAT
 */
 
 #include "shell.h"
@@ -14,9 +14,7 @@ int	ft_look_dot(char **tab, int i)
 {
   if (tab[i][0] ==  ';')
     {
-      if (strlen(tab[i]) > 1 || i == 0)
-	return (-1);
-      else if (strchr(tab[i - 1], '&') != NULL
+      if (strchr(tab[i - 1], '&') != NULL
 	       || strchr(tab[i - 1], '|') != NULL)
 	return (-1);
     }
@@ -90,7 +88,12 @@ int	ft_check_input(char *line)
 	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
 	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
-	  printf("Bad token at word %d \"%s\"\n", i, tab[i]);
+	  dprintf(2, "Bad token at word %d \"%s\"\n", i, tab[i]);
+	  return (-1);
+	}
+      if (ft_check_redirect(tab, i) == -1)
+	{
+	  dprintf(2, "Ambiguous output redirect.\n");
 	  return (-1);
 	}
       i += 1;
