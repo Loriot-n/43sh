@@ -32,11 +32,11 @@ int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
   char		**tmp;
   char		*path;
 
-  if (!raw->line->input->buffer)
+  if (!raw->line->input->buffer || !raw->line->input->buffer[0])
     return (BELL);
   tmp = split(raw->beg, " ;&|");
   path = strdup(".");
-  if (tab_len(tmp) == 1)
+  if (tab_len(tmp) == 1 || is_sep(tmp[tab_len(tmp) - 1]) == 1)
     path = get_env(g_shell, "PATH");
   pros = autocomplete(tmp[tab_len(tmp) - 1], path, DT_REG);
   if (!pros)
