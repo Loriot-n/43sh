@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Wed Jun  1 16:06:49 2016 CUENAT
+** Last update Wed Jun  1 17:33:16 2016 CUENAT
 */
 
 #include "shell.h"
@@ -118,7 +118,8 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[2] = &ft_unsetenv;
   ptr[3] = &ft_setenv;
   ptr[4] = &ft_cd;
-  ptr[5] = &ft_env;
+
+ ptr[5] = &ft_env;
   ptr[6] = &ft_source;
   ptr[7] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
