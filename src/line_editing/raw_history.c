@@ -1,11 +1,11 @@
 /*
 ** raw_history.c for 42sh in /home/nico/rendu/S02/Unix/PSU_2015_42sh/src
-** 
+**
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-** 
+**
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Fri Jun 03 11:42:09 2016 Nicolas Loriot
+** Last update Fri Jun 03 11:43:04 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -85,4 +85,3 @@ int		raw_hist_move(t_raw *raw, int move)
   raw->line->input->len = strlen(raw->line->input->buffer);
   return (SUCCESS);
   }
-

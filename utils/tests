@@ -328,7 +328,7 @@ NAME="man ls"
 SETUP=""
 CLEAN=""
 TEST=
-  echo "man ls"
+  echo "man ls | cat"
 [36-END]
 
 [37]

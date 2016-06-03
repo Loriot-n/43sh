@@ -10,6 +10,20 @@
 
 #include "shell.h"
 
+int	to_glob(char *line)
+{
+  int	i;
+
+  i = 0;
+  while (line[i])
+    {
+      if (line[i] == '*')
+	return (1);
+      i++;
+    }
+  return (0);
+}
+
 char		*replace_glob(char *line)
 {
   int		i;
@@ -26,11 +40,13 @@ char		*replace_glob(char *line)
   while (tmp[i])
     {
       (i > 1) ? glob_flags |= (GLOB_APPEND | GLOB_NOCHECK) : 0;
-      if ((ret = glob(tmp[i], glob_flags, NULL, results)) == 0)
-	tmp[i] = epur(tab_join(' ', results->gl_pathv));
+      if (to_glob(tmp[i]) == 1 &&
+	  (ret = glob(tmp[i], glob_flags, NULL, results)) == 0)
+	{
+	  tmp[i] = epur(tab_join(' ', results->gl_pathv));
+	  globfree(results);
+	}
       i++;
     }
-  if (tmp[0])
-    globfree(results);
-  return (tab_join(' ', tmp));
+  return (epur(tab_join(' ', tmp)));
 }
