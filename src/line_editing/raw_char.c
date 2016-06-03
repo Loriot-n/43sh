@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Thu Jun 02 19:24:12 2016 Nicolas Loriot
+** Last update Fri Jun 03 11:43:36 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -59,7 +59,7 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
       raw->line->oldcursor = raw->line->cursor;
       if (read(0, raw->rd, 10) < 0)
 	continue ;
-      if (raw->rd[0] > 31 && raw->rd[0] < 127)
+      if (raw->rd[0] > 31 && raw->rd[0] != 127)
 	{
 	  err = insert_char(raw, raw->rd[0]);
 	  raw->complete = 0;
@@ -72,7 +72,7 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
 	return ;
       redraw(raw, *move, *enter);
       (raw->history->index >= 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
-      // free(raw->rd);
+      free(raw->rd);
     }
   free_hist(raw->history);
   free(move);
