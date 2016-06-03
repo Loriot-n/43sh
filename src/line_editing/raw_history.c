@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Thu Jun  2 20:25:09 2016 CUENAT
+** Last update Fri Jun  3 11:38:20 2016 CUENAT
 */
 
 #include "shell.h"
