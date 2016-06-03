@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Fri Jun  3 11:47:05 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -21,12 +21,12 @@ int	check_alias(char **lexed)
 {
   if (tab_len(lexed) < 6)
     {
-      printf("%s=: bad assignment\n", lexed[1]);
+      printf("%s=: Bad assignment\n", lexed[1]);
       return (-1);
     }
-  if (!lexed[1] || strcmp(lexed[2], "=") != 0 ||
-      ((*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
-       (*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
+  if (strcmp(lexed[1], "=") != 0 ||
+      ((*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
+       (*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
     {
       printf("Bad assignment\n");
       return (-1);

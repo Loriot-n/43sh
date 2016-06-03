@@ -5,14 +5,14 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 14:33:14 2016 CUENAT
-** Last update Mon May 30 15:15:10 2016 CUENAT
+** Last update Fri Jun  3 09:44:08 2016 Sanchez Loris
 */
 
 #include "shell.h"
 
 int	ft_is_a_build_in(char *cmd)
 {
-  char	*check[8];
+  char	*check[9];
   int	i;
 
   i = 0;
@@ -23,7 +23,8 @@ int	ft_is_a_build_in(char *cmd)
   check[4] = "cd";
   check[5] = "env";
   check[6] = "source";
-  check[7] = NULL;
+  check[7] = "alias";
+  check[8] = NULL;
   while (cmd && check[i])
     {
       if (strcmp(check[i], cmd) == 0)
