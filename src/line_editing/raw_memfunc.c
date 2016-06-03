@@ -5,32 +5,29 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Tue May 31 19:52:48 2016 Nicolas Loriot
-** Last update Wed Jun 01 12:17:19 2016 Nicolas Loriot
+** Last update Fri Jun 03 12:49:05 2016 Nicolas Loriot
 */
 
 #include "shell.h"
 #include "arrows.h"
 
-void		raw_memmove(void *src, void *dest, size_t size)
+void		raw_memmove(char **dest, char **src, size_t size)
 {
-  char		*tmp;
-  char		*csrc;
-  char		*cdest;
+  char		**tmp;
   int		i;
+  int		j;
 
   i = 0;
-  csrc = (char *)src;
-  cdest = (char *)dest;
-  tmp = raw_alloc(size);
-  while (csrc[i])
+  tmp = NULL;
+  while (src[i])
     {
-      tmp[i] = csrc[i];
+      tmp = add_string(tmp, src[i]);
       i++;
     }
   i = 0;
-  while (tmp[i])
+  while (tmp)
     {
-      cdest[i] = tmp[i];
+      dest = add_string(tmp, dest[i]);
       i++;
     }
   free(tmp);

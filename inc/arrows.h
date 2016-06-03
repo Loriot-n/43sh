@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Thu May 26 17:19:15 2016 Nicolas Loriot
-** Last update Fri Jun 03 11:28:53 2016 Nicolas Loriot
+** Last update Fri Jun 03 12:44:59 2016 Nicolas Loriot
 */
 
 #ifndef ARROWS_H_
@@ -96,7 +96,7 @@ void		*raw_realloc(void *oldptr, size_t size);
 void		*raw_calloc(size_t nmemb, size_t size);
 char		*raw_strdup(char *src);
 int		raw_strchr(char *str, char ch);
-void		raw_memmove(void *src, void *dest, size_t size);
+void		raw_memmove(char **src, char **dest, size_t size);
 
 /*
 ** Line Editing

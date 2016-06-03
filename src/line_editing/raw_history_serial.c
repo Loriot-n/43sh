@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Tue May 31 23:08:06 2016 Nicolas Loriot
-** Last update Thu Jun 02 12:56:29 2016 Nicolas Loriot
+** Last update Fri Jun 03 13:23:39 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -37,29 +37,23 @@ char		*hist_to_serial(t_raw *raw)
 int		hist_from_file(t_raw *raw, char *str)
 {
   int		max;
+  int		fd;
   int		len;
   char		*tok;
 
+  len = 0;
   if (!str)
     return (-1);
+  while (str = (get_next_line((fd = open("./42sh_history", O_RDWR)))))
+    len++;
+  close(fd);
   max = raw->history->max - 1;
   free_hist(raw->history);
   free(raw->history);
-  len = raw_strchr(str, '\n');
   (len > max) ? (max = len) : (0);
   raw->history = new_hist(max);
   str = raw_strdup(str);
   tok = strtok(str, "\n");
-  if (tok)
-    {
-      while (1)
-	{
-	  raw->history->index = -1;
-	  hist_add_str(raw, tok);
-	  if ((tok = strtok(NULL, "\n")) != NULL)
-	    break;
-	}
-    }
   free(str);
   return (0);
 }
