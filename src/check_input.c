@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Thu Jun  2 15:16:30 2016 CUENAT
+** Last update Fri Jun  3 11:49:41 2016 CUENAT
 */
 
 #include "shell.h"
@@ -81,7 +81,7 @@ int	ft_check_input(char *line)
 
   i = 0;
   tkn = "|&; ";
-  bad_tkn = "{}^:!,";
+  bad_tkn = "{}^!,";
   tab = split(line, tkn);
   check = 1;
   while (tab && tab[i])

@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Fri Jun  3 10:20:56 2016 Sanchez Loris
 */
 
 #include "shell.h"

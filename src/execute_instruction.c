@@ -5,6 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
+** Last update Fri Jun  3 11:55:06 2016 Sanchez Loris
 ** Last update Thu Jun  2 23:19:25 2016 CUENAT
 */
 
@@ -122,7 +123,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
-  int	(*ptr[8])(t_shell *shell);
+  int	(*ptr[9])(t_shell *shell);
   int  	i;
 
   ptr[0] = &ft_exit;
@@ -132,7 +133,8 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[4] = &ft_cd;
   ptr[5] = &ft_env;
   ptr[6] = &ft_source;
-  ptr[7] = NULL;
+  ptr[7] = &ft_alias;
+  ptr[8] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell);
   else

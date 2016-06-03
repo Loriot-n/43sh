@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Fri Jun 03 13:05:49 2016 Nicolas Loriot
+** Last update Fri Jun 03 14:29:26 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -25,7 +25,6 @@ int		ft_start_exec(t_shell *shell)
       while (tmp_sub != NULL)
 	{
 	  tkn = strdup("\0");
-	  shell->fd_in = 0;
 	  if (ft_create_exec_function(shell, tmp_sub, tkn) == -1)
 	    break;
 	  tmp_sub = tmp_sub->next;

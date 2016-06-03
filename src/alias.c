@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Fri Jun  3 12:36:18 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -21,34 +21,17 @@ int	check_alias(char **lexed)
 {
   if (tab_len(lexed) < 6)
     {
-      printf("%s=: bad assignment\n", lexed[1]);
+      printf("%s=: Bad assignment\n", lexed[1]);
       return (-1);
     }
-  if (!lexed[1] || strcmp(lexed[2], "=") != 0 ||
-      ((*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
-       (*lexed[3] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
+  if (strcmp(lexed[1], "=") != 0 ||
+      ((*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
+       (*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
     {
       printf("Bad assignment\n");
       return (-1);
     }
   return (1);
-}
-
-t_alias		*get_aliases(t_shell *shell, char **tab)
-{
-  int		i;
-  char		**lexed;
-
-  i = 0;
-  while (tab[i])
-    {
-      lexed = split(tab[i], " =\"'");
-      if (strcmp(lexed[0], "alias") == 0 && check_alias(lexed) == 1)
-	insert_alias(&lexed[4], lexed[1], &(shell->alias), 0);
-      ft_free_tab(lexed);
-      i++;
-    }
-  return (shell->alias);
 }
 
 char	*replace_alias(t_alias *alias_list, char *cmd)

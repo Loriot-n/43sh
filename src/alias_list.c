@@ -5,49 +5,31 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Fri Jun  3 11:45:54 2016 Sanchez Loris
 */
 
 #include "shell.h"
 
-t_alias		*new_alias(char **cmd, char *alias)
+t_alias		*new_alias(char *replace, char *replace_by)
 {
   t_alias	*elem;
-  char		*new_cmd;
-  int		len;
-  int		i;
 
-  if (!(elem = malloc(sizeof(t_alias))))
+  if ((elem = malloc(sizeof(t_alias))) == NULL)
     exit(EXIT_FAILURE);
-  len = 0;
-  if (!(new_cmd = calloc(1, 1)))
-    exit(EXIT_FAILURE);
-  cmd[tab_len(cmd) - 1] = NULL;
-  i = 0;
-  while (cmd[i])
-    {
-      len += strlen(cmd[i]);
-      if (!(new_cmd = realloc(new_cmd, len + 2)))
-	exit(EXIT_FAILURE);
-      new_cmd = strcat(new_cmd, cmd[i]);
-      new_cmd = add_char(new_cmd, ' ');
-      i++;
-    }
-  elem->cmd = epur(new_cmd);
-  free(new_cmd);
-  elem->alias = strdup(alias);
+  elem->alias = strdup(replace);
+  elem->cmd = strdup(replace_by);
   elem->next = NULL;
   return (elem);
 }
 
-t_alias			*insert_alias(char **cmd, char *alias, t_alias **head,
+t_alias			*insert_alias(char *replace, char *replace_by, t_alias **head,
 				      int whatdo)
 {
   t_alias		*newnode;
   t_alias		*tmp;
 
   tmp = *head;
-  newnode = new_alias(cmd, alias);
+  newnode = new_alias(replace, replace_by);
   newnode->whatdo = whatdo;
   if (!(*head))
     {
