@@ -17,15 +17,15 @@ char	*get_history(char **history, char *path)
   char	tmp[PATH_MAX];
 
   i = 0;
-  while (path[i] && path[i] != '-')
+  while (path && path[i] && path[i] != '-')
     i++;
-  if (!path[i + 1])
+  if (path && !path[i + 1])
     return (history[1]);
   j = 0;
-  while (history[j] && (j != path[i + 1] - 48 ||
+  while (history && history[j] && (j != path[i + 1] - 48 ||
 			strcmp(history[j], getcwd(tmp, PATH_MAX)) == 0))
     j++;
-  if (!(history[j]))
+  if (history && !(history[j]))
     dprintf(2, "cd: no such entry in dir stack\n");
   return (history[j]);
 }
@@ -35,7 +35,7 @@ char	**fill_history(char **tab, char *path)
   int	i;
 
   i = 3;
-  if (strcmp(tab[0], path) == 0)
+  if (!path || strcmp(tab[0], path) == 0)
     return (tab);
   while (i > 0)
     {
