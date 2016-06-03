@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Fri Jun  3 12:32:05 2016 Sanchez Loris
+** Last update Fri Jun  3 12:36:18 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -32,23 +32,6 @@ int	check_alias(char **lexed)
       return (-1);
     }
   return (1);
-}
-
-t_alias		*get_aliases(t_shell *shell, char **tab)
-{
-  int		i;
-  char		**lexed;
-
-  i = 0;
-  while (tab[i])
-    {
-      lexed = split(tab[i], " =\"'");
-      //      if (strcmp(lexed[0], "alias") == 0 && check_alias(lexed) == 1)
-      //	insert_alias(&lexed[4], lexed[1], &(shell->alias), 0);
-      ft_free_tab(lexed);
-      i++;
-    }
-  return (shell->alias);
 }
 
 char	*replace_alias(t_alias *alias_list, char *cmd)
