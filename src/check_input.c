@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Fri Jun  3 11:49:41 2016 CUENAT
+** Last update Fri Jun  3 15:09:13 2016 CUENAT
 */
 
 #include "shell.h"
@@ -91,17 +91,17 @@ int	ft_check_input(char *line)
 	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
 	  dprintf(2, "Bad token at word %d \"%s\"\n", i, tab[i]);
-	  return (-1);
+	  return (1);
 	}
       if (ft_check_redirect(tab, i) == -1)
 	{
 	  dprintf(2, "Ambiguous output redirect.\n");
-	  return (-1);
+	  return (1);
 	}
        if (ft_check_input_redirect(tab, i) == -1)
 	{
 	  dprintf(2, "Ambiguous input redirect.\n");
-	  return (-1);
+	  return (1);
 	}
       i += 1;
     }
