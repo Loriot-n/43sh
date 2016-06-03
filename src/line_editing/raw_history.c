@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Thu Jun 02 19:29:18 2016 Nicolas Loriot
+** Last update Fri Jun 03 11:42:09 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -19,8 +19,7 @@ t_hist		*new_hist(int size)
   new->max = size + 1;
   new->index = -1;
   new->len = 0;
-  new->tab = raw_alloc(sizeof(char *) * new->max);
-  memset(new->tab, 0, sizeof(char *) * new->max);
+  new->tab = raw_calloc(new->max, sizeof(char *) * new->max);
   new->buffer = NULL;
   new->original = NULL;
   return (new);
@@ -31,7 +30,7 @@ void		free_hist(t_hist *hist)
   int		i;
 
   i = 0;
-  while (hist->tab[i])
+  while (i < hist->len)
     free(hist->tab[i++]);
   free(hist->tab);
   free(hist->buffer);

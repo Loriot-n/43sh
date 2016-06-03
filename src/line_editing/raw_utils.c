@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 12:36:39 2016 Nicolas Loriot
-** Last update Thu Jun 02 18:22:32 2016 Nicolas Loriot
+** Last update Fri Jun 03 11:12:58 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -38,10 +38,11 @@ void		read_mode(t_raw *raw, int state)
   newT = raw->term->origin;
   if (state)
     {
-      newT.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+      newT.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IUTF8);
       newT.c_oflag &= ~OPOST;
       newT.c_cflag |= CS8;
-      newT.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG | IUTF8);
+      newT.c_cflag |= ~CSIZE;
+      newT.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
       newT.c_cc[VMIN] = 1;
       newT.c_cc[VTIME] = 0;
     }
@@ -82,8 +83,8 @@ void		redraw(t_raw *raw, int change, int enter)
       if ((multi = (draw_next_line(raw, multi, enter))))
 	return ;
       dprintf(raw->term->fd, C_LN_CLEAR_LINE, 0);
-      dprintf(raw->term->fd, "%s", raw->line->input->buffer);
-      /* print_raw_string(raw->line->input->buffer); */
+      /* dprintf(raw->term->fd, "%s", raw->line->input->buffer); */
+      print_raw_string(raw->line->input->buffer);
       if (raw->line->input->len)
 	dprintf(raw->term->fd, C_CUR_MOVE_BACK, raw->line->input->len);
     }
