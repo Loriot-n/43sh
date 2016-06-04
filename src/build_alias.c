@@ -5,7 +5,7 @@
 ** Login   <sanche_k@epitech.net>
 ** 
 ** Started on  Fri Jun  3 09:40:49 2016 Sanchez Loris
-** Last update Fri Jun  3 12:16:09 2016 Sanchez Loris
+** Last update Sat Jun  4 16:58:32 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -22,22 +22,54 @@ void		print_alias(t_alias *alias)
     }
 }
 
+void		show_this_alias(char *search, t_alias *alias)
+{
+  t_alias	*tmp;
+
+  tmp = alias;
+  while (tmp)
+    {
+      if (strcmp(search, tmp->alias) == 0)
+	printf("%s\n", tmp->cmd);
+      tmp = tmp->next;
+    }
+}
+
 int		ft_alias(t_shell *shell)
 {
   char		**tab;
   char		*str;
 
- 
   if (strcmp(shell->exec_list->cmd, "alias") == 0)
     {
       print_alias(shell->alias);
       return (0);
     }
-  tab = split(strdup(&(shell->exec_list->cmd[6])), "\" =");
-  if (check_alias(tab) == -1)
-    return (-1);  
-  tab[tab_len(tab) - 1] = NULL; 
-  str = epur(tab_join(' ', &tab[3]));
+  tab = split(strdup(&(shell->exec_list->cmd[6])), " ");
+  if (tab[1] == NULL)
+    show_this_alias(tab[0], shell->alias);
+  str = epur(tab_join(' ', &tab[1]));
   insert_alias(tab[0], str, &shell->alias, 0);
+  return (0);
+}
+
+int		ft_unalias(t_shell *shell)
+{
+  t_alias	*tmp;
+  char		**tab;
+
+  tmp = shell->alias;
+  tab = split(strdup(&(shell->exec_list->cmd[6])), " ");
+  while (tmp->next)
+    {
+      if (strcmp(tab[1], tmp->next->alias) == 0)
+	{
+	  free(tmp->next->cmd);
+     	  free(tmp->next->alias);
+	  tmp->next = tmp->next->next;
+	}
+      else
+	tmp = tmp->next;
+    }
   return (0);
 }
