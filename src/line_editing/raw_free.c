@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Tue May 31 21:01:57 2016 Nicolas Loriot
-** Last update Tue May 31 21:05:16 2016 Nicolas Loriot
+** Last update Sat Jun 04 17:53:34 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -16,6 +16,8 @@ void		raw_free(t_raw *raw)
   free(raw->line->input->buffer);
   free(raw->line->input);
   free(raw->line->prompt);
+  free_hist(raw->history);
+  free(raw->history);
   free(raw->line);
   free(raw->term);
   free(raw->buffer);

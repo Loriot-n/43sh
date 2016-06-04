@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 25 15:52:42 2016 CUENAT
-** Last update Sat Jun  4 16:44:07 2016 CUENAT
+** Last update Sat Jun  4 17:38:37 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -36,6 +36,7 @@ void	print_it_baby(char *line)
 int	ft_echo(t_shell *shell)
 {
   char	*cmd;
+  int	i;
 
   if (shell->cur_exec[1] == NULL)
     {
@@ -48,7 +49,14 @@ int	ft_echo(t_shell *shell)
       cmd = strdup(shell->cur_exec[2]);
       cmd[strlen(cmd) - 1] = 0;
     }
-  print_it_baby(cmd);
+  i = 1;
+  while (shell->cur_exec[i])
+    {
+      print_it_baby(shell->cur_exec[i]);
+      if (shell->cur_exec[i + 1])
+	putchar(' ');
+      i++;
+    }
   putchar(10);
   return (0);
 }

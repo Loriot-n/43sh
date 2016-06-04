@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Fri May 27 12:08:05 2016 Nicolas Loriot
-** Last update Thu Jun 02 19:27:01 2016 Nicolas Loriot
+** Last update Sat Jun 04 18:28:43 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -29,7 +29,6 @@ t_raw		*init_raw(t_shell *shell, char *to_send)
   new->term->nb_line = 0;
   new->term->fd = STDIN_FILENO;
   new->term->mode = 0;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &new->term->ws);
   tcgetattr(0, &new->term->origin);
   new->complete = 0;
   new->beg = NULL;
@@ -72,19 +71,24 @@ t_hist		*init_hist(t_raw *raw)
 char		*get_line(t_raw *raw, char *prompt)
 {
   t_hist	*hist;
+  int		*enter;
+  int		*move;
 
   set_line(raw, "", 0);
   raw->history->index = -1;
   raw->line->prompt->buffer = prompt;
   raw->line->prompt->len = strlen(raw->line->prompt->buffer);
   write(1, raw->line->prompt->buffer, strlen(prompt));
+  enter = raw_alloc(sizeof(int));
+  move = raw_alloc(sizeof(int));
+  *enter = 0;
   hist = init_hist(raw);
   read_mode(raw, 1);
-  get_raw_input(raw, hist);
+  get_raw_input(raw, hist, enter, move);
   read_mode(raw, 0);
   write(1, "\n", 1);
-  /* free_hist(raw->history); */
-  /* free(raw->history); */
+  free(move);
+  free(enter);
   raw->history = hist;
   raw->buffer = raw_strdup(raw->line->input->buffer);
   return (raw->buffer);

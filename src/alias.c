@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Fri Jun  3 12:36:18 2016 Sanchez Loris
+** Last update Sat Jun  4 16:07:16 2016 Sanchez Loris
 */
 
 #include "shell.h"
@@ -19,16 +19,9 @@ void	empty(char *tmp, char *one, char **lexed)
 
 int	check_alias(char **lexed)
 {
-  if (tab_len(lexed) < 6)
+  if (tab_len(lexed) < 2)
     {
       printf("%s=: Bad assignment\n", lexed[1]);
-      return (-1);
-    }
-  if (strcmp(lexed[1], "=") != 0 ||
-      ((*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '\'' &&
-       (*lexed[2] + *lexed[tab_len(lexed) - 1]) != 2 * '"'))
-    {
-      printf("Bad assignment\n");
       return (-1);
     }
   return (1);

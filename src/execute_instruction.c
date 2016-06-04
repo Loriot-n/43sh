@@ -5,7 +5,11 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sat Jun  4 13:49:50 2016 CUENAT
+<<<<<<< HEAD
+** Last update Sat Jun  4 16:45:46 2016 Sanchez Loris
+=======
+** Last update Sat Jun  4 17:19:27 2016 CUENAT
+>>>>>>> 26f3d908db0a6bc3793323fd4d2b967bdc95b008
 ** Last update Thu Jun  2 23:19:25 2016 CUENAT
 */
 
@@ -84,7 +88,12 @@ int		ft_final_exec(t_shell *shell, char *tkn)
 	}
     }
   else
-    ft_execute_instr_no_fork(shell, tkn);
+    {
+      close(tube[0]);
+      close(tube[1]);
+      close(shell->fd_in);
+      ft_execute_instr_no_fork(shell, tkn);
+    }
   return (0);
 }
 
@@ -105,6 +114,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	  close(tube[0]);
 	  if (end == 0)
 	    dup2(tube[1], 1);
+	  close(tube[1]);
 	  exit(ft_redirect_or_pipe(shell, tkn, shell->fd_in));
 	}
       else
@@ -123,7 +133,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
-  int	(*ptr[9])(t_shell *shell);
+  int	(*ptr[10])(t_shell *shell);
   int  	i;
 
   ptr[0] = &ft_exit;
@@ -134,7 +144,8 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[5] = &ft_env;
   ptr[6] = &ft_source;
   ptr[7] = &ft_alias;
-  ptr[8] = NULL;
+  ptr[8] = &ft_unalias;
+  ptr[9] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
     (ptr[i])(shell);
   else

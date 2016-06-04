@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sat Jun  4 16:02:11 2016 CUENAT
+** Last update Sat Jun 04 18:34:29 2016 Nicolas Loriot
 */
 
 #include "arrows.h"

@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Fri Jun  3 09:46:07 2016 Sanchez Loris
+## Last update Sat Jun 04 17:46:02 2016 Nicolas Loriot
 ##
 
 NAME	=	42sh
@@ -49,6 +49,7 @@ SRCS	=	src/main.c \
 		src/line_editing/get_input.c \
 		src/line_editing/raw_char.c \
 		src/line_editing/raw_history.c \
+		src/line_editing/raw_history_serial.c \
 		src/line_editing/raw_string.c \
 		src/line_editing/raw_utils.c \
 		src/line_editing/escape_char.c \
