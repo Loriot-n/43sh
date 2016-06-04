@@ -15,6 +15,8 @@ int	to_glob(char *line)
   int	i;
 
   i = 0;
+  if (line[0] == '*' || line[strlen(line) - 1] == '*')
+    return (0);
   while (line[i])
     {
       if (line[i] == '*')
