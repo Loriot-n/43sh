@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Sat Jun  4 16:03:02 2016 CUENAT
+** Last update Sat Jun  4 16:44:34 2016 CUENAT
 */
 
 #include "shell.h"
@@ -86,7 +86,7 @@ int	ft_check_input(char *line)
   check = 1;
   while (tab && tab[i])
     {
-      if ((check = is_const_string(tab[i], check)) == 1 &&
+      if ((check = is_const_string(tab[i], check) == 1) &&
 	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
 	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
