@@ -45,4 +45,5 @@ void	parse_options(t_shell *shell, char *path)
       free(one);
       i++;
     }
+  close(fd);
 }
