@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Fri Jun  3 15:08:19 2016 CUENAT
+** Last update Sat Jun  4 16:02:11 2016 CUENAT
 */
 
 #include "arrows.h"
@@ -40,7 +40,7 @@ int	ft_launch_shell(t_shell *shell)
   t_raw	*raw;
 
   signal(SIGINT, ctrl);
-  raw = init_raw("exit");
+  raw = init_raw(shell, "exit");
   set_hist(raw, 1, 15);
   while (((shell->isa_tty == 1 &&
 	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
@@ -49,7 +49,7 @@ int	ft_launch_shell(t_shell *shell)
       line = replace_env(shell, line);
       line = epur(line);
       line = replace_alias(shell->alias, line);
-      // line = replace_quotes(shell, line);
+      //line = replace_quotes(shell, line);
       line = replace_glob(line);
       if ((shell->res_exec = ft_check_input(line)) == 0)
 	{

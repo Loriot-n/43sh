@@ -11,7 +11,7 @@
 #include "shell.h"
 #include "arrows.h"
 
-t_raw		*init_raw(char *to_send)
+t_raw		*init_raw(t_shell *shell, char *to_send)
 {
   t_raw		*new;
 
@@ -21,6 +21,7 @@ t_raw		*init_raw(char *to_send)
   new->line->input = raw_alloc(sizeof(t_str));
   new->term = raw_alloc(sizeof(t_term));
   new->history = raw_alloc(sizeof(t_hist));
+  new->shell = shell;
   new->line->input->buffer = raw_strdup("");
   new->line->input->len = 0;
   new->line->oldcursor = 0;
