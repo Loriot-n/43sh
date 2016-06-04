@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Tue May 31 23:08:06 2016 Nicolas Loriot
-** Last update Sat Jun 04 17:47:34 2016 Nicolas Loriot
+** Last update Sat Jun 04 18:36:40 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -49,10 +49,8 @@ int		hist_from_file(t_raw *raw)
 {
   int		max;
   int		fd;
-  int		len;
   char		*str;
 
-  len = 0;
   max = get_hist_max_file(raw);
   raw->history = new_hist(max);
   if ((fd = open(".42sh_history", O_RDWR)))
