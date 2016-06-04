@@ -40,7 +40,7 @@ int	ft_launch_shell(t_shell *shell)
   t_raw	*raw;
 
   signal(SIGINT, ctrl);
-  raw = init_raw("exit");
+  raw = init_raw(shell, "exit");
   set_hist(raw, 1, 15);
   while (((shell->isa_tty == 1 &&
 	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
