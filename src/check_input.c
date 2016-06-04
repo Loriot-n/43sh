@@ -86,8 +86,7 @@ int	ft_check_input(char *line)
   check = 1;
   while (tab && tab[i])
     {
-      if ((check = is_const_string(tab[i], check) == 1) &&
-	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
+      if ((ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
 	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
 	  dprintf(2, "Unmatched %s\n", tab[i]);
