@@ -1,2 +1,1 @@
 alias l="ls -la"
-alias cat="cat -e"
