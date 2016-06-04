@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sat Jun  4 19:40:42 2016 CUENAT
+** Last update Sat Jun  4 19:43:43 2016 CUENAT
 */
 
 #include "shell.h"
@@ -59,6 +59,7 @@ int		ft_final_exec(t_shell *shell, char *tkn)
   int		tube[2];
   pid_t		pid;
 
+  pid = 0;
   if (pipe(tube) == -1)
     return (-1);
   if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
