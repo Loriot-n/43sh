@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Fri Jun 03 13:02:03 2016 Nicolas Loriot
+** Last update Sat Jun 04 18:28:54 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -43,15 +43,10 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
     return (BELL);
 }
 
-void		get_raw_input(t_raw *raw, t_hist *hist)
+void		get_raw_input(t_raw *raw, t_hist *hist, int *enter, int *move)
 {
-  int		*enter;
   int		err;
-  int		*move;
 
-  enter = raw_alloc(sizeof(int));
-  move = raw_alloc(sizeof(int));
-  *enter = 0;
   while (!*enter)
     {
       *move = 0;
@@ -71,10 +66,8 @@ void		get_raw_input(t_raw *raw, t_hist *hist)
       if (err == ERROR && raw->line->input->buffer[0] == 0)
 	return ;
       redraw(raw, *move, *enter);
-      (raw->history->index >= 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
       free(raw->rd);
     }
+  (raw->history->index >= 0) ? (hist_add_str(raw, raw->line->input->buffer)) : (0);
   free_hist(raw->history);
-  free(move);
-  free(enter);
 }
