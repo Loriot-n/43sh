@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Sat Jun  4 19:40:20 2016 CUENAT
+** Last update Sat Jun  4 19:42:40 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -242,6 +242,7 @@ void	print_alias(t_alias *alias);
 int	check_alias(char **lexed);
 void    show_this_alias(char *search, t_alias *alias);
 int	ft_unalias(t_shell *shell);
+void	ft_norme_unalias(t_alias *tmp, char **tab);
 
 /*
 ** START ------ HISTORY -------- END
