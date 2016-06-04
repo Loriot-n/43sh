@@ -39,7 +39,7 @@ int		tabulation(t_raw *raw, char *ch, int *enter, int *move)
   tmp = split(raw->beg, " ;&|");
   path = strdup(".");
   if (tab_len(tmp) == 1 || is_sep(tmp[tab_len(tmp) - 1]) == 1)
-    path = get_env(g_shell, "PATH");
+    path = get_env(raw->shell, "PATH");
   pros = autocomplete(tmp[tab_len(tmp) - 1], path, DT_REG);
   if (!pros)
     return (BELL);

@@ -47,7 +47,6 @@
 #endif
 
 typedef struct dirent t_dir;
-t_shell *g_shell;
 
 /*
 ** START ----- FILL STRUCT ----- START

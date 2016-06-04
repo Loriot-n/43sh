@@ -19,6 +19,8 @@
 # include <termios.h>
 # include <assert.h>
 
+typedef struct s_shell t_shell;
+
 typedef struct		s_str
 {
   char			*buffer;
@@ -63,6 +65,7 @@ typedef struct		s_raw
   int			safe;
   unsigned int		complete;
   char			*beg;
+  t_shell		*shell;
 }			t_raw;
 
 typedef enum		s_status
@@ -81,7 +84,7 @@ typedef enum		s_status
 # define C_CUR_MOVE_BACK	"\x1b[%dD"
 
 char		*get_line(t_raw *raw, char *prompt);
-t_raw		*init_raw(char *to_send);
+t_raw		*init_raw(t_shell *shell, char *to_send);
 void		get_raw_input(t_raw *raw, t_hist *hist);
 void		read_mode(t_raw *raw, int state);
 void		input_error(int err);
