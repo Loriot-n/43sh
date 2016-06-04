@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Fri Jun  3 17:08:18 2016 CUENAT
+** Last update Sat Jun  4 16:44:34 2016 CUENAT
 */
 
 #include "shell.h"
@@ -90,7 +90,7 @@ int	ft_check_input(char *line)
 	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
 	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
 	{
-	  dprintf(2, "Bad token at word %d \"%s\"\n", i, tab[i]);
+	  dprintf(2, "Unmatched %s\n", tab[i]);
 	  return (1);
 	}
       if (ft_check_redirect(tab, i) == -1)

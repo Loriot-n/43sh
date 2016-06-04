@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Thu May 26 17:19:15 2016 Nicolas Loriot
-** Last update Sat Jun 04 18:27:54 2016 Nicolas Loriot
+** Last update Sat Jun 04 18:35:34 2016 Nicolas Loriot
 */
 
 #ifndef ARROWS_H_
@@ -18,6 +18,8 @@
 # undef tab
 # include <termios.h>
 # include <assert.h>
+
+typedef struct s_shell t_shell;
 
 typedef struct		s_str
 {
@@ -62,6 +64,7 @@ typedef struct		s_raw
   int			safe;
   unsigned int		complete;
   char			*beg;
+  t_shell		*shell;
 }			t_raw;
 
 typedef enum		s_status
@@ -80,8 +83,8 @@ typedef enum		s_status
 # define C_CUR_MOVE_BACK	"\x1b[%dD"
 
 char		*get_line(t_raw *raw, char *prompt);
-t_raw		*init_raw(char *to_send);
 void		get_raw_input(t_raw *raw, t_hist *hist, int *enter, int *move);
+t_raw		*init_raw(t_shell *shell, char *to_send);
 void		read_mode(t_raw *raw, int state);
 void		input_error(int err);
 void		raw_free(t_raw *raw);
