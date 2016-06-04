@@ -15,6 +15,8 @@ int	to_glob(char *line)
   int	i;
 
   i = 0;
+  if (line[0] == '"' || line[strlen(line) - 1] == '"')
+    return (0);
   while (line[i])
     {
       if (line[i] == '*')
@@ -35,17 +37,19 @@ char		*replace_glob(char *line)
   tmp = split(line, " ");
   i = 0;
   glob_flags = 0;
+  results = NULL;
   if (!(results = malloc(sizeof(glob_t) * 1)))
     exit(EXIT_FAILURE);
   while (tmp[i])
     {
-      (i > 1) ? glob_flags |= (GLOB_APPEND | GLOB_NOCHECK) : 0;
+      (i > 1) ? glob_flags |= (GLOB_APPEND | GLOB_NOCHECK | GLOB_ERR) : 0;
       if (to_glob(tmp[i]) == 1 &&
 	  (ret = glob(tmp[i], glob_flags, NULL, results)) == 0)
 	{
 	  tmp[i] = epur(tab_join(' ', results->gl_pathv));
 	  globfree(results);
 	}
+	//   perror("glob");
       i++;
     }
   return (epur(tab_join(' ', tmp)));
