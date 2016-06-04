@@ -46,7 +46,6 @@ char	*add_char(char *str, char new)
     {
       i = ft_strlen(str);
       !(str = realloc(str, ft_strlen(str) + 2)) ? exit(EXIT_FAILURE) : 0;
-
     }
   else
     !(str = malloc(sizeof(char) * 2)) ? exit(EXIT_FAILURE) : 0;
