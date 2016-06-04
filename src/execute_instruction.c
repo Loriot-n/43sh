@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Fri Jun  3 16:57:15 2016 CUENAT
+** Last update Sat Jun  4 13:49:50 2016 CUENAT
 ** Last update Thu Jun  2 23:19:25 2016 CUENAT
 */
 
@@ -48,9 +48,9 @@ void	ft_execute_instr_fork_2(t_shell *shell)
     {
       status = 0;
       wait(&status);
-      sig_handler(status);
       if (WIFEXITED(status) && status != 0)
 	shell->res_exec = status;
+      sig_handler(status);
       i += 1;
     }
 }
