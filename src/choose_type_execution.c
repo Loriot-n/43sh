@@ -36,7 +36,6 @@ int	ft_is_a_build_in(char *cmd)
 
 int	ft_choose_type_execution(t_shell *shell, char *tkn, int end)
 {
-  /*if (ft_execute_instr_no_fork(shell, tkn) != 2)*/
   if (ft_is_a_build_in(shell->cur_exec[0]) == 0)
     ft_execute_instr_no_fork(shell, tkn);
   else

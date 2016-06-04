@@ -10,58 +10,45 @@
 
 #include "shell.h"
 
-int	ft_check_token(char *line, char *tkn)
-{
-
-  return (0);
-}
-
-int	ft_echo_with_return_line(t_shell *shell)
+void	print_it_baby(char *line)
 {
   int	i;
-  int	pb;
+  char	tmp;
+  char	*one;
 
+  tmp = 0;
+  if (line[0] != '"' && line[0] != '\'')
+    return ((void)printf("%s", line)) ;
+  one = NULL;
+  tmp = line[0];
   i = 1;
-  while (shell->cur_exec[i])
-    {
-      if ((pb = ft_check_token(shell->cur_exec[i], "'\"")) != 0)
-	{
-	  printf("unmatched %c\n", shell->cur_exec[i][pb]);
-	  return (-1);
-	}
-      i += 1;
-    }
-  printf("\n");
-  return (0);
+  while (line[i] && line[i] != tmp)
+    i++;
+  if (line[i]  != tmp)
+    return ((void)dprintf(2, "Unmatched %c.\n", tmp));
+  (!(one = malloc(sizeof(char) * i + 2))) ? exit(EXIT_FAILURE) : 0;
+  strncpy(one, &line[1], i - 1);
+  one[i - 1] = 0;
+  printf("%s", one);
+  print_it_baby(&line[i + 1]);
 }
-
-int	ft_echo_without_return_line(t_shell *shell)
-{
-  int	i;
-  int	pb;
-
-  i = 1;
-  while (shell->cur_exec[i])
-    {
-      if ((pb = ft_check_token(shell->cur_exec[i], "'\"")) != 0)
-	{
-	  printf("unmatched %c\n", shell->cur_exec[i][pb]);
-	  return (-1);
-	}
-      i += 1;
-    }
-  return (0);
-}
-
 
 int	ft_echo(t_shell *shell)
 {
+  char	*cmd;
 
   if (shell->cur_exec[1] == NULL)
-    printf("\n");
-  if (shell->cur_exec[1] != NULL && strcmp(shell->cur_exec[1], "-n") == 0)
-    ft_echo_without_return_line(shell);
-  else
-  ft_echo_with_return_line(shell);
+    {
+      printf("\n");
+      return (0);
+    }
+  cmd = shell->cur_exec[1];
+  if (strcmp(shell->cur_exec[1], "-n") == 0)
+    {
+      cmd = strdup(shell->cur_exec[2]);
+      cmd[strlen(cmd) - 1] = 0;
+    }
+  print_it_baby(cmd);
+  putchar(10);
   return (0);
 }
