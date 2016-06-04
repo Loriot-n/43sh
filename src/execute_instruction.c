@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sat Jun  4 13:49:50 2016 CUENAT
+** Last update Sat Jun  4 17:19:27 2016 CUENAT
 ** Last update Thu Jun  2 23:19:25 2016 CUENAT
 */
 
@@ -84,7 +84,12 @@ int		ft_final_exec(t_shell *shell, char *tkn)
 	}
     }
   else
-    ft_execute_instr_no_fork(shell, tkn);
+    {
+      close(tube[0]);
+      close(tube[1]);
+      close(shell->fd_in);
+      ft_execute_instr_no_fork(shell, tkn);
+    }
   return (0);
 }
 
@@ -105,6 +110,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	  close(tube[0]);
 	  if (end == 0)
 	    dup2(tube[1], 1);
+	  close(tube[1]);
 	  exit(ft_redirect_or_pipe(shell, tkn, shell->fd_in));
 	}
       else
