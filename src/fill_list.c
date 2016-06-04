@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 11:25:16 2016 CUENAT
-** Last update Sat Jun  4 16:10:56 2016 CUENAT
+** Last update Sat Jun  4 18:42:53 2016 CUENAT
 */
 
 #include "shell.h"
@@ -20,7 +20,8 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
   new->cmd = strdup(epur(tmp_c));
-  new->exec_cmd = split_no_const(new->cmd, " |<>");
+  //new->exec_cmd = split_no_const(new->cmd, " |<>");
+  new->exec_cmd = split(new->cmd, " |<>");
   new->separator = *sep;
   new->next = NULL;
   if (list == NULL)
