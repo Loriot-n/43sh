@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Sat Jun 04 17:46:02 2016 Nicolas Loriot
+## Last update Sat Jun  4 19:38:48 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -61,6 +61,7 @@ SRCS	=	src/main.c \
 		src/magic_quotes.c \
 		src/tabulation.c \
 		src/build_alias.c \
+		src/execute_pipe.c
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Sat Jun  4 16:46:36 2016 Sanchez Loris
+** Last update Sat Jun  4 19:40:20 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -148,6 +148,15 @@ int	ft_execute_instr_fork(t_shell *shell, char *tkn, int end);
 int	ft_execute_instr_no_fork(t_shell *shell, char *tkn);
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in);
 void	ft_execute_instr_fork_2(t_shell *shell);
+
+/*
+** execute_pipe.c
+*/
+int	ft_final_exec_pipe(t_shell *shell,
+			   int pid,
+			   int tube[2],
+			   char *tkn);
+void	ft_execute_instr_fork_pipe(t_shell *shell, int tube[2]);
 
 /*
 ** choose_type_execution.c
