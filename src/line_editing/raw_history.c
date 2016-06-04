@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Fri Jun 03 17:33:14 2016 Nicolas Loriot
+** Last update Sat Jun 04 16:32:35 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -43,6 +43,7 @@ void		hist_add_str(t_raw *raw, char *str)
 {
   int		index;
 
+  append_history(str);
   index = 0;
   if (raw->history->index > -1)
     index = raw->history->index;

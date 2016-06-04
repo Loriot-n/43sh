@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Thu May 26 17:19:15 2016 Nicolas Loriot
-** Last update Fri Jun 03 17:31:45 2016 Nicolas Loriot
+** Last update Sat Jun 04 18:27:54 2016 Nicolas Loriot
 */
 
 #ifndef ARROWS_H_
@@ -39,7 +39,6 @@ typedef struct		s_term
   int			mode;
   int			nb_line;
   struct termios	origin;
-  struct winsize	ws;
 }			t_term;
 
 typedef struct		s_hist
@@ -82,7 +81,7 @@ typedef enum		s_status
 
 char		*get_line(t_raw *raw, char *prompt);
 t_raw		*init_raw(char *to_send);
-void		get_raw_input(t_raw *raw, t_hist *hist);
+void		get_raw_input(t_raw *raw, t_hist *hist, int *enter, int *move);
 void		read_mode(t_raw *raw, int state);
 void		input_error(int err);
 void		raw_free(t_raw *raw);
@@ -146,6 +145,8 @@ int		set_hist(t_raw *raw, int set, int size);
 int		raw_hist_move(t_raw *raw, int move);
 void		hist_add_str(t_raw *raw, char *str);
 char		*hist_to_serial(t_raw *raw);
+int		hist_from_file(t_raw *raw);
+int		get_hist_elem_id(int fd);
 void		free_hist(t_hist *hist);
 
 #endif /* !ARROWS_H_  */

@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 ** 
 ** Started on  Wed May 25 13:27:52 2016 Nicolas Loriot
-** Last update Thu May 26 17:10:46 2016 Nicolas Loriot
+** Last update Sat Jun 04 17:51:00 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -17,13 +17,27 @@ int		get_fd_history()
 
   if (passed == 1)
     return (-1);
-  if ((fd = open(".42sh_history", O_CREAT | O_RDWR, 0666)) == -1)
+  if ((fd = open(".42sh_history", O_CREAT | O_RDWR | O_APPEND, 0666)) == -1)
     {
       passed = 1;
       printf("42sh_history : %s", strerror(errno));
       return (-1);
     }
   return (fd);
+}
+
+int		get_hist_elem_id(int fd)
+{
+  int		id;
+  char		*str;
+
+  id = 0;
+  while ((str = get_next_line(fd)))
+    {
+      free(str);
+      id++;
+    }
+  return (id + 1);
 }
 
 void		append_history(char *value)
@@ -34,7 +48,7 @@ void		append_history(char *value)
   id = 0;
   if ((fd = get_fd_history()) == -1)
     return ;
-  while (get_next_line(fd))
-    ++id;
+  id = get_hist_elem_id(fd);
   dprintf(fd, "%d %s\n", id, value);
+  close(fd);
 }
