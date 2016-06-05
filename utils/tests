@@ -479,3 +479,20 @@ TEST=
   echo "CacaCacaProutProutPwetPwet"
   echo 'echo $?'
 [50-END]
+
+[51]
+NAME="Executing Folder"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "inc"
+[51-END]
+
+[52]
+NAME="Exec format error"
+SETUP="touch lol; chmod +x lol"
+CLEAN="rm -f lol"
+TEST=
+  echo "./lol"
+  echo "echo $?"
+[52-END]

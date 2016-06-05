@@ -3,9 +3,9 @@
 **
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-**
+** yan typedef size_t
 ** Started on  Thu May 26 17:19:15 2016 Nicolas Loriot
-** Last update Sat Jun 04 18:35:34 2016 Nicolas Loriot
+** Last update Sun Jun 05 14:09:25 2016 Nicolas Loriot
 */
 
 #ifndef ARROWS_H_
@@ -146,7 +146,7 @@ int		end_key(t_raw *raw, char *ch, int *enter, int *move);
 t_hist		*new_hist(int size);
 int		set_hist(t_raw *raw, int set, int size);
 int		raw_hist_move(t_raw *raw, int move);
-void		hist_add_str(t_raw *raw, char *str);
+void		hist_add_str(t_raw *raw, char *str, t_shell *shell);
 char		*hist_to_serial(t_raw *raw);
 int		hist_from_file(t_raw *raw);
 int		get_hist_elem_id(int fd);

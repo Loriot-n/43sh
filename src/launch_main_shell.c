@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sun Jun  5 15:43:31 2016 CUENAT
+** Last update Sun Jun  5 16:07:48 2016 CUENAT
 */
 
 #include "arrows.h"
@@ -40,7 +40,6 @@ int	ft_in_lauch(t_shell *shell, t_raw *raw, char *line)
    line = replace_env(shell, line);
    line = epur(line);
    line = replace_alias(shell->alias, line);
-   //line = replace_quotes(shell, line);
    line = replace_glob(line);
    if ((shell->res_exec = ft_check_input(line)) == 0)
      {
@@ -67,10 +66,9 @@ int	ft_launch_shell(t_shell *shell)
       ft_in_lauch(shell, raw, strdup(line));
       ft_free_tab(shell->path);
       if (strlen(raw->line->input->buffer))
-	hist_add_str(raw, raw->line->input->buffer);
+	hist_add_str(raw, raw->line->input->buffer, shell);
       free(line);
     }
   raw_free(raw);
-  printf("exit");
   return (0);
 }
