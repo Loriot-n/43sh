@@ -496,3 +496,14 @@ TEST=
   echo "./lol"
   echo "echo $?"
 [52-END]
+
+[53]
+NAME="echo"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "echo"
+  echo "echo -n"
+  echo 'echo -n ""'
+  echo 'echo -n "caca"'
+[53-END]
