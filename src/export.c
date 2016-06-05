@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Sun Jun  5 17:35:39 2016 CUENAT
 */
 
 #include "shell.h"
@@ -32,10 +32,7 @@ char	**add_export(t_shell *shell, int fd)
 	  while (shell->env[i] && (strncmp(shell->env[i], tab[1],
 		strlen(tab[1])) != 0 || shell->env[i][strlen(tab[1])] != '='))
 	    i++;
-	  if (shell->env[i])
-	    modify_env(shell, tmp, i);
-	  else
-	    add_env(shell, tmp);
+	  (shell->env[i]) ? modify_env(shell, tmp, i) : add_env(shell, tmp);
 	}
     }
   return (shell->env);
