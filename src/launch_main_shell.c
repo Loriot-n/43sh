@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sun Jun  5 16:31:31 2016 CUENAT
+** Last update Sun Jun  5 21:04:01 2016 CUENAT
 */
 
 #include "arrows.h"
@@ -17,7 +17,6 @@ int		ft_start_exec(t_shell *shell)
   t_sub_list	*tmp_sub;
   char		*tkn;
 
-  shell->res_exec = 0;
   tmp_list = shell->exec_list;
   while (tmp_list != NULL)
     {

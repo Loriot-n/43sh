@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 15:48:14 2016 CUENAT
-** Last update Sun Jun  5 14:58:52 2016 CUENAT
+** Last update Sun Jun  5 21:41:50 2016 CUENAT
 */
 
 #include "shell.h"
@@ -27,6 +27,5 @@ int		main(int ac, char **av, char **environ)
   free_alias(shell->alias);
   (shell->res_exec == 0) ? (i = 0) : (i = 1);
   ft_free_struct(shell);
-  putchar(10);
   return (i);
 }
