@@ -5,11 +5,20 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 16:39:02 2016 Nicolas Loriot
-** Last update Sun Jun  5 16:34:13 2016 CUENAT
+** Last update Sun Jun 05 17:21:28 2016 Nicolas Loriot
 */
 
 #include "shell.h"
 #include "arrows.h"
+
+void		set_comp_attribute(t_raw *raw, int i)
+{
+  raw->complete = (i == 2) ? raw->complete + 1 : 0;
+  if (i == 2)
+    (!raw->beg) ? raw->beg = strdup(raw->line->input->buffer) : 0;
+  else
+    raw->beg = NULL;
+}
 
 int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
 {
@@ -32,11 +41,7 @@ int		get_std_escape(t_raw *raw, char *ch, int *enter, int *move)
     i++;
   if (i < 7)
     {
-      raw->complete = (i == 2) ? raw->complete + 1 : 0;
-      if (i == 2)
-	(!raw->beg) ? raw->beg = strdup(raw->line->input->buffer) : 0;
-      else
-	raw->beg = NULL;
+      set_comp_attribute(raw, i);
       return (f[i](raw, ch, enter, move));
     }
   else
