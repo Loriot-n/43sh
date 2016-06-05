@@ -29,7 +29,7 @@ char	*get_env(t_shell *shell, char *var)
   if (!env[i] || !var)
     return (NULL);
   tmp = env[i];
-  return (&tmp[strlen(var) + 1]);
+  return (strdup(&tmp[strlen(var) + 1]));
 }
 
 static int	check(char *line)

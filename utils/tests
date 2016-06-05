@@ -4,6 +4,7 @@ sETUP="PATH='/usr/bin:/bin' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [01-END]
 
 [02]
@@ -12,6 +13,7 @@ SETUP="PATH='/bin' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [02-END]
 
 [03]
@@ -20,6 +22,7 @@ SETUP="PATH=':/usr/bin:/bin:' ; touch file$$"
 CLEAN="rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [03-END]
 
 [04]
@@ -28,6 +31,7 @@ SETUP="touch file$$;PATH=''"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [04-END]
 
 [05]
@@ -36,6 +40,7 @@ SETUP="PATH='/tmp:/root/:/bin' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [05-END]
 
 [06]
@@ -44,6 +49,7 @@ SETUP="PATH=' ' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [06-END]
 
 [07]
@@ -52,6 +58,7 @@ SETUP="PATH='coucou' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [07-END]
 
 [08]
@@ -60,6 +67,7 @@ SETUP="PATH='/' ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [08-END]
 
 [09]
@@ -68,6 +76,7 @@ SETUP="PATH='.mybin' ; /usr/bin/touch file$$ ; /bin/mkdir .mybin ; /bin/cp /bin/
 CLEAN="/bin/rm -f file$$ ; /bin/rm -Rf .mybin"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [09-END]
 
 [10]
@@ -76,6 +85,7 @@ SETUP="unset PATH ; /usr/bin/touch file$$"
 CLEAN="/bin/rm -f file$$"
 TESTS=
   echo 'ls -la /bin .'
+  echo 'echo $?'
 [10-END]
 
 
@@ -85,6 +95,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo 'pwd'
+  echo 'echo $?'
 [11-END]
 
 [12]
@@ -93,6 +104,7 @@ SETUP="OLDPATH=$PATH ; PATH='/toto'"
 CLEAN="PATH=$OLDPATH"
 TESTS=
   echo 'setenv | /bin/grep PATH'
+  echo 'echo $?'
 [12-END]
 
 [13]
@@ -105,6 +117,7 @@ TESTS=
   echo 'bin/cat'
   sleep 0.5
   echo 'pwd'
+  echo 'echo $?'
 [13-END]
 
 [14]
@@ -113,6 +126,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo 'exit 25'
+  echo 'echo $?'
 [14-END]
 
 [15]
@@ -121,6 +135,7 @@ SETUP="PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
   echo 'coucou'
+  echo 'echo $?'
 [15-END]
 
 [16]
@@ -139,6 +154,7 @@ TESTS=
   echo 'setenv titi abcd'
   echo 'unsetenv tata'
   echo 'env'
+  echo 'echo $?'
 [16-END]
 
 [17]
@@ -152,6 +168,7 @@ TESTS=
   echo -e "cd -\necho KEY\npwd\ncd /\nls"
   echo "cd -"
   echo "ls"
+  echo 'echo $?'
 [17-END]
 
 [18]
@@ -160,6 +177,7 @@ SETUP="mkdir testdircd ; chmod 000 testdircd"
 CLEAN="chmod 755 testdircd ; rmdir testdircd"
 TESTS=
   echo "cd testdircd"
+  echo 'echo $?'
 [18-END]
 
 [19]
@@ -178,6 +196,7 @@ TESTS=
   echo -e "\tls"
   echo -e "\tls\t-l"
   echo -e "\t\t    ls\t     \t-l    \t\t  \t -a    \t\t"
+  echo 'echo $?'
 [19-END]
 
 [20]
@@ -194,6 +213,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo -e "ls /dev | grep tty"
+  echo 'echo $?'
 [21-END]
 
 [22]
@@ -203,6 +223,7 @@ CLEAN=""
 TESTS=
   echo -e "ls | grep plop"
   echo -e "\t ls   -l\t/dev|\tgrep tty"
+  echo 'echo $?'
 [22-END]
 
 [23]
@@ -211,6 +232,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo -e "ls /dev | cat  | tr y Y | grep ttY | cat"
+  echo 'echo $?'
 [23-END]
 
 [24]
@@ -219,6 +241,7 @@ SETUP="ulimit -n 21"
 CLEAN=""
 TESTS=
   echo -e "ls -lR /dev | cat  | tr y Y | grep ttY | cat | cat | cat | cat | cat | cat |cat"
+  echo 'echo $?'
 [24-END]
 
 [25]
@@ -227,6 +250,7 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo -e "ls -lR /dev | cat  | tr y Y | grep ttY | cat | cati | cat"
+  echo 'echo $?'
 [25-END]
 
 [26]
@@ -237,6 +261,7 @@ TESTS=
   echo "ls /dev > fic"
   echo "echo toto"
   echo "cat fic"
+  echo 'echo $?'
 [26-END]
 
 [27]
@@ -250,6 +275,7 @@ TESTS=
   echo "ls / >> fic"
   echo "echo titi"
   echo "cat fic"
+  echo 'echo $?'
 [27-END]
 
 [28]
@@ -260,6 +286,7 @@ TESTS=
   echo "cat /bin/ls > myls"
   echo "chmod 755 myls"
   echo "./myls"
+  echo 'echo $?'
 [28-END]
 
 [29]
@@ -268,6 +295,7 @@ SETUP="/bin/ls /dev > fic"
 CLEAN="rm fic"
 TESTS=
   echo "grep tty < fic"
+  echo 'echo $?'
 [29-END]
 
 [30]
@@ -276,6 +304,7 @@ SETUP="/bin/ls /dev > fic"
 CLEAN="rm fic ficout ficout2"
 TESTS=
   echo "grep tty < fic | tr y Y > ficout ; cat ficout | sed s/tt/uu/g > ficout2 ; cat ficout2 | tr u I"
+  echo 'echo $?'
 [30-END]
 
 [31]
@@ -287,6 +316,7 @@ TESTS=
   echo "echo ls | ./42sh > result2"
   echo "cat result"
   echo "cat result2"
+  echo 'echo $?'
 [31-END]
 
 [32]
@@ -296,6 +326,7 @@ CLEAN="rm fic"
 TESTS=
   echo "cat fic >> fic"
   echo "cat fic"
+  echo 'echo $?'
 [32-END]
 
 [33]
@@ -305,6 +336,7 @@ CLEAN=""
 TEST=
   echo "unsetenv *"
   echo "env"
+  echo 'echo $?'
 [33-END]
 
 [34]
@@ -313,6 +345,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "ls $HOME"
+  echo 'echo $?'
 [34-END]
 
 [35]
@@ -321,6 +354,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "echo 'ls -al | grep Makefile;'
+  echo 'echo $?'
 [35-END]
 
 [36]
@@ -329,6 +363,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "man ls | cat"
+  echo 'echo $?'
 [36-END]
 
 [37]
@@ -337,6 +372,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "exit abc"
+  echo 'echo $?'
 [37-END]
 
 [38]
@@ -346,6 +382,7 @@ CLEAN="rm -f caca toto"
 TEST=
   echo "ls > caca toto"
   echo "cat caca toto"
+  echo 'echo $?'
 [38-END]
 
 [39]
@@ -354,6 +391,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "echo 'ls $HOME'"
+  echo 'echo $?'
 [39-END]
 
 [40]
@@ -362,6 +400,7 @@ SETUP=""
 CLEAN="rm -f ok"
 TEST=
   echo "caca > ok"
+  echo 'echo $?'
 [40-END]
 
 [41]
@@ -370,6 +409,7 @@ SETUP=""
 CLEAN="rm -f ok caca"
 TEST=
   echo "ls > ok > caca"
+  echo 'echo $?'
 [41-END]
 
 [43]
@@ -378,7 +418,9 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "./fpe"
+  echo 'echo $?'
   echo "./sigsegv"
+  echo 'echo $?'
 [43-END]
 
 [45]
@@ -388,6 +430,7 @@ CLEAN=""
 TEST=
   echo "alias l ls -la"
   echo "l"
+  echo 'echo $?'
 [45-END]
 
 [46]
@@ -397,6 +440,7 @@ CLEAN="rm -f ok"
 TEST=
   echo "alias l ls -la > ok"
   echo "l"
+  echo 'echo $?'
 [46-END]
 
 [47]
@@ -406,6 +450,7 @@ CLEAN=""
 TEST=
   echo "alias l ls -la"
   echo "unalias l"
+  echo 'echo $?'
 [47-END]
 
 [48]
@@ -414,6 +459,7 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "ls `echo $HOME`"
+  echo 'echo $?'
 [48-END]
 
 [49]
@@ -422,4 +468,14 @@ SETUP=""
 CLEAN=""
 TEST=
   echo "cat src/*.c"
+  echo 'echo $?'
 [49-END]
+
+[50]
+NAME="Non existent bin"
+SETUP=""
+CLEAN=""
+TEST=
+  echo "CacaCacaProutProutPwetPwet"
+  echo 'echo $?'
+[50-END]

@@ -26,23 +26,24 @@ SRCS	=	src/main.c \
 		src/free_struct.c \
 		src/execute_instruction.c \
 		src/redirection.c \
-		src/alias.c \
-		src/alias_list.c \
+		src/built_in/alias.c \
+		src/built_in/alias_list.c \
 		src/signal.c \
-		src/42shconfig.c \
+		src/config_file/42shconfig.c \
 		src/choose_type_execution.c \
 		src/my_getnbr.c \
-		src/build_exit.c \
-		src/build_echo.c \
-		src/build_setenv.c \
-		src/build_unsetenv.c \
-		src/build_cd.c \
-		src/build_env.c \
+		src/built_in/build_exit.c \
+		src/built_in/build_echo.c \
+		src/built_in/build_setenv.c \
+		src/built_in/build_unsetenv.c \
+		src/built_in/build_cd.c \
+		src/built_in/build_env.c \
+		src/built_in/build_source.c \
+		src/built_in/build_alias.c \
 		src/env_values.c \
-		src/check_options.c \
+		src/config_file/check_options.c \
 		src/join.c \
 		src/export.c \
-		src/build_source.c \
 		src/check_input2.c \
 		src/globing.c \
 		src/cmd_history.c \
@@ -57,10 +58,9 @@ SRCS	=	src/main.c \
 		src/line_editing/input_signals.c \
 		src/line_editing/raw_memfunc.c \
 		src/line_editing/raw_free.c \
-		src/autocomplete.c \
+		src/autocompletion/autocomplete.c \
 		src/magic_quotes.c \
-		src/tabulation.c \
-		src/build_alias.c \
+		src/autocompletion/tabulation.c \
 		src/execute_pipe.c
 
 OBJS	=	$(SRCS:.c=.o)
