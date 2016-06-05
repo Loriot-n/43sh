@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 12:36:39 2016 Nicolas Loriot
-** Last update Sun Jun  5 16:26:16 2016 CUENAT
+** Last update Sun Jun 05 20:29:07 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -33,20 +33,20 @@ int		raw_strchr(char *str, char ch)
 
 void			read_mode(t_raw *raw, int state)
 {
-  struct termios	newT;
+  struct termios	new_t;
 
-  newT = raw->term->origin;
+  new_t = raw->term->origin;
   if (state)
     {
-      newT.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IUTF8);
-      newT.c_oflag &= ~OPOST;
-      newT.c_cflag |= CS8;
-      newT.c_cflag |= ~CSIZE;
-      newT.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-      newT.c_cc[VMIN] = 1;
-      newT.c_cc[VTIME] = 0;
+      new_t.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IUTF8);
+      new_t.c_oflag &= ~OPOST;
+      new_t.c_cflag |= CS8;
+      new_t.c_cflag |= ~CSIZE;
+      new_t.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+      new_t.c_cc[VMIN] = 1;
+      new_t.c_cc[VTIME] = 0;
     }
-  tcsetattr(0, TCSAFLUSH, &newT);
+  tcsetattr(0, TCSAFLUSH, &new_t);
   raw->term->mode = state;
 }
 
