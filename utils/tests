@@ -250,7 +250,6 @@ SETUP=""
 CLEAN=""
 TESTS=
   echo -e "ls -lR /dev | cat  | tr y Y | grep ttY | cat | cati | cat"
-  echo 'echo $?'
 [25-END]
 
 [26]

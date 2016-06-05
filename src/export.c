@@ -5,14 +5,14 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Sun Jun  5 17:35:39 2016 CUENAT
+** Last update Sun Jun  5 20:06:25 2016 CUENAT
 */
 
 #include "shell.h"
 
 char	**add_export(t_shell *shell, int fd)
 {
-  char	*one;
+   char	*one;
   char	**tab;
   char	*tmp[4];
   int	i;
