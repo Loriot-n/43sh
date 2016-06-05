@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Sun Jun  5 17:02:07 2016 CUENAT
+## Last update Sun Jun  5 22:17:20 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -67,7 +67,7 @@ SRCS	=	src/main.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-I inc -W -Wall -Wextra -g3 -Wno-unused-parameter
+CFLAGS	=	-I inc -W -Wall -Wextra -Wno-unused-parameter
 
 all:		$(NAME)
 
