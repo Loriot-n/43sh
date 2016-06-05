@@ -5,8 +5,7 @@
 ** Login   <sanche_k@epitech.net>
 **
 ** Started on  Fri Jun  3 09:40:49 2016 Sanchez Loris
-** Last update Sun Jun  5 16:44:23 2016 CUENAT
-** Last update Sat Jun 04 19:14:22 2016 Nicolas Loriot
+** Last update Sun Jun  5 17:06:52 2016 CUENAT
 */
 
 #include "shell.h"

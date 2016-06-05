@@ -6,7 +6,7 @@
 ** Login   <stanislas@epitech.net>
 ** yan typedef size_t
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Sun Jun  5 17:02:47 2016 CUENAT
+** Last update Sun Jun  5 17:07:06 2016 CUENAT
 */
 
 #ifndef SHELL_H_
