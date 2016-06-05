@@ -1893,6 +1893,7 @@ def get_system_header_types():
         'dirent.h':     'DIR',
         'errno.h':      '',
         'fcntl.h':      '',
+        'glob.h':       'glob_t',
         'grp.h':        '',
         'ncurses.h':    curses,
         'pwd.h':        '',
@@ -2893,7 +2894,10 @@ class Parser(TokenReader):
             operator = self._parse_sign(operators)
             if operator is None:
                 break
-            left = BinaryOperationExpr(left, operator, sub_function())
+            right = sub_function()
+            if right is None:
+                self._raise_syntax_error()
+            left = BinaryOperationExpr(left, operator, right)
         return left
 
     @backtrack
@@ -4093,6 +4097,11 @@ class NameChecker(StyleChecker):
             return
         if isinstance(decl, FunctionExpr):
             return
+        if isinstance(decl, BinaryOperationExpr):
+            if decl.operator.string == '=':
+                # Don't check the initializer
+                self._check_declarator(decl.left, typedef, global_variable)
+                return
         for child in decl.children:
             self._check_declarator(child, typedef, global_variable)
 
@@ -4413,7 +4422,8 @@ def main():
     program = Program()
     program.check()
     program.print_issues()
-    sys.exit(0 if len(program.issues) == 0 else 1)
+    error_count = len([e for e in program.issues if e.level == 'error'])
+    sys.exit(os.EX_OK if error_count == 0 else os.EX_DATAERR)
 
 
 if __name__ == '__main__':
