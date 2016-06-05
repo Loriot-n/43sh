@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Sun Jun  5 20:46:55 2016 CUENAT
+** Last update Sun Jun  5 20:53:58 2016 CUENAT
 */
 
 #include "shell.h"
@@ -118,7 +118,6 @@ int	ft_create_exec_function(t_shell *shell, t_sub_list *tmp, char *tkn)
       || (tmp->separator == OR && shell->res_exec != 0))
     {
       shell->fd_in = dup(0);
-      shell->nb_fork = 0;
       while (tmp->exec_cmd[i])
 	{
 	  if ((i = ft_main_read_function(shell, tmp, tkn, i)) == -1)

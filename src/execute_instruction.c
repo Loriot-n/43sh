@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sun Jun  5 20:46:16 2016 CUENAT
+** Last update Sun Jun  5 20:58:46 2016 CUENAT
 */
 
 #include "shell.h"
@@ -50,6 +50,8 @@ void	ft_execute_instr_fork_2(t_shell *shell)
       wait(&status);
       if (WIFEXITED(status) && status != 0)
 	shell->res_exec = WEXITSTATUS(status);
+      if (WIFSIGNALED(status))
+	shell->res_exec = status;
       sig_handler(status);
       i += 1;
     }
