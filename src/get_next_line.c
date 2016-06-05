@@ -1,5 +1,5 @@
 /*
-** get_next_line.c for gnl in /home/nico/rendu/S01/ProgElem/CPE_2015_getnextline
+** get_next_line.c for gnl in /home/nico/rendu/S01/CPE_2015/getnextline
 **
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
