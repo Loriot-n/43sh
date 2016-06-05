@@ -5,7 +5,7 @@
 ** Login   <sanche_k@epitech.net>
 **
 ** Started on  Fri Jun  3 09:40:49 2016 Sanchez Loris
-** Last update Sun Jun  5 17:06:52 2016 CUENAT
+** Last update Sun Jun 05 20:02:03 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -17,7 +17,7 @@ void		print_alias(t_alias *alias)
   tmp = alias;
   while (tmp)
     {
-      printf("%s %s\n", tmp->alias, tmp->cmd);
+      printf("%s\t(%s)\n", tmp->alias, tmp->cmd);
       tmp = tmp->next;
     }
 }

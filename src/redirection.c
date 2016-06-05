@@ -30,7 +30,7 @@ void	ft_double_inredirect(char *file)
 
 void	ft_inredirect(char *file, int fd_in)
 {
-  int 	fd0;
+  int	fd0;
 
   if ((fd0 = open(file, O_RDONLY, 0)) == -1)
     {
