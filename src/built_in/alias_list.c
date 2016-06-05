@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Sun Jun  5 17:01:11 2016 Sanchez Loris
+** Last update Sun Jun 05 19:09:43 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -22,7 +22,9 @@ t_alias		*new_alias(char *replace, char *replace_by)
   return (elem);
 }
 
-t_alias			*insert_alias(char *replace, char *replace_by, t_alias **head,
+t_alias			*insert_alias(char *replace,
+				      char *replace_by,
+				      t_alias **head,
 				      int whatdo)
 {
   t_alias		*newnode;
@@ -36,9 +38,14 @@ t_alias			*insert_alias(char *replace, char *replace_by, t_alias **head,
       *head = newnode;
       return (*head);
     }
-  while (tmp->next != NULL && strcmp(tmp->alias, replace))
+  if (!strcmp(tmp->alias, replace))
+    {
+      tmp->cmd = replace_by;
+      return (tmp);
+    }
+  while (tmp->next != NULL)
     tmp = tmp->next;
-  if (tmp->next)
+  if (!strcmp(tmp->alias, replace))
     {
       tmp->cmd = replace_by;
       return (tmp);
