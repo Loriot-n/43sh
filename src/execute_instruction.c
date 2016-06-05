@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sun Jun  5 14:59:26 2016 CUENAT
+** Last update Sun Jun  5 15:17:30 2016 CUENAT
 */
 
 #include "shell.h"
@@ -31,6 +31,7 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in)
 	    dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
 	  else
 	    dprintf(2, "%s: %s\n", shell->cur_exec[0], strerror(errno));
+	  shell->res_exec = 1;
 	  return (-1);
 	}
     }
@@ -106,6 +107,7 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
   int	(*ptr[10])(t_shell *shell);
   int  	i;
+  int	k;
 
   ptr[0] = &ft_exit;
   ptr[1] = &ft_echo;
@@ -118,11 +120,13 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[8] = &ft_unalias;
   ptr[9] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
-    (ptr[i])(shell);
+   k =  (ptr[i])(shell);
   else
     return (-1);
   (void)(tkn);
   if (i == 0)
     return (2);
+  if (k != 0)
+    shell->res_exec = 1;
   return (0);
 }
