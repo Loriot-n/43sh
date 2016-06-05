@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sat Jun 04 18:34:29 2016 Nicolas Loriot
+** Last update Sat Jun  4 19:23:04 2016 CUENAT
 */
 
 #include "arrows.h"
@@ -34,6 +34,24 @@ int		ft_start_exec(t_shell *shell)
   return (0);
 }
 
+int	ft_in_lauch(t_shell *shell, t_raw *raw, char *line)
+{
+   shell->path = ft_fill_bin_path(shell->env);
+   line = replace_env(shell, line);
+   line = epur(line);
+   line = replace_alias(shell->alias, line);
+   //line = replace_quotes(shell, line);
+   line = replace_glob(line);
+   if ((shell->res_exec = ft_check_input(line)) == 0)
+     {
+       ft_create_list(shell, line);
+       ft_create_sub_list(shell);
+       ft_start_exec(shell);
+       ft_free_struct(shell);
+     }
+   return (0);
+}
+
 int	ft_launch_shell(t_shell *shell)
 {
   char	*line;
@@ -45,18 +63,7 @@ int	ft_launch_shell(t_shell *shell)
   while (((shell->isa_tty == 1 &&
 	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
     {
-      shell->path = ft_fill_bin_path(shell->env);
-      line = replace_env(shell, line);
-      line = epur(line);
-      line = replace_alias(shell->alias, line);
-      line = replace_glob(line);
-      if ((shell->res_exec = ft_check_input(line)) == 0)
-	{
-	  ft_create_list(shell, line);
-	  ft_create_sub_list(shell);
-	  ft_start_exec(shell);
-	  ft_free_struct(shell);
-	}
+      ft_in_lauch(shell, raw, line);
       ft_free_tab(shell->path);
       if (strlen(raw->line->input->buffer))
 	hist_add_str(raw, raw->line->input->buffer);

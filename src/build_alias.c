@@ -5,7 +5,8 @@
 ** Login   <sanche_k@epitech.net>
 ** 
 ** Started on  Fri Jun  3 09:40:49 2016 Sanchez Loris
-** Last update Sat Jun  4 18:29:55 2016 Sanchez Loris
+** Last update Sat Jun  4 19:49:38 2016 Sanchez Loris
+** Last update Sat Jun 04 19:14:22 2016 Nicolas Loriot
 */
 
 #include "shell.h"
@@ -54,6 +55,18 @@ int		ft_alias(t_shell *shell)
   return (0);
 }
 
+void		ft_norme_unalias(t_alias *tmp, char **tab)
+{
+  if (strcmp(tab[1], tmp->next->alias) == 0)
+    {
+      free(tmp->next->cmd);
+      free(tmp->next->alias);
+      tmp->next = tmp->next->next;
+    }
+  else
+    tmp = tmp->next;  
+}
+
 int		ft_unalias(t_shell *shell)
 {
   t_alias	*tmp;
@@ -61,28 +74,21 @@ int		ft_unalias(t_shell *shell)
 
   tmp = shell->alias;
   tab = split(strdup(&(shell->exec_list->cmd[6])), " ");
-  if (tab[1] == NULL)
+  if (tab == NULL || shell->alias == NULL)
+    return (0);
+  if (tab[1] == NULL || !strcmp(tab[1], "unalias"))
     {
       printf("unalias: Too few arguments.\n");
       return (1);
     }
-  if (strcmp(tab[1], tmp->alias) == 0)
+  if (tab[1] && tmp->alias && strcmp(tab[1], tmp->alias) == 0)
     {
       free(tmp->cmd);
       free(tmp->alias);
       shell->alias = shell->alias->next;
       return (0);
-      }
-  while (tmp->next)
-    {
-      if (strcmp(tab[1], tmp->next->alias) == 0)
-	{
-	  free(tmp->next->cmd);
-     	  free(tmp->next->alias);
-	  tmp->next = tmp->next->next;
-	}
-      else
-	tmp = tmp->next;
     }
+  while (tmp->next)
+    ft_norme_unalias(tmp, tab);
   return (0);
 }

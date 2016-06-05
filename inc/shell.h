@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 ** yan typedef size_t
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Sat Jun  4 16:46:36 2016 Sanchez Loris
+** Last update Sat Jun  4 19:42:40 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -150,6 +150,15 @@ int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in);
 void	ft_execute_instr_fork_2(t_shell *shell);
 
 /*
+** execute_pipe.c
+*/
+int	ft_final_exec_pipe(t_shell *shell,
+			   int pid,
+			   int tube[2],
+			   char *tkn);
+void	ft_execute_instr_fork_pipe(t_shell *shell, int tube[2]);
+
+/*
 ** choose_type_execution.c
 */
 int	ft_choose_type_execution(t_shell *shell, char *tkn, int end);
@@ -233,6 +242,7 @@ void	print_alias(t_alias *alias);
 int	check_alias(char **lexed);
 void    show_this_alias(char *search, t_alias *alias);
 int	ft_unalias(t_shell *shell);
+void	ft_norme_unalias(t_alias *tmp, char **tab);
 
 /*
 ** START ------ HISTORY -------- END

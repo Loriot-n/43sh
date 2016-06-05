@@ -5,12 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-<<<<<<< HEAD
-** Last update Sat Jun  4 16:45:46 2016 Sanchez Loris
-=======
-** Last update Sat Jun  4 17:19:27 2016 CUENAT
->>>>>>> 26f3d908db0a6bc3793323fd4d2b967bdc95b008
-** Last update Thu Jun  2 23:19:25 2016 CUENAT
+** Last update Sat Jun  4 19:43:43 2016 CUENAT
 */
 
 #include "shell.h"
@@ -64,29 +59,11 @@ int		ft_final_exec(t_shell *shell, char *tkn)
   int		tube[2];
   pid_t		pid;
 
+  pid = 0;
   if (pipe(tube) == -1)
     return (-1);
   if (ft_is_a_build_in(shell->cur_exec[0]) == -1)
-    {
-      if ((pid = fork()) == -1)
-	exit(EXIT_FAILURE);
-      else if (pid == 0)
-	{
-	  dup2(shell->fd_in, 0);
-	  close(tube[0]);
-	  ft_redirect_or_pipe(shell, tkn, shell->fd_in);
-	  close(tube[1]);
-	  exit(EXIT_FAILURE);
-	}
-      else
-	{
-	  shell->nb_fork += 1;
-	  close(shell->fd_in);
-	  shell->fd_in = dup(tube[0]);
-	  close(tube[0]);
-	  close(tube[1]);
-	}
-    }
+    ft_final_exec_pipe(shell, pid, tube, tkn);
   else
     {
       close(tube[0]);
@@ -118,13 +95,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 	  exit(ft_redirect_or_pipe(shell, tkn, shell->fd_in));
 	}
       else
-	{
-	  shell->nb_fork += 1;
-	  close(shell->fd_in);
-	  shell->fd_in = dup(tube[0]);
-	  close(tube[0]);
-	  close(tube[1]);
-	}
+	ft_execute_instr_fork_pipe(shell, tube);
     }
   else
     ft_final_exec(shell, tkn);
