@@ -1,3 +1,0 @@
-#!/bin/sh
-docker run -it -v /home/stanislas/clone/PSU_2015_42sh  epitechcontent/blinux:latest
-/bin/bash 
