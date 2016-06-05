@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Sun Jun 05 14:27:37 2016 Nicolas Loriot
 */
 
 #include "shell.h"

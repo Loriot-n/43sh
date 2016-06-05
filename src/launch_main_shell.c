@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sat Jun  4 19:23:04 2016 CUENAT
+** Last update Sun Jun 05 15:08:05 2016 Nicolas Loriot
 */
 
 #include "arrows.h"
@@ -61,15 +61,15 @@ int	ft_launch_shell(t_shell *shell)
   raw = init_raw(shell, "exit");
   set_hist(raw, 1, 15);
   while (((shell->isa_tty == 1 &&
-	   (line = get_line(raw, "$> ")))) || (line = get_next_line(0)))
+	   (!strcmp(line = get_line(raw, "$> "), "exit")))) ||
+	 (line = get_next_line(0)))
     {
       ft_in_lauch(shell, raw, line);
       ft_free_tab(shell->path);
       if (strlen(raw->line->input->buffer))
-	hist_add_str(raw, raw->line->input->buffer);
+	hist_add_str(raw, raw->line->input->buffer, shell);
       free(line);
     }
   raw_free(raw);
-  printf("exit");
   return (0);
 }
