@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 18:24:09 2016 CUENAT
-** Last update Sun Jun  5 15:40:47 2016 CUENAT
+** Last update Sun Jun  5 17:04:20 2016 CUENAT
 */
 
 #include "shell.h"
@@ -74,7 +74,7 @@ char	**ft_fill_tab_for_execve(char **cmd, int *i)
 	exit(EXIT_FAILURE);
       res[j] = strdup(cmd[*i]);
       j += 1;
-      *i +=1;
+      *i += 1;
     }
   res[j] = NULL;
   return (res);
@@ -104,8 +104,7 @@ int	ft_main_read_function(t_shell *shell, t_sub_list *tmp, char *tkn, int i)
     (end = 0) : (end = 1);
   ft_choose_type_execution(shell, tkn, end);
   free(tkn);
-  if (tmp->exec_cmd[i] != NULL)
-    tkn = strdup(tmp->exec_cmd[i]);
+  (tmp->exec_cmd[i] != NULL) ? (tkn = strdup(tmp->exec_cmd[i])) : 0;
   ft_free_tab(shell->cur_exec);
   return (i);
 }

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Sat Jun  4 19:35:31 2016 CUENAT
-** Last update Sat Jun  4 19:40:03 2016 CUENAT
+** Last update Sun Jun  5 16:09:21 2016 CUENAT
 */
 
 #include "shell.h"
@@ -38,9 +38,9 @@ int	ft_final_exec_pipe(t_shell *shell,
 
 void	ft_execute_instr_fork_pipe(t_shell *shell, int tube[2])
 {
-   shell->nb_fork += 1;
-   close(shell->fd_in);
-   shell->fd_in = dup(tube[0]);
-   close(tube[0]);
-   close(tube[1]);
+  shell->nb_fork += 1;
+  close(shell->fd_in);
+  shell->fd_in = dup(tube[0]);
+  close(tube[0]);
+  close(tube[1]);
 }

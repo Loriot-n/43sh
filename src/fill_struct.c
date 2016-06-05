@@ -5,15 +5,15 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 16:08:26 2016 CUENAT
-** Last update Mon May 30 16:01:09 2016 CUENAT
+** Last update Sun Jun  5 16:22:30 2016 CUENAT
 */
 
 #include "shell.h"
 
-char	**ft_create_env()
+char		**ft_create_env()
 {
-  char	**tmp;
-  char	*pwd;
+  char		**tmp;
+  char		*pwd;
   struct passwd	*info;
 
   info = getpwuid(geteuid());

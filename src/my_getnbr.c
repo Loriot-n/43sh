@@ -1,11 +1,11 @@
 /*
 ** my_getnbr.c for my_getnbr.c in /home/cuenat_s/rendu/Piscine_C_J04
-** 
+**
 ** Made by stanislas cuenat
 ** Login   <cuenat_s@epitech.net>
-** 
+**
 ** Started on  Thu Oct  1 21:53:43 2015 stanislas cuenat
-** Last update Sun Jan 24 20:22:10 2016 stanislas cuenat
+** Last update Sun Jun  5 16:30:36 2016 CUENAT
 */
 
 void	my_verif(char *str, int i, long int *ret)
@@ -17,7 +17,7 @@ void	my_verif(char *str, int i, long int *ret)
 void	my_increment(long *ret, char *str, int i)
 {
   if (*ret >= 0)
-    *ret= *ret * 10 + (str[i] - 48);
+    *ret = *ret * 10 + (str[i] - 48);
   else
     *ret = *ret * 10 - (str[i] - 48);
 }
@@ -44,7 +44,7 @@ int		my_getnbr(char *str)
       if (ret > 2147483647 || ret < (-2147483648))
         return (0);
       if (chk > 0 && (str[i] < 48 || str[i] > 57))
-	  return (ret);
+	return (ret);
       i = i + 1;
     }
   return (ret);

@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 11:25:16 2016 CUENAT
-** Last update Sat Jun  4 18:42:53 2016 CUENAT
+** Last update Sun Jun  5 17:01:21 2016 CUENAT
 */
 
 #include "shell.h"
@@ -20,7 +20,6 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
   new->cmd = strdup(epur(tmp_c));
-  /*new->exec_cmd = split_no_const(new->cmd, " |<>"); */
   new->exec_cmd = split(new->cmd, " |<>");
   new->separator = *sep;
   new->next = NULL;
@@ -38,9 +37,8 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
 
 void	ft_parse_string_sub_list(t_list *tmp, int *sep)
 {
-  int  	i;
-  int  	j;
-  char 	*tmp_c;
+  int	i;
+  int	j;
 
   i = 0;
   while (tmp->cmd[i])
@@ -51,20 +49,11 @@ void	ft_parse_string_sub_list(t_list *tmp, int *sep)
 	  if (is_in_const(tmp->cmd, i) == 0 &&
 	      ((tmp->cmd[i] == '&' && tmp->cmd[i + 1] == '&')
 	      || (tmp->cmd[i] == '|' && tmp->cmd[i + 1] == '|')))
-	    break;
+	    break ;
 	  i += 1;
 	}
       if (j != i)
-	{
-	  if ((tmp_c = malloc(sizeof(char) * (i - j + 1))) == NULL)
-	      exit(EXIT_FAILURE);
-	  strncpy(tmp_c, &tmp->cmd[j], (i - j));
-	  tmp_c[i - j] = '\0';
-	  tmp->sub_list = ft_add_sub_list_at_end(tmp->sub_list, tmp_c, sep);
-	  *sep = NO;
-	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '&') ? (*sep = AND) : 0;
-	  (tmp->cmd[i] != '\0' && tmp->cmd[i + 1] == '|') ? (*sep = OR) : 0;
-	}
+	ft_parse_string_sub_list_2(tmp, i, j, sep);
       (tmp->cmd[i] != '\0') ? (i += 2) : (i);
     }
 }

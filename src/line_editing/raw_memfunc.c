@@ -1,11 +1,11 @@
 /*
 ** raw_memfunc.c for 42sh in /home/nico/rendu/S02/Unix/PSU_2015_42sh/src
-** 
+**
 ** Made by Nicolas Loriot
 ** Login   <loriot_n@epitech.net>
-** 
+**
 ** Started on  Tue May 31 19:52:48 2016 Nicolas Loriot
-** Last update Fri Jun 03 17:31:29 2016 Nicolas Loriot
+** Last update Sun Jun  5 16:25:52 2016 CUENAT
 */
 
 #include "shell.h"
@@ -14,6 +14,7 @@
 void		raw_memmove(void *dest, void *src, size_t size)
 {
   void		*tmp;
+
   tmp = raw_alloc(size);
   memcpy(tmp, src, size);
   memcpy(dest, tmp, size);
@@ -46,4 +47,3 @@ void		*raw_calloc(size_t nmemb, size_t size)
     exit(EXIT_FAILURE);
   return (ret);
 }
-

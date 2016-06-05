@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 13:59:30 2016 CUENAT
-** Last update Fri Jun  3 10:29:20 2016 CUENAT
+** Last update Sun Jun  5 16:20:42 2016 CUENAT
 */
 
 #include "shell.h"
@@ -20,7 +20,7 @@ void	ft_double_inredirect(char *file)
       if (strcmp(input, file) == 0)
 	{
 	  free(input);
-	  break;
+	  break ;
 	}
       free(input);
       write(1, "? ", 2);
@@ -30,7 +30,7 @@ void	ft_double_inredirect(char *file)
 
 void	ft_inredirect(char *file, int fd_in)
 {
-  int fd0;
+  int 	fd0;
 
   if ((fd0 = open(file, O_RDONLY, 0)) == -1)
     {
@@ -45,7 +45,7 @@ void    ft_rewrite(char *file)
 {
   int   fd;
 
-  if ((fd = open(file , O_CREAT | O_RDWR | O_TRUNC, 0666)) == -1)
+  if ((fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0666)) == -1)
     {
       dprintf(2, "%s: %s\n", file, strerror(errno));
       exit(EXIT_FAILURE);

@@ -5,27 +5,27 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Tue May 24 11:53:50 2016 CUENAT
-** Last update Sun Jun  5 15:43:05 2016 CUENAT
+** Last update Sun Jun  5 16:16:25 2016 CUENAT
 */
 
 #include "shell.h"
 
 int	ft_redirect_or_pipe(t_shell *shell, char *tkn, int fd_in)
 {
-   if (tkn != NULL)
-	{
-	  if (strcmp(tkn, ">") == 0)
-	    ft_rewrite(shell->file);
-	  else if (strcmp(tkn, ">>") == 0)
-	    ft_write_at_end(shell->file);
-	  else if (strcmp(tkn, "<") == 0)
-	    ft_inredirect(shell->file, fd_in);
-	  else if (strcmp(tkn, "<<") == 0)
-	    ft_double_inredirect(shell->file);
-	}
+  if (tkn != NULL)
+    {
+      if (strcmp(tkn, ">") == 0)
+	ft_rewrite(shell->file);
+      else if (strcmp(tkn, ">>") == 0)
+	ft_write_at_end(shell->file);
+      else if (strcmp(tkn, "<") == 0)
+	ft_inredirect(shell->file, fd_in);
+      else if (strcmp(tkn, "<<") == 0)
+	ft_double_inredirect(shell->file);
+    }
   if (ft_execute_instr_no_fork(shell, tkn) == -1)
     {
-      if (execve(shell->cur_exec[0], shell->cur_exec,shell->env) < 0)
+      if (execve(shell->cur_exec[0], shell->cur_exec, shell->env) < 0)
 	{
 	  if (errno == ENOENT)
 	    dprintf(2, "%s: Command not found.\n", shell->cur_exec[0]);
@@ -105,7 +105,7 @@ int		ft_execute_instr_fork(t_shell *shell, char *tkn, int end)
 int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
 {
   int	(*ptr[10])(t_shell *shell);
-  int  	i;
+  int	i;
   int	k;
 
   ptr[0] = &ft_exit;
@@ -119,7 +119,7 @@ int    	ft_execute_instr_no_fork(t_shell *shell, char *tkn)
   ptr[8] = &ft_unalias;
   ptr[9] = NULL;
   if ((i = ft_is_a_build_in(shell->cur_exec[0])) != -1)
-   k =  (ptr[i])(shell);
+    k = (ptr[i])(shell);
   else
     return (-1);
   (void)(tkn);

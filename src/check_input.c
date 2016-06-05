@@ -5,14 +5,14 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Thu May 19 10:38:57 2016 CUENAT
-** Last update Sat Jun  4 16:44:34 2016 CUENAT
+** Last update Sun Jun  5 16:40:07 2016 CUENAT
 */
 
 #include "shell.h"
 
 int	ft_look_dot(char **tab, int i)
 {
-  if (tab[i][0] ==  ';')
+  if (tab[i][0] == ';')
     {
       if (i == 0)
 	return (-1);
@@ -25,7 +25,7 @@ int	ft_look_dot(char **tab, int i)
 
 int	ft_look_and(char **tab, int i)
 {
-  if (tab[i][0] ==  '&')
+  if (tab[i][0] == '&')
     {
       if (tab[i + 1] == NULL && tab_len(tab) > 1)
 	return (-1);
@@ -39,7 +39,7 @@ int	ft_look_and(char **tab, int i)
 
 int	ft_look_or(char **tab, int i)
 {
-  if (tab[i][0] ==  '|')
+  if (tab[i][0] == '|')
     {
       if (strlen(tab[i]) > 2 || i == 0 || tab[i + 1] == NULL)
 	return (-1);
@@ -86,23 +86,8 @@ int	ft_check_input(char *line)
   check = 1;
   while (tab && tab[i])
     {
-      if ((check = is_const_string(tab[i], check) == 1) &&
-	  (ft_look_bad_tkn(tab[i], bad_tkn) == -1 || ft_look_and(tab, i) == -1
-	  || ft_look_or(tab, i) == -1 || ft_look_dot(tab, i) == -1))
-	{
-	  dprintf(2, "Unmatched %s\n", tab[i]);
-	  return (1);
-	}
-      if (ft_check_redirect(tab, i) == -1)
-	{
-	  dprintf(2, "Ambiguous output redirect.\n");
-	  return (1);
-	}
-       if (ft_check_input_redirect(tab, i) == -1)
-	{
-	  dprintf(2, "Ambiguous input redirect.\n");
-	  return (1);
-	}
+      if (ft_check_input_in_loop(tab, i, check, bad_tkn) != 0)
+	return (1);
       i += 1;
     }
   ft_free_tab(tab);

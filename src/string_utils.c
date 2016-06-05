@@ -5,14 +5,14 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Wed May 18 19:53:58 2016 CUENAT
-** Last update Wed May 18 19:57:16 2016 CUENAT
+** Last update Sun Jun  5 16:31:58 2016 CUENAT
 */
 
 #include "shell.h"
 
 char	*ft_strcat(char *str1, char *str2)
 {
-  char 	*res;
+  char	*res;
   int	i;
   int	j;
 
@@ -24,14 +24,14 @@ char	*ft_strcat(char *str1, char *str2)
     {
       res[i] = str1[j];
       i += 1;
-      j +=1;
+      j += 1;
     }
   j = 0;
   while (str2[j])
     {
       res[i] = str2[j];
       i += 1;
-      j +=1;
+      j += 1;
     }
   res[i] = '\0';
   return (res);

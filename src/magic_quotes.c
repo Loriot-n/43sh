@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update %udate maire_q
+** Last update Sun Jun  5 16:23:05 2016 CUENAT
 */
 
 #include "shell.h"
@@ -31,7 +31,7 @@ char	*replace(char *line, char *one, int begin, int end)
 char	*get_answer(t_shell *shell, char *tmp)
 {
   int	p[2];
-  int 	pid;
+  int	pid;
   char	*one;
 
   if (pipe(p) == -1 || (pid = fork()) == -1)

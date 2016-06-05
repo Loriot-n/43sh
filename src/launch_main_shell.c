@@ -5,7 +5,7 @@
 ** Login   <stanislas@epitech.net>
 **
 ** Started on  Mon May 30 16:18:20 2016 CUENAT
-** Last update Sun Jun  5 16:07:48 2016 CUENAT
+** Last update Sun Jun  5 16:31:31 2016 CUENAT
 */
 
 #include "arrows.h"
@@ -26,7 +26,7 @@ int		ft_start_exec(t_shell *shell)
 	{
 	  tkn = strdup("\0");
 	  if (ft_create_exec_function(shell, tmp_sub, tkn) == -1)
-	    break;
+	    break ;
 	  tmp_sub = tmp_sub->next;
 	}
       tmp_list = tmp_list->next;
@@ -36,18 +36,18 @@ int		ft_start_exec(t_shell *shell)
 
 int	ft_in_lauch(t_shell *shell, t_raw *raw, char *line)
 {
-   shell->path = ft_fill_bin_path(shell->env);
-   line = replace_env(shell, line);
-   line = epur(line);
-   line = replace_alias(shell->alias, line);
-   line = replace_glob(line);
-   if ((shell->res_exec = ft_check_input(line)) == 0)
-     {
-       ft_create_list(shell, line);
-       ft_create_sub_list(shell);
-       ft_start_exec(shell);
-       ft_free_struct(shell);
-     }
+  shell->path = ft_fill_bin_path(shell->env);
+  line = replace_env(shell, line);
+  line = epur(line);
+  line = replace_alias(shell->alias, line);
+  line = replace_glob(line);
+  if ((shell->res_exec = ft_check_input(line)) == 0)
+    {
+      ft_create_list(shell, line);
+      ft_create_sub_list(shell);
+      ft_start_exec(shell);
+      ft_free_struct(shell);
+    }
   free(line);
   return (0);
 }

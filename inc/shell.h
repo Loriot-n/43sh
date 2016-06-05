@@ -1,3 +1,4 @@
+
 /*
 ** shell.h for  in /home/stanislas/PSU_2015_42sh
 **
@@ -5,7 +6,7 @@
 ** Login   <stanislas@epitech.net>
 ** yan typedef size_t
 ** Started on  Wed May 18 15:32:47 2016 CUENAT
-** Last update Sun Jun 05 14:10:25 2016 Nicolas Loriot
+** Last update Sun Jun  5 17:02:47 2016 CUENAT
 */
 
 #ifndef SHELL_H_
@@ -68,6 +69,7 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
 int	ft_create_list(t_shell *shell, char *line);
 t_list	*ft_add_at_end(t_list *exec_list, char *val);
 int	ft_create_sub_list(t_shell *shell);
+void	ft_parse_string_sub_list_2(t_list *tmp, int i, int j, int *sep);
 
 /*
 ** free_struct.c
@@ -187,6 +189,10 @@ int	ft_look_bad_tkn(char *word, char *tkn);
 int	ft_check_redirect(char **tab, int i);
 int	ft_check_input_redirect(char **tab, int i);
 
+/*
+** check_input3.c
+*/
+int	ft_check_input_in_loop(char **tab, int i, int check, char *bad_tkn);
 
 /*
 ** END ----- PARSE / UTILS STRING ----- END

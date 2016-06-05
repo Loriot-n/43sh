@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 17:13:04 2016 Nicolas Loriot
-** Last update Sun Jun 05 14:10:29 2016 Nicolas Loriot
+** Last update Sun Jun  5 16:27:46 2016 CUENAT
 */
 
 #include "shell.h"
@@ -85,4 +85,4 @@ int		raw_hist_move(t_raw *raw, int move)
       raw_strdup(raw->history->tab[raw->history->index]);
   raw->line->input->len = strlen(raw->line->input->buffer);
   return (SUCCESS);
-  }
+}

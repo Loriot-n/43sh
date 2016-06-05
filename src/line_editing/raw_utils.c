@@ -5,7 +5,7 @@
 ** Login   <loriot_n@epitech.net>
 **
 ** Started on  Mon May 30 12:36:39 2016 Nicolas Loriot
-** Last update Sat Jun 04 14:39:54 2016 Nicolas Loriot
+** Last update Sun Jun  5 16:26:16 2016 CUENAT
 */
 
 #include "shell.h"
@@ -31,9 +31,9 @@ int		raw_strchr(char *str, char ch)
   return (0);
 }
 
-void		read_mode(t_raw *raw, int state)
+void			read_mode(t_raw *raw, int state)
 {
-  struct	termios newT;
+  struct termios	newT;
 
   newT = raw->term->origin;
   if (state)

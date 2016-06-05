@@ -5,7 +5,7 @@
 ** Login   <maire_q@epitech.eu>
 **
 ** Started on  %cdate maire_q
-** Last update Wed Jun  1 13:07:20 2016 CUENAT
+** Last update Sun Jun  5 16:29:33 2016 CUENAT
 */
 
 #include "shell.h"
@@ -80,7 +80,6 @@ int 	ft_setenv(t_shell *shell)
 
   if (st_check(shell, shell->cur_exec) == -1)
     return (-1);
-      ;
   i = 0;
   while (shell->env[i] && (strncmp(shell->env[i], shell->cur_exec[1],
 				  strlen(shell->cur_exec[1])) != 0 ||

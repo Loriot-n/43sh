@@ -5,7 +5,7 @@
 ## Login   <stanislas@epitech.net>
 ##
 ## Started on  Tue Mar 29 11:16:42 2016 CUENAT
-## Last update Sat Jun  4 19:38:48 2016 CUENAT
+## Last update Sun Jun  5 17:02:07 2016 CUENAT
 ##
 
 NAME	=	42sh
@@ -61,7 +61,9 @@ SRCS	=	src/main.c \
 		src/autocompletion/autocomplete.c \
 		src/magic_quotes.c \
 		src/autocompletion/tabulation.c \
-		src/execute_pipe.c
+		src/execute_pipe.c \
+		src/check_input3.c \
+		src/fill_list2.c
 
 OBJS	=	$(SRCS:.c=.o)
 
