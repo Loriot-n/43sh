@@ -3,7 +3,7 @@
 **
 ** Made by maire_q
 ** Login   <maire_q@epitech.eu>
-**
+** yan typedef glob_t
 ** Started on  %cdate maire_q
 ** Last update %udate maire_q
 */

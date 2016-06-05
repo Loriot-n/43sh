@@ -79,7 +79,7 @@ int 	ft_setenv(t_shell *shell)
   int	i;
 
   if (st_check(shell, shell->cur_exec) == -1)
-    return -1;
+    return (-1);
       ;
   i = 0;
   while (shell->env[i] && (strncmp(shell->env[i], shell->cur_exec[1],

@@ -49,7 +49,8 @@ int	ft_in_lauch(t_shell *shell, t_raw *raw, char *line)
        ft_start_exec(shell);
        ft_free_struct(shell);
      }
-   return (0);
+  free(line);
+  return (0);
 }
 
 int	ft_launch_shell(t_shell *shell)
@@ -64,7 +65,7 @@ int	ft_launch_shell(t_shell *shell)
 	   (!strcmp(line = get_line(raw, "$> "), "exit")))) ||
 	 (line = get_next_line(0)))
     {
-      ft_in_lauch(shell, raw, line);
+      ft_in_lauch(shell, raw, strdup(line));
       ft_free_tab(shell->path);
       if (strlen(raw->line->input->buffer))
 	hist_add_str(raw, raw->line->input->buffer, shell);

@@ -36,9 +36,9 @@ char	**sort_autocomplet(char **tab)
   return (tab);
 }
 
-char	**autocomplete(char *begin, char *path, int check)
+char		**autocomplete(char *begin, char *path, int check)
 {
-  DIR 		*dir;
+  DIR		*dir;
   t_dir		*ent;
   char		**one;
   char		**answer;
@@ -62,21 +62,3 @@ char	**autocomplete(char *begin, char *path, int check)
   answer = sort_autocomplet(answer);
   return (answer);
 }
-
-/*
-DT_BLK      This is a block device.
-
-DT_CHR      This is a character device.
-
-DT_DIR      This is a directory.
-
-DT_FIFO     This is a named pipe (FIFO).
-
-DT_LNK      This is a symbolic link.
-
-DT_REG      This is a regular file.
-
-DT_SOCK     This is a UNIX domain socket.
-
-DT_UNKNOWN  The file type could not be determined.
-*/

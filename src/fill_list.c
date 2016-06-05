@@ -20,7 +20,7 @@ t_sub_list	*ft_add_sub_list_at_end(t_sub_list *list,
   if ((new = malloc(sizeof(t_sub_list))) == NULL)
     exit(EXIT_FAILURE);
   new->cmd = strdup(epur(tmp_c));
-  //new->exec_cmd = split_no_const(new->cmd, " |<>");
+  /*new->exec_cmd = split_no_const(new->cmd, " |<>"); */
   new->exec_cmd = split(new->cmd, " |<>");
   new->separator = *sep;
   new->next = NULL;
