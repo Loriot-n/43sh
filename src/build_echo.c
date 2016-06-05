@@ -18,13 +18,13 @@ void	print_it_baby(char *line)
 
   tmp = 0;
   if (line[0] != '"' && line[0] != '\'')
-    return ((void)printf("%s", line)) ;
+    return ((void)printf("%s", line));
   one = NULL;
   tmp = line[0];
   i = 1;
   while (line[i] && line[i] != tmp)
     i++;
-  if (line[i]  != tmp)
+  if (line[i] != tmp)
     return ((void)dprintf(2, "Unmatched %c.\n", tmp));
   (!(one = malloc(sizeof(char) * i + 2))) ? exit(EXIT_FAILURE) : 0;
   strncpy(one, &line[1], i - 1);

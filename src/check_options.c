@@ -54,7 +54,6 @@ void		exec_simple_cmd(char *line, t_shell *shell)
   line = replace_env(shell, line);
   line = epur(line);
   line = replace_alias(shell->alias, line);
-  //line = replace_glob(line);
   if (ft_check_input(line) == 0)
     {
       ft_create_list(shell, line);

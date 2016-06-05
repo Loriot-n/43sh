@@ -93,7 +93,7 @@ int		ft_cd(t_shell *shell)
     {
       dprintf(2, "%s: %s.\n", path, strerror(errno));
       shell->res_exec = 1;
-      return -1;
+      return (-1);
     }
   history = fill_history(history, getcwd(tmp, PATH_MAX));
   return (0);
